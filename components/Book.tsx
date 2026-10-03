@@ -11,18 +11,32 @@ export default function Book() {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
-  useEffect(() => {
+useEffect(() => {
+  if (!bookRef.current) return;
+
+  const initPageFlip = () => {
     if (!bookRef.current) return;
 
+    // Destroy previous instance
+    pageFlipRef.current?.destroy();
+    pageFlipRef.current = null;
+
+    const isMobile = window.innerWidth < 768;
+
     const pageFlip = new PageFlip(bookRef.current, {
-      width: 400,
+      width: 600,
       height: 500,
       size: "fixed",
       autoSize: true,
+
       showCover: true,
       drawShadow: true,
       maxShadowOpacity: 0.5,
-      usePortrait: true,
+
+      // Mobile = 1 page
+      // Desktop = 2 pages
+      usePortrait: isMobile,
+
       mobileScrollSupport: false,
       swipeDistance: 20,
       startPage: 0,
@@ -38,23 +52,47 @@ export default function Book() {
       setTotalPages(pageFlip.getPageCount());
     });
 
-    pageFlip.loadFromHTML(bookRef.current.querySelectorAll(".book-page"));
+    pageFlip.loadFromHTML(
+      bookRef.current.querySelectorAll(".book-page")
+    );
+  };
 
-    return () => {
-      pageFlip.destroy();
-      pageFlipRef.current = null;
-    };
-  }, []);
+  // Initial setup
+  initPageFlip();
+
+  // Detect mobile ↔ desktop changes
+  let previousMobile = window.innerWidth < 768;
+
+  const handleResize = () => {
+    const isMobile = window.innerWidth < 768;
+
+    if (isMobile !== previousMobile) {
+      previousMobile = isMobile;
+      initPageFlip();
+    }
+  };
+
+  window.addEventListener("resize", handleResize);
+
+  return () => {
+    window.removeEventListener("resize", handleResize);
+
+    pageFlipRef.current?.destroy();
+    pageFlipRef.current = null;
+  };
+}, []);
+
 
   return (
     <div className="flex flex-col items-center justify-center">
       <div ref={bookRef}>
       {/* Front Cover */}
       <div
-        className="book-page bg-blue-700 text-white"
-        data-density="hard"
-        style={{ width: 200, height: 700 }}
-      >
+  className="book-page relative overflow-hidden bg-blue-700 text-white"
+  data-density="hard"
+  style={{ width: 600, height: 500 }}
+>
+
         <Image
           // src="/frontr.png"
           src="/pages/front.png"
