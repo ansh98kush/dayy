@@ -4,31 +4,31 @@ import { useEffect, useRef, useState } from "react";
 import { PageFlip } from "page-flip";
 import Image from "next/image";
 
-
 export default function Book() {
   const bookRef = useRef<HTMLDivElement>(null);
   const pageFlipRef = useRef<PageFlip | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
- useEffect(() => {
-  if (!bookRef.current) return;
+  useEffect(() => {
+    if (!bookRef.current) return;
 
-  const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
 
-  const pageFlip = new PageFlip(bookRef.current, {
-    width: 400,
-    height: 500,
-    size: "fixed",
-    autoSize: true,
-    showCover: true,
-    drawShadow: true,
-    maxShadowOpacity: 0.5,
-    usePortrait: !isDesktop, // desktop: always two-page spread, mobile: unchanged
-    mobileScrollSupport: false,
-    swipeDistance: 20,
-    startPage: 0,
-  });
+    const pageFlip = new PageFlip(bookRef.current, {
+      width: 400,
+      height: 500,
+      size: "fixed",
+      autoSize: true,
+      showCover: true,
+      drawShadow: true,
+      maxShadowOpacity: 0.5,
+      usePortrait: !isDesktop,
+      mobileScrollSupport: false,
+      swipeDistance: 20,
+      startPage: 0,
+    });
+
     pageFlipRef.current = pageFlip;
 
     pageFlip.on("flip", (e) => {
@@ -49,7 +49,7 @@ export default function Book() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-     <div ref={bookRef} className="md:w-[800px] md:h-[500px]">
+      <div ref={bookRef} className="md:w-[800px] md:h-[500px]">
       {/* Front Cover */}
       <div
         className="book-page bg-blue-700 text-white"
@@ -648,4 +648,4 @@ export default function Book() {
     </div>
   </div>
 );
-} in desktop both pages are not available make them vsiible
+} 
