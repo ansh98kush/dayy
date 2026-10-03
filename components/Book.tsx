@@ -24,8 +24,8 @@ useEffect(() => {
     const isMobile = window.innerWidth < 768;
 
     const pageFlip = new PageFlip(bookRef.current, {
-      width: 600,
-      height: 500,
+      width: 200,
+      height: 700,
       size: "fixed",
       autoSize: true,
 
@@ -90,7 +90,7 @@ useEffect(() => {
       <div
   className="book-page relative overflow-hidden bg-blue-700 text-white"
   data-density="hard"
-  style={{ width: 600, height: 500 }}
+  style={{ width: 200, height: 700 }}
 >
 
         <Image
