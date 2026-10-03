@@ -11,37 +11,24 @@ export default function Book() {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
-useEffect(() => {
+ useEffect(() => {
   if (!bookRef.current) return;
 
-  const initPageFlip = () => {
-    if (!bookRef.current) return;
+  const isDesktop = window.matchMedia("(min-width: 768px)").matches;
 
-    // Destroy previous instance
-    pageFlipRef.current?.destroy();
-    pageFlipRef.current = null;
-
-    const isMobile = window.innerWidth < 768;
-
-    const pageFlip = new PageFlip(bookRef.current, {
-      width: 200,
-      height: 700,
-      size: "fixed",
-      autoSize: true,
-
-      showCover: true,
-      drawShadow: true,
-      maxShadowOpacity: 0.5,
-
-      // Mobile = 1 page
-      // Desktop = 2 pages
-      usePortrait: isMobile,
-
-      mobileScrollSupport: false,
-      swipeDistance: 20,
-      startPage: 0,
-    });
-
+  const pageFlip = new PageFlip(bookRef.current, {
+    width: 400,
+    height: 500,
+    size: "fixed",
+    autoSize: true,
+    showCover: true,
+    drawShadow: true,
+    maxShadowOpacity: 0.5,
+    usePortrait: !isDesktop, // desktop: always two-page spread, mobile: unchanged
+    mobileScrollSupport: false,
+    swipeDistance: 20,
+    startPage: 0,
+  });
     pageFlipRef.current = pageFlip;
 
     pageFlip.on("flip", (e) => {
@@ -52,47 +39,23 @@ useEffect(() => {
       setTotalPages(pageFlip.getPageCount());
     });
 
-    pageFlip.loadFromHTML(
-      bookRef.current.querySelectorAll(".book-page")
-    );
-  };
+    pageFlip.loadFromHTML(bookRef.current.querySelectorAll(".book-page"));
 
-  // Initial setup
-  initPageFlip();
-
-  // Detect mobile ↔ desktop changes
-  let previousMobile = window.innerWidth < 768;
-
-  const handleResize = () => {
-    const isMobile = window.innerWidth < 768;
-
-    if (isMobile !== previousMobile) {
-      previousMobile = isMobile;
-      initPageFlip();
-    }
-  };
-
-  window.addEventListener("resize", handleResize);
-
-  return () => {
-    window.removeEventListener("resize", handleResize);
-
-    pageFlipRef.current?.destroy();
-    pageFlipRef.current = null;
-  };
-}, []);
-
+    return () => {
+      pageFlip.destroy();
+      pageFlipRef.current = null;
+    };
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div ref={bookRef}>
+     <div ref={bookRef} className="md:w-[800px] md:h-[500px]">
       {/* Front Cover */}
       <div
-  className="book-page relative overflow-hidden bg-blue-700 text-white"
-  data-density="hard"
-  style={{ width: 200, height: 700 }}
->
-
+        className="book-page bg-blue-700 text-white"
+        data-density="hard"
+        style={{ width: 200, height: 700 }}
+      >
         <Image
           // src="/frontr.png"
           src="/pages/front.png"
@@ -685,4 +648,4 @@ useEffect(() => {
     </div>
   </div>
 );
-}
+} in desktop both pages are not available make them vsiible
