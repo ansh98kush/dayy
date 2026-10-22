@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const photos = [
-  "/ref/girl.jpg",
-  "/ref/girl2.jpg",
-  "/ref/girl3.jpg",
-  "/ref/girl4.jpg",
-  "/ref/girl5.jpg",
-  "/ref/girl6.jpg",
+  "/client/photo-1.jpg",
+  "/client/photo-2.jpg",
+  "/client/photo-3.jpg",
+  "/client/photo-4.jpg",
+  "/client/photo-5.jpg",
+  "/client/photo-6.jpg",
 ] as const;
 
 export const ToggleSection = () => {

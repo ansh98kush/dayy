@@ -3,33 +3,132 @@
 import { useEffect, useRef, useState } from "react";
 import { PageFlip } from "page-flip";
 import Image from "next/image";
+import {
+  PageTableContents,
+  PageEditorialCollage,
+  PageWhosThatGirl,
+  PageInstagramGirl,
+  PageThingsAbout,
+  PageFactsWithPhotos,
+  PageThingsILoveAboutYou,
+  PageMeetTheQueen,
+  PageFavouriteMemory,
+  PageNumberedMemories,
+  PageHeartSpreadLeft,
+  PageHeartSpreadRight,
+  PagePhotoDumpPart1,
+  PageScatteredPolaroids,
+  PageHeartfeltMessage,
+  PageDiagonalFilmstrip,
+  PageBackCoverFlipbook,
+} from "./MagazinePages";
+
+/* ------------------------------------------------------------------
+ * 📖 MAGAZINE COVER CONFIGURATION
+ * ------------------------------------------------------------------
+ * Change the cover image, text, or dimensions directly in code here:
+ * ------------------------------------------------------------------ */
+export const COVER_CONFIG = {
+  // Birthday Girl Image from /client
+  coverImage: "/client/cover.jpg",
+  imagePosition: "center 22%", // Frames face, jhumkas, and royal embroidered dress
+  // Crisp natural editorial grade
+  imageFilter: "contrast(103%) brightness(102%) saturate(102%)",
+
+  // Exact VOUGUE Magazine Typography & Text
+  masthead: "VOUGUE",
+  issue: "ISSUE NO.000456",
+  headlineName: "AAKRITI",
+  headlineSub1: "18 AND",
+  headlineSub2: "UNSTOPPABLE,",
+  headlineSub3: "THE RISE OF AAKRITI",
+  age: "18",
+  editionLine1: "BIRTHDAY",
+  editionLine2: "EDITION",
+  featureTag: "FEATURING",
+  featureRole: "SPECIAL BIRTHDAY EDITION",
+  modelName: "AAKRITI",
+  barcode: "L0123456789B",
+
+  // Magazine proportions (1:1.41 authentic Vogue / A4 portrait size)
+  pageWidth: 425,
+  pageHeight: 600,
+};
 
 export default function Book() {
   const bookRef = useRef<HTMLDivElement>(null);
   const pageFlipRef = useRef<PageFlip | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(true);
+  const [scale, setScale] = useState(1);
+  const [isRotated, setIsRotated] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const desktop = w >= 900 && h >= 680;
+      setIsDesktop(desktop);
+
+      if (desktop) {
+        setScale(1);
+      } else {
+        if (isRotated) {
+          // 16:9 Rotated Mode: Book width (850) runs vertically, height (600) runs horizontally
+          const padH = 110;
+          const padW = 20;
+          const maxLen = Math.max(300, h - padH);
+          const maxBreadth = Math.max(200, w - padW);
+          const sLen = maxLen / 850;
+          const sBreadth = maxBreadth / 600;
+          setScale(Math.min(sLen, sBreadth));
+        } else {
+          // Normal 2-page landscape spread: 850px wide x 600px tall
+          const padX = 16;
+          const padY = 120;
+          const maxW = Math.max(300, w - padX);
+          const maxH = Math.max(200, h - padY);
+          const sW = maxW / 850;
+          const sH = maxH / 600;
+          setScale(Math.min(sW, sH));
+        }
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isRotated]);
+
+  const toggleRotate = () => {
+    setIsRotated((prev) => !prev);
+  };
 
   useEffect(() => {
     if (!bookRef.current) return;
 
-    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
-
+    // Authentic A4 Magazine Dimensions (425 x 600 each page, 850 x 600 two-page spread)
     const pageFlip = new PageFlip(bookRef.current, {
-      width: 400,
-      height: 500,
+      width: COVER_CONFIG.pageWidth,
+      height: COVER_CONFIG.pageHeight,
       size: "fixed",
       autoSize: true,
       showCover: true,
       drawShadow: true,
       maxShadowOpacity: 0.5,
-      usePortrait: !isDesktop,
+      usePortrait: false, // Always show both two pages in landscape view
       mobileScrollSupport: false,
       swipeDistance: 20,
       startPage: 0,
+      disableFlipByClick: true,
+      clickEventForward: true,
     });
 
     pageFlipRef.current = pageFlip;
+    if (typeof window !== "undefined") {
+      (window as any).__pageFlip = pageFlip;
+    }
 
     pageFlip.on("flip", (e) => {
       setCurrentPage(e.data as number);
@@ -39,613 +138,536 @@ export default function Book() {
       setTotalPages(pageFlip.getPageCount());
     });
 
-    pageFlip.loadFromHTML(bookRef.current.querySelectorAll(".book-page"));
+    const pages = bookRef.current.querySelectorAll<HTMLElement>(".book-page");
+    if (pages && pages.length > 0) {
+      try {
+        pageFlip.loadFromHTML(pages);
+      } catch (err) {
+        console.warn("pageFlip loadFromHTML error:", err);
+      }
+    }
+
+    // Intercept mouse/pointer/touch events on buttons and interactive elements
+    // in the capture phase so PageFlip never receives them and never triggers a page flip.
+    const container = bookRef.current;
+    const preventFlipOnInteractive = (e: Event) => {
+      const el = e.target as Element | null;
+      if (
+        el?.closest?.(
+          'button, a, input, textarea, select, [role="button"], [data-no-flip="true"], .interactive'
+        )
+      ) {
+        e.stopPropagation();
+      }
+    };
+
+    container.addEventListener("pointerdown", preventFlipOnInteractive, { capture: true });
+    container.addEventListener("mousedown", preventFlipOnInteractive, { capture: true });
+    container.addEventListener("touchstart", preventFlipOnInteractive, { capture: true, passive: true });
+    container.addEventListener("pointerup", preventFlipOnInteractive, { capture: true });
+    container.addEventListener("mouseup", preventFlipOnInteractive, { capture: true });
+    container.addEventListener("touchend", preventFlipOnInteractive, { capture: true });
 
     return () => {
-      pageFlip.destroy();
+      container.removeEventListener("pointerdown", preventFlipOnInteractive, { capture: true });
+      container.removeEventListener("mousedown", preventFlipOnInteractive, { capture: true });
+      container.removeEventListener("touchstart", preventFlipOnInteractive, { capture: true });
+      container.removeEventListener("pointerup", preventFlipOnInteractive, { capture: true });
+      container.removeEventListener("mouseup", preventFlipOnInteractive, { capture: true });
+      container.removeEventListener("touchend", preventFlipOnInteractive, { capture: true });
+      try {
+        pageFlip.destroy();
+      } catch (err) {
+        // ignore cleanup error
+      }
       pageFlipRef.current = null;
     };
   }, []);
 
+  const handlePrev = () => {
+    const pf = pageFlipRef.current;
+    if (!pf) return;
+    try {
+      pf.flipPrev();
+    } catch {
+      try {
+        (pf as any).turnToPrevPage?.();
+      } catch {
+        // ignore
+      }
+    }
+  };
+
+  const handleNext = () => {
+    const pf = pageFlipRef.current;
+    if (!pf) return;
+    try {
+      pf.flipNext();
+    } catch {
+      try {
+        (pf as any).turnToNextPage?.();
+      } catch {
+        // ignore
+      }
+    }
+  };
+
+  const isCover = currentPage === 0;
+  const isBackCover = totalPages > 0 && currentPage >= totalPages - 1;
+  const isOriginalRefImage = COVER_CONFIG.coverImage.includes("magzine-ref/cover.jpg");
+
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div ref={bookRef} className="md:w-[800px] md:h-[500px]">
-      {/* Front Cover */}
-      <div
-        className="book-page bg-blue-700 text-white"
-        data-density="hard"
-        style={{ width: 200, height: 700 }}
-      >
-        <Image
-          // src="/frontr.png"
-          src="/pages/front.png"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-130 translate-x-3 pointer-events-none select-none"
-        ></Image>
-
-        <div className="flex h-full items-center justify-center text-5xl font-bold"></div>
+    <div className="flex flex-col items-center justify-center w-full select-none">
+      {/* ── Top Bar: 16:9 Rotation Indicator & Option ── */}
+      <div className="flex items-center justify-between w-full max-w-[850px] px-3 mb-2 z-30">
+        <div className="text-[11px] font-mono tracking-widest text-[#9f773a] opacity-80 uppercase font-medium">
+          {isRotated ? "16:9 Widescreen View" : "Landscape Editorial"}
+        </div>
+        <button
+          type="button"
+          onClick={toggleRotate}
+          className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold tracking-wider uppercase bg-[#1c1815]/80 hover:bg-[#1c1815] text-[#e8d5be] border border-[#9f773a]/40 backdrop-blur-md shadow-md transition-all cursor-pointer active:scale-95"
+          aria-label={isRotated ? "Switch to 9:16 portrait" : "Rotate to 16:9 landscape"}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className={`w-3.5 h-3.5 transition-transform duration-300 ${isRotated ? "rotate-90 text-[#f5e7d5]" : "text-[#d8c3a5]"}`}>
+            <rect x="2" y="5" width="20" height="14" rx="2" />
+            <path d="M2 10h20" strokeDasharray="2 2" opacity={0.4} />
+          </svg>
+          <span>{isRotated ? "Rotate (9:16)" : "Rotate (16:9)"}</span>
+        </button>
       </div>
 
-      {/* Page 1 */}
+      {/* ── Book Container: Auto-scales cleanly to fit both desktop and mobile in landscape ── */}
       <div
-        className="  book-page bg-amber-50 text-black"
-        style={{ width: 600, height: 500 }}
+        className="relative flex items-center justify-center transition-all duration-500 ease-out"
+        style={{
+          width: (isRotated ? 600 : 850) * scale,
+          height: (isRotated ? 850 : 600) * scale,
+        }}
       >
-        {/* <div className="flex h-full items-center justify-center text-4xl">
-          Page 1
-        </div> */}
+        <div
+          className="shrink-0 flex items-center justify-center transition-transform duration-500 ease-out"
+          style={{
+            width: 850,
+            height: 600,
+            transform: `${isRotated ? "rotate(90deg) " : ""}scale(${scale})`,
+            transformOrigin: "center center",
+          }}
+        >
+          <div
+            ref={bookRef}
+            className="w-[850px] h-[600px] transition-transform duration-500 ease-out"
+            style={{
+              transform: isCover
+                ? `translateX(-${COVER_CONFIG.pageWidth / 2}px)`
+                : isBackCover
+                ? `translateX(${COVER_CONFIG.pageWidth / 2}px)`
+                : "translateX(0px)",
+            }}
+          >
+        {/* ── FRONT COVER: EXACT VOUGUE MAGAZINE COVER WITH GIRL IMAGE ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#c8b8a3] text-white shadow-2xl rounded-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight, isolation: "isolate" }}
+          data-density="hard"
+        >
+          {/* 1. Photo Layer with Option B Editorial Filter */}
+          <div className="absolute inset-0 overflow-hidden">
+            <Image
+              src={COVER_CONFIG.coverImage}
+              alt="Vogue Magazine Birthday Cover"
+              fill
+              priority
+              draggable={false}
+              className="object-cover pointer-events-none select-none transition-transform duration-700"
+              style={{
+                objectPosition: COVER_CONFIG.imagePosition || "center 22%",
+                filter:
+                  COVER_CONFIG.imageFilter ||
+                  "sepia(16%) saturate(84%) contrast(93%) brightness(103%)",
+              }}
+            />
+          </div>
 
-        <Image
-          src="/pages/left.jpg"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain  pointer-events-none select-none"
-        ></Image>
+          {/* 2. Option B Film Grain (Transparent noise texture; mix-blend-mode: soft-light) */}
+          {!isOriginalRefImage && (
+            <div
+              className="absolute inset-0 pointer-events-none z-10"
+              style={{
+                opacity: 0.13,
+                mixBlendMode: "soft-light",
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E\")",
+              }}
+              aria-hidden="true"
+            />
+          )}
 
-        <Image
-          src="/elements/fwine.png"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain  -rotate-12  -translate-x-34 -translate-y-33 scale-35   "
-        ></Image>
+          {/* 2b. Option B Film Vignette (Subtle radial edge darkening) */}
+          {!isOriginalRefImage && (
+            <div
+              className="absolute inset-0 pointer-events-none z-10"
+              style={{
+                background:
+                  "radial-gradient(ellipse at center, transparent 52%, rgba(42, 27, 18, 0.15) 100%)",
+              }}
+              aria-hidden="true"
+            />
+          )}
 
-        {/* <Image
-      src="/elements/stamp.png"
-        alt="Front Cover"
-    fill
-    priority
-    draggable={false}
-    className="object-contain  -rotate-12  -translate-x-20 translate-y-30 scale-40   "
-        ></Image>  */}
+          {/* 3. Pixel-Perfect Editorial Typography Layer (Exact Bodoni Moda Magazine Typeface) */}
+          {!isOriginalRefImage && (
+            <div className="absolute inset-0 z-20 pointer-events-none select-none">
+              {/* ─ Masthead: VOUGUE (Didone high-contrast serif, tight tracking, edge-to-edge) ─ */}
+              <div className="absolute top-[2.2%] left-0 right-0 px-[14px] text-center select-none">
+                <h1
+                  className="font-medium uppercase text-white select-none m-0"
+                  style={{
+                    fontFamily: "'Bodoni Moda', Didot, 'Bodoni 72', 'Times New Roman', serif",
+                    fontWeight: 500,
+                    fontSize: "94px",
+                    lineHeight: 0.82,
+                    letterSpacing: "-0.075em",
+                    textShadow: "0 2px 10px rgba(0,0,0,0.75)",
+                    whiteSpace: "nowrap",
+                    display: "block",
+                  }}
+                >
+                  {COVER_CONFIG.masthead}
+                </h1>
+              </div>
 
-        <Image
-          src="/elements/side3.png"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain   -translate-x-23 -translate-y-14 scale-78   "
-        ></Image>
+              {/* ─ Issue Line: ISSUE NO.000456 ─ */}
+              <div className="absolute top-[16%] right-[5.8%] text-right">
+                <span
+                  className="font-normal text-[9px] tracking-[0.18em] text-white/95 uppercase"
+                  style={{
+                    fontFamily: "'Bodoni Moda', Didot, 'Bodoni 72', serif",
+                    textShadow: "0 1px 4px rgba(0,0,0,0.85)",
+                  }}
+                >
+                  {COVER_CONFIG.issue}
+                </span>
+              </div>
 
-        <Image
-          src="/elements/mouse.png"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain   z-50 translate-x-20 translate-y-46 scale-55   "
-        ></Image>
+              {/* ─ Left Upper Headline Block ─ */}
+              <div className="absolute top-[27%] left-[6%] max-w-[50%] flex flex-col items-start text-left">
+                <span
+                  className="text-[23px] font-medium tracking-[-0.045em] text-white leading-[0.88] uppercase"
+                  style={{
+                    fontFamily: "'Bodoni Moda', Didot, 'Bodoni 72', serif",
+                    fontWeight: 500,
+                    textShadow: "0 2px 8px rgba(0,0,0,0.85)",
+                  }}
+                >
+                  {COVER_CONFIG.headlineName}
+                </span>
+                <span
+                  className="text-[11px] font-normal tracking-[0.04em] text-white/95 leading-[1.25] uppercase mt-1.5"
+                  style={{
+                    fontFamily: "'Bodoni Moda', Didot, 'Bodoni 72', serif",
+                    textShadow: "0 1px 4px rgba(0,0,0,0.85)",
+                  }}
+                >
+                  {COVER_CONFIG.headlineSub1}<br />
+                  {COVER_CONFIG.headlineSub2}<br />
+                  <span className="italic">{COVER_CONFIG.headlineSub3}</span>
+                </span>
+              </div>
 
-        <Image
-          src="/elements/butter.png"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-45 rotate-30  -translate-x-28 translate-y-32 "
-        ></Image>
+              {/* ─ Right Middle: 20 BIRTHDAY EDITION ─ */}
+              <div className="absolute top-[42%] right-[6%] flex flex-col items-end text-right">
+                <span
+                  className="font-medium text-[68px] leading-[0.82] tracking-[-0.03em] text-white"
+                  style={{
+                    fontFamily: "'Bodoni Moda', Didot, 'Bodoni 72', serif",
+                    fontWeight: 500,
+                    textShadow: "0 3px 12px rgba(0,0,0,0.85)",
+                  }}
+                >
+                  {COVER_CONFIG.age}
+                </span>
+                <span
+                  className="font-medium text-[27px] tracking-[-0.045em] leading-[0.88] text-white uppercase mt-0.5"
+                  style={{
+                    fontFamily: "'Bodoni Moda', Didot, 'Bodoni 72', serif",
+                    fontWeight: 500,
+                    textShadow: "0 2px 10px rgba(0,0,0,0.85)",
+                  }}
+                >
+                  {COVER_CONFIG.editionLine1}<br />
+                  {COVER_CONFIG.editionLine2}
+                </span>
+              </div>
 
-        <Image
-          src="/ref/girl.jpg"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-33  rotate-10  translate-x-14 -translate-y-23 "
-        ></Image>
+              {/* ─ Bottom Left: FEATURING SUPER MODEL ISABELLA MASON ─ */}
+              <div className="absolute bottom-[5.2%] left-[6%] max-w-[56%] flex flex-col items-start text-left">
+                <span
+                  className="text-[11px] tracking-[0.1em] text-white/90 leading-tight uppercase font-normal"
+                  style={{
+                    fontFamily: "'Bodoni Moda', Didot, 'Bodoni 72', serif",
+                    textShadow: "0 1px 4px rgba(0,0,0,0.85)",
+                  }}
+                >
+                  {COVER_CONFIG.featureTag}<br />
+                  {COVER_CONFIG.featureRole}
+                </span>
+                <span
+                  className="text-[22px] font-medium tracking-[-0.045em] text-white leading-[0.9] uppercase mt-1"
+                  style={{
+                    fontFamily: "'Bodoni Moda', Didot, 'Bodoni 72', serif",
+                    fontWeight: 500,
+                    textShadow: "0 2px 8px rgba(0,0,0,0.85)",
+                  }}
+                >
+                  {COVER_CONFIG.modelName}
+                </span>
+              </div>
 
-        <Image
-          src="/elements/frame10.png"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-65 rotate-10  translate-x-14 -translate-y-20 "
-        ></Image>
+              {/* ─ Bottom Right: Realistic Barcode Card ─ */}
+              <div className="absolute bottom-[4.2%] right-[6%]">
+                <div className="bg-white px-2 py-1 rounded-sm shadow-md flex flex-col items-center justify-center">
+                  <svg viewBox="0 0 100 24" className="w-[82px] h-[16px]">
+                    <rect x="2" y="0" width="2" height="24" fill="#000" />
+                    <rect x="6" y="0" width="1" height="24" fill="#000" />
+                    <rect x="9" y="0" width="3" height="24" fill="#000" />
+                    <rect x="14" y="0" width="1.5" height="24" fill="#000" />
+                    <rect x="18" y="0" width="2.5" height="24" fill="#000" />
+                    <rect x="23" y="0" width="1" height="24" fill="#000" />
+                    <rect x="26" y="0" width="3.5" height="24" fill="#000" />
+                    <rect x="32" y="0" width="1.5" height="24" fill="#000" />
+                    <rect x="36" y="0" width="2" height="24" fill="#000" />
+                    <rect x="40" y="0" width="3" height="24" fill="#000" />
+                    <rect x="45" y="0" width="1" height="24" fill="#000" />
+                    <rect x="48" y="0" width="2.5" height="24" fill="#000" />
+                    <rect x="53" y="0" width="1.5" height="24" fill="#000" />
+                    <rect x="56" y="0" width="3" height="24" fill="#000" />
+                    <rect x="61" y="0" width="1" height="24" fill="#000" />
+                    <rect x="64" y="0" width="2" height="24" fill="#000" />
+                    <rect x="68" y="0" width="3.5" height="24" fill="#000" />
+                    <rect x="74" y="0" width="1.5" height="24" fill="#000" />
+                    <rect x="78" y="0" width="2" height="24" fill="#000" />
+                    <rect x="82" y="0" width="1" height="24" fill="#000" />
+                    <rect x="85" y="0" width="3" height="24" fill="#000" />
+                    <rect x="90" y="0" width="1.5" height="24" fill="#000" />
+                    <rect x="94" y="0" width="2.5" height="24" fill="#000" />
+                  </svg>
+                  <span className="font-mono text-[7px] text-black font-bold tracking-[0.12em] mt-0.5">
+                    {COVER_CONFIG.barcode}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
 
-        <Image
-          src="/elements/text1.png"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-45   translate-x-10 translate-y-15 "
-        ></Image>
+          {/* 4. Subtle Glossy Magazine Spine Crease & Sheen Overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none select-none z-30"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(0,0,0,0.25) 0%, rgba(255,255,255,0.06) 2%, rgba(0,0,0,0.03) 5%, transparent 12%, transparent 95%, rgba(0,0,0,0.12) 100%)",
+            }}
+          />
+        </div>
+
+        {/* ── SPREAD 1 (LEFT): TABLE OF CONTENTS ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageTableContents />
+        </div>
+
+        {/* ── SPREAD 1 (RIGHT): 7-PHOTO EDITORIAL COLLAGE ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#faf8f4] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageEditorialCollage />
+        </div>
+
+        {/* ── SPREAD 2 (LEFT): "WHO'S THAT GIRL?" EDITORIAL SPOTLIGHT ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageWhosThatGirl />
+        </div>
+
+        {/* ── SPREAD 2 (RIGHT): "INSTAGRAM GIRL" 4-POST FEED ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageInstagramGirl />
+        </div>
+
+        {/* ── SPREAD 3 (LEFT): CHAPTER 01 - THINGS ABOUT HER ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageThingsAbout />
+        </div>
+
+        {/* ── SPREAD 3 (RIGHT): 12 FACTS & PHOTO STRIP ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageFactsWithPhotos />
+        </div>
+
+        {/* ── SPREAD 4 (LEFT): THINGS I LOVE ABOUT YOU (5 REASONS) ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageThingsILoveAboutYou />
+        </div>
+
+        {/* ── SPREAD 4 (RIGHT): MEET THE BIRTHDAY QUEEN (PORTRAIT SPOTLIGHT) ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#f6f2ea] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageMeetTheQueen />
+        </div>
+
+        {/* ── SPREAD 5 (LEFT): CHAPTER 02 - FAVOURITE MEMORY OF US ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageFavouriteMemory />
+        </div>
+
+        {/* ── SPREAD 5 (RIGHT): NUMBERED MEMORIES COLLAGE (01-06) ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageNumberedMemories />
+        </div>
+
+        {/* ── SPREAD 6 (LEFT): "MY ONLY LOVE" 11-PHOTO HEART (LEFT HALF) ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#fff2f5] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageHeartSpreadLeft />
+        </div>
+
+        {/* ── SPREAD 6 (RIGHT): "MY ONLY LOVE" 11-PHOTO HEART (RIGHT HALF) ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#fff2f5] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageHeartSpreadRight />
+        </div>
+
+        {/* ── SPREAD 7 (LEFT): CHAPTER 03 - PHOTO DUMP (PART 1) ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PagePhotoDumpPart1 />
+        </div>
+
+        {/* ── SPREAD 7 (RIGHT): SCATTERED POLAROIDS ARCHIVE ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#f7f4ed] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageScatteredPolaroids />
+        </div>
+
+        {/* ── SPREAD 8 (LEFT): CHAPTER 04 - HEARTFELT MESSAGE ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageHeartfeltMessage />
+        </div>
+
+        {/* ── SPREAD 8 (RIGHT): DIAGONAL 35MM FILMSTRIP MEMORIES ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageDiagonalFilmstrip />
+        </div>
+
+        {/* ── BACK COVER: HAPPY BIRTHDAY "THIS IS YOUR STORY" ── */}
+        <div
+          className="book-page relative overflow-hidden bg-[#141210] text-white shadow-2xl rounded-md select-none"
+          data-density="hard"
+          style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
+        >
+          <PageBackCoverFlipbook />
+        </div>
+          </div>
+        </div>
       </div>
 
-      {/* Page 2 */}
-      <div
-        className="relative overflow-hidden book-page bg-amber-50 text-black"
-        style={{ width: 600, height: 500 }}
-      >
-        {/* <div className="flex h-full items-center justify-center text-4xl">
-          Page 2
-        </div> */}
-        <Image
-          src="/pages/right.jpg"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain  pointer-events-none select-none"
-        ></Image>
+      {/* ── UNIFIED CONTROLS: Works beautifully on both desktop & mobile in landscape ── */}
+      <div className="flex items-center justify-center gap-2.5 sm:gap-3 mt-4 px-4 sm:px-5 py-2 rounded-full bg-[#1c1815]/85 backdrop-blur-md border border-[#9f773a]/30 shadow-lg z-30 select-none">
+        <button
+          type="button"
+          aria-label="Previous Page"
+          onClick={handlePrev}
+          disabled={isCover}
+          className={`px-3 sm:px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-[#9f773a]/25 hover:bg-[#9f773a]/40 active:scale-95 text-[#f5e7d5] border border-[#9f773a]/40 transition-all cursor-pointer shadow-sm touch-manipulation ${isCover ? "opacity-30 cursor-not-allowed pointer-events-none" : ""}`}
+        >
+          ‹ Prev
+        </button>
 
-        <Image
-          src="/elements/paper.png"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain rotate-90 shadow-black   translate-x-18 translate-y-38  scale-50   "
-        ></Image>
+        <span className="text-[11px] font-mono text-[#e8d5be] font-semibold tracking-widest px-2 sm:px-3 min-w-[75px] sm:min-w-[90px] text-center">
+          {isCover
+            ? "COVER"
+            : isBackCover
+            ? "BACK"
+            : `${currentPage} - ${Math.min(currentPage + 1, (totalPages || 18) - 1)} / ${totalPages || 18}`}
+        </span>
 
-        <Image
-          src="/elements/starB.png"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain shadow-black  -rotate-50 -translate-x-17 translate-y-30  scale-50   "
-        ></Image>
+        <button
+          type="button"
+          aria-label="Next Page"
+          onClick={handleNext}
+          disabled={isBackCover}
+          className={`px-3 sm:px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-[#9f773a]/25 hover:bg-[#9f773a]/40 active:scale-95 text-[#f5e7d5] border border-[#9f773a]/40 transition-all cursor-pointer shadow-sm touch-manipulation ${isBackCover ? "opacity-30 cursor-not-allowed pointer-events-none" : ""}`}
+        >
+          Next ›
+        </button>
 
-        <Image
-          src="/ref/girl.jpg"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain shadow-black rotate-20  translate-x-19 -translate-y-22  scale-22   "
-        ></Image>
+        <div className="w-[1px] h-4 bg-[#9f773a]/30 mx-0.5" />
 
-        <Image
-          src="/ref/girl2.jpg"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain shadow-black rotate-20  translate-x-26 -translate-y-43  scale-22   "
-        ></Image>
-
-        <Image
-          src="/ref/girl3.jpg"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain shadow-black rotate-20  translate-x-11 translate-y-1  scale-22   "
-        ></Image>
-
-        <Image
-          src="/elements/frame9.png"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain shadow-black rotate-12  translate-x-18 -translate-y-20  scale-80   "
-        ></Image>
-
-        <Image
-          src="/elements/text2.png"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain shadow-black rotate-0 -translate-x-13 -translate-y-40  scale-60   "
-        ></Image>
-
-        <Image
-          src="/elements/kit.png"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain shadow-black rotate-0 -translate-x-13 -translate-y-16  scale-60   "
-        ></Image>
-      </div>
-
-      {/* Page 3 */}
-      <div
-        className="relative overflow-hidden book-page bg-amber-50 text-black"
-        style={{ width: 600, height: 500 }}
-      >
-        {/* <div className="flex h-full items-center justify-center text-4xl">
-          Page 3
-        </div> */}
-
-        <Image
-          src="/pages/left.jpg"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain pointer-events-none select-none"
-        />
-
-        {/* Lyrics */}
-        <Image
-          src="/elements/billa6.png"
-          alt="Lyrics"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-55 rotate-1 -translate-x-30 -translate-y-10"
-        />
-
-        {/* Wine */}
-        <Image
-          src="/elements/side1.png"
-          alt="Wine"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-50 rotate-180 -translate-x-26 translate-y-31"
-        />
-
-        {/* Tape */}
-        <Image
-          src="/elements/starem.png"
-          alt="Tape"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-16 -rotate-18 translate-x-18 -translate-y-56 z-20"
-        />
-
-        <Image
-          src="/ref/girl4.jpg"
-          alt="Frame"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-33 rotate-17 translate-x-13 -translate-y-21 z-30"
-        />
-
-        {/* Photo Frame (Main Focus) */}
-        <Image
-          src="/elements/frame11.png"
-          alt="Frame"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-75 rotate-18 translate-x-10 -translate-y-11 z-30"
-        />
-
-        {/* Recorder */}
-        <Image
-          src="/elements/moon.png"
-          alt="Recorder"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-34 -rotate-14 -translate-x-20 translate-y-30 z-40"
-        />
-
-        <Image
-          src="/elements/fits.png"
-          alt="Recorder"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-44 -rotate-14 -translate-x-30 -translate-y-50 z-40"
-        />
-
-        {/* Vinyl Disk */}
-        <Image
-          src="/elements/note1.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-68 -rotate-7 z-50 translate-x-14 translate-y-38 "
-        />
-
-        {/* Old Paper */}
-        <Image
-          src="/elements/lovetape.png"
-          alt="Old Paper"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-19 rotate-0 z-50 translate-x-10 translate-y-24"
-        />
-      </div>
-
-      {/* Page 4 */}
-      <div
-        className="relative overflow-hidden book-page bg-amber-50 text-black"
-        style={{ width: 600, height: 500 }}
-      >
-        <Image
-          src="/pages/right.jpg"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain pointer-events-none select-none"
-        />
-
-        <Image
-          src="/elements/side2.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-68  rotate-0 z-50 translate-x-16 translate-y-23 "
-        />
-
-        <Image
-          src="/elements/billa.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-38  rotate-0 z-50 -translate-x-14 -translate-y-28 "
-        />
-
-        <Image
-          src="/elements/boqey.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-48  rotate-0 z-50 -translate-x-14 translate-y-28 "
-        />
-
-        <Image
-          src="/ref/girl5.jpg"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-32  rotate-0 z-50 translate-x-19 -translate-y-32 "
-        />
-
-        {/* <Image
-          src="/ref/girl1.jpg"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-68  rotate-0 z-50 translate-x-18 -translate-y-28 "
-        /> */}
-
-        <Image
-          src="/frames/frame5.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-68  rotate-0 z-50 translate-x-18 -translate-y-28 "
-        />
-
-        <Image
-          src="/elements/miss.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-48  rotate-18 z-50 translate-x-28 translate-y-4 "
-        />
-      </div>
-
-      {/* Page 5 */}
-      <div
-        className="relative overflow-hidden book-page bg-amber-50 text-black"
-        style={{ width: 600, height: 500 }}
-      >
-        <Image
-          src="/pages/left.jpg"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain pointer-events-none select-none"
-        />
-
-        <Image
-          src="/elements/side4.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-68  rotate-0 z-50 -translate-x-22 translate-y-23 "
-        />
-
-        <Image
-          src="/elements/disk.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-68  rotate-0 z-50 -translate-x-50 -translate-y-15 "
-        />
-
-        <Image
-          src="/elements/disk.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-68  rotate-0 z-50 -translate-x-50 -translate-y-15 "
-        />
-
-        <Image
-          src="/elements/billa5.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-68  rotate-0 z-50 translate-x-19 translate-y-33 "
-        />
-
-        <Image
-          src="/ref/girl4.jpg"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-26  -rotate-11 z-50 translate-x-4 -translate-y-12 "
-        />
-
-        <Image
-          src="/ref/girl10.jpg"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-26  rotate-11 z-50 translate-x-16 -translate-y-40 "
-        />
-
-        <Image
-          src="/elements/frame8.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-68  rotate-0 z-50 translate-x-10 -translate-y-25 "
-        />
-
-        <Image
-          src="/elements/twoStar.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-38  rotate-0 z-50 -translate-x-14 translate-y-20 "
-        />
-
-        <Image
-          src="/elements/text3.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-48  rotate-0 z-50 -translate-x-22 -translate-y-48 "
-        />
-      </div>
-
-      {/* Page 6 */}
-      <div
-        className="relative overflow-hidden book-page bg-amber-50 text-black"
-        style={{ width: 600, height: 500 }}
-      >
-        <Image
-          src="/pages/right.jpg"
-          alt="Front Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain pointer-events-none select-none"
-        />
-
-        <Image
-          src="/elements/side5.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-78  rotate-0 z-50 translate-x-22 translate-y-14 "
-        />
-
-        <Image
-          src="/elements/text4.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-58  rotate-0 z-50 -translate-x-6 -translate-y-40 "
-        />
-
-
-          <Image
-          src="/ref/girl9.jpg"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-28  -rotate-4 z-50 -translate-x-18 -translate-y-16 "
-        />
-        
-          <Image
-          src="/ref/girl8.jpg"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-27  rotate-10 z-50 -translate-x-11 translate-y-13 "
-        />
-
-        <Image
-          src="/elements/frame7.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-68  rotate-0 z-50 -translate-x-14 translate-y-1 "
-        />
-
-        <Image
-          src="/elements/billa4.png"
-          alt="Disk"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-58  rotate-0 z-50 -translate-x-17 translate-y-40 "
-        />
-      </div>
-
-      {/* Back Cover */}
-      <div
-        className="relative overflow-hidden book-page bg-blue-700 text-white"
-        data-density="hard"
-        style={{ width: 600, height: 500 }}
-      >
-        {/* <div className="flex h-full items-center justify-center text-5xl font-bold">
-          Back Cover
-        </div> */}
-          <Image
-          // src="/frontr.png"
-          src="/pages/back.png"
-          alt="Back Cover"
-          fill
-          priority
-          draggable={false}
-          className="object-contain scale-130 translate-x-3 pointer-events-none select-none"
-        ></Image>
+        <button
+          type="button"
+          aria-label={isRotated ? "Switch to Portrait View" : "Rotate to 16:9 Landscape View"}
+          onClick={toggleRotate}
+          className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full transition-all cursor-pointer shadow-sm touch-manipulation active:scale-95 ${
+            isRotated
+              ? "bg-[#d8c3a5] text-[#1c1815] border border-[#d8c3a5] font-bold shadow-md"
+              : "bg-[#9f773a]/25 hover:bg-[#9f773a]/40 text-[#f5e7d5] border border-[#9f773a]/40"
+          }`}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={`w-3.5 h-3.5 transition-transform duration-300 ${isRotated ? "rotate-90" : ""}`}
+          >
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M7 15l2-2 2 2" />
+            <path d="M17 9l-2 2-2-2" />
+          </svg>
+          <span>{isRotated ? "9:16" : "16:9"}</span>
+        </button>
       </div>
     </div>
-
-    {/* Mobile-friendly page flip controls */}
-    <div className="flex items-center justify-center gap-3 mt-4 z-30 select-none">
-      <button
-        type="button"
-        aria-label="Previous Page"
-        onClick={() => pageFlipRef.current?.flipPrev()}
-        className="px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-white/90 border border-white/15 backdrop-blur-md transition-all cursor-pointer shadow-sm"
-      >
-        ‹ Prev
-      </button>
-
-      <span className="text-[11px] font-mono text-white/60 tracking-widest px-2">
-        {currentPage + 1} / {totalPages || 7}
-      </span>
-
-      <button
-        type="button"
-        aria-label="Next Page"
-        onClick={() => pageFlipRef.current?.flipNext()}
-        className="px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-white/90 border border-white/15 backdrop-blur-md transition-all cursor-pointer shadow-sm"
-      >
-        Next ›
-      </button>
-    </div>
-  </div>
-);
+  );
 } 

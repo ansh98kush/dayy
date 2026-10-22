@@ -1,22 +1,22 @@
-import { ToggleSection } from "@/components/ToggleSection";
 import { HeroSection } from "../components/sections/HeroSection";
-import { DraggableCardBody, DraggableCardContainer } from "@/components/DraggableCards";
 import LoveGallery from "@/components/LoveGallery";
-import StellarCardGallerySingle from "@/components/NewWorld";
-import Book from "@/components/Book";
-import { Section } from "lucide-react";
 import DoodleBackgroundDemo from "@/components/DoodleBg";
 import FloatingNotes from "@/components/Butterfly";
 import ShowtimeCountdown from "@/components/Curtain";
+import DemoOne from "@/components/ui/demo";
+import LanyardDemo from "@/components/ui/lanyard-demo";
+import ScrollTriggerDemo from "@/components/ui/scroll-trigger-demo";
 
 
 export default function Home() {
   return (
     <ShowtimeCountdown
-      showPreviewButton={true}
-      targetDate={new Date('2026-08-11T00:00:00+05:30')}
+      showPreviewButton={false}
+      targetDate={new Date('2026-10-23T00:00:00+05:30')}
+      tickerText="HAPPY 18TH BIRTHDAY AAKRITI · OCT 23 ·"
+      marqueeSub="Aakriti turns 18 · The Celebration Begins"
     >
-      <div id="main-scroll-container" className="h-full min-h-[100dvh] w-full overflow-x-hidden overflow-y-scroll snap-y snap-mandatory bg-zinc-50 dark:bg-black select-none scroll-smooth">
+      <div id="main-scroll-container" className="w-full max-w-[100vw] overflow-x-clip bg-zinc-50 dark:bg-black select-none">
         {/* Section 1: Intro Counter & Watermark Reveal */}
         <section id="section-1" className="h-[100dvh] min-h-[100dvh] w-full snap-start snap-always shrink-0 overflow-hidden relative z-10">
           <iframe
@@ -43,13 +43,23 @@ export default function Home() {
           <DoodleBackgroundDemo />
         </section>
 
-        {/* Section 5: 3D Galaxy Stellar Gallery */}
-        <section id="section-5" className="h-[100dvh] min-h-[100dvh] w-full snap-start snap-always shrink-0 overflow-hidden relative z-10">
-          <StellarCardGallerySingle />
+        {/* Section 5: Perspective Zoom Gallery */}
+        <section id="section-5" className="w-full shrink-0 relative z-10 bg-black">
+          <ScrollTriggerDemo />
         </section>
 
-        {/* Section 6: iMessage Finale */}
+        {/* Section 6: Ink Reveal */}
         <section id="section-6" className="h-[100dvh] min-h-[100dvh] w-full snap-start snap-always shrink-0 overflow-hidden relative z-10">
+          <DemoOne />
+        </section>
+
+        {/* Section 7: Lanyard Badge */}
+        <section id="section-7" className="h-[100dvh] min-h-[100dvh] w-full snap-start snap-always shrink-0 overflow-hidden relative z-10">
+          <LanyardDemo />
+        </section>
+
+        {/* Section 8: iMessage Finale */}
+        <section id="section-8" className="h-[100dvh] min-h-[100dvh] w-full snap-start snap-always shrink-0 overflow-hidden relative z-10">
           <iframe
             src="/last.html"
             title="Birthday Finale Message"
@@ -61,4 +71,3 @@ export default function Home() {
     </ShowtimeCountdown>
   );
 }
-

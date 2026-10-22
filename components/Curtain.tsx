@@ -48,6 +48,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import gsap from 'gsap';
+import FlipClock from '@/components/ui/flip-clock';
 
 export interface ShowtimeCountdownProps {
   /** Moment the countdown ends and the curtain opens. */
@@ -90,13 +91,13 @@ interface Remaining {
   seconds: number;
 }
 
-const TARGET = new Date('2026-11-11T00:00:00+05:30').getTime();
+const DEFAULT_TARGET = new Date('2026-11-11T00:00:00+05:30');
 
-async function getRemaining() {
+async function getRemaining(targetTime: number) {
   const res = await fetch('/api/time', { cache: 'no-store' });
   const { now } = await res.json();
 
-  const diff = TARGET - now;
+  const diff = targetTime - now;
 
   if (diff <= 0) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0, total: 0 };
@@ -113,23 +114,22 @@ async function getRemaining() {
   };
 }
 
-/** Default target: Aug 11 2026, 00:00 IST */
-const DEFAULT_TARGET = new Date(Date.UTC(2026, 11, 11, 0, 0, 0) - (5 * 60 + 30) * 60 * 1000);
-
 type UnitKey = 'days' | 'hours' | 'minutes' | 'seconds';
 
 export default function ShowtimeCountdown({
-  tickerText = 'SAVE THE DATE · NOV 11 ·',
-  marqueeTitle = 'NOW SHOWING',
-  marqueeSub = "a Pipi production, live NOV 11th",
+  targetDate,
+  tickerText = 'HAPPY 18TH BIRTHDAY AAKRITI · OCT 23 ·',
+  marqueeTitle = 'Now Showing',
+  marqueeSub = "Aakriti turns 18 · The Celebration Begins",
   doorsText = 'doors open at midnight, IST',
   songSrc,
   songVolume = 0.6,
   redirectTo,
   children,
-  showPreviewButton = true,
+  showPreviewButton = false,
 }: ShowtimeCountdownProps) {
   const router = useRouter();
+  const effectiveTarget = targetDate ? new Date(targetDate) : DEFAULT_TARGET;
 
   // Both flip together, only once the lock screen has fully faded out.
   // `mounted` gates your children, `revealed` unmounts the overlay itself.
@@ -144,28 +144,15 @@ export default function ShowtimeCountdown({
 
   const rootRef = useRef<HTMLDivElement>(null);
   const chromeRef = useRef<HTMLDivElement>(null);
-  const flickerRef = useRef<HTMLDivElement>(null);
   const curtainLRef = useRef<HTMLDivElement>(null);
   const curtainRRef = useRef<HTMLDivElement>(null);
   const lockContentRef = useRef<HTMLDivElement>(null);
-  const bulbTopRef = useRef<HTMLDivElement>(null);
-  const bulbBottomRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
-
-  const daysRef = useRef<HTMLDivElement>(null);
-  const hoursRef = useRef<HTMLDivElement>(null);
-  const minutesRef = useRef<HTMLDivElement>(null);
-  const secondsRef = useRef<HTMLDivElement>(null);
-  const builtRef = useRef<Record<UnitKey, boolean>>({
-    days: false,
-    hours: false,
-    minutes: false,
-    seconds: false,
-  });
 
   const unlockedRef = useRef(false);
   const reduceMotionRef = useRef(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const builtRef = useRef<Record<UnitKey, boolean>>({ days: false, hours: false, minutes: false, seconds: false });
 
   useEffect(() => {
     reduceMotionRef.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -181,56 +168,6 @@ export default function ShowtimeCountdown({
       document.body.style.overflow = original;
     };
   }, [revealed]);
-
-  /* ---------- bulb rail dots (built once the portal content exists) ---------- */
-  useEffect(() => {
-    if (revealed || !isClient) return;
-    const build = (el: HTMLDivElement | null, count: number) => {
-      if (!el) return;
-      el.innerHTML = '';
-      for (let i = 0; i < count; i++) {
-        const dot = document.createElement('span');
-        dot.className = 'bulb-dot';
-        el.appendChild(dot);
-      }
-    };
-    build(bulbTopRef.current, 22);
-    build(bulbBottomRef.current, 22);
-  }, [revealed, isClient]);
-
-  /* ---------- ambient motion: bulb pulse + projector flicker (only while locked) ---------- */
-  useEffect(() => {
-    if (revealed || !isClient || reduceMotionRef.current) return;
-
-    const dots = rootRef.current?.querySelectorAll<HTMLElement>('.bulb-dot');
-    const bulbTween = dots
-      ? gsap.to(dots, {
-          opacity: 1,
-          scale: 1.5,
-          duration: 0.5,
-          ease: 'power1.inOut',
-          stagger: { each: 0.045, repeat: -1, yoyo: true },
-        })
-      : null;
-
-    let cancelled = false;
-    function flickerLoop() {
-      if (cancelled) return;
-      gsap.to(flickerRef.current, {
-        opacity: () => Math.random() * 0.045,
-        duration: () => 0.06 + Math.random() * 0.18,
-        ease: 'power1.inOut',
-        onComplete: flickerLoop,
-      });
-    }
-    flickerLoop();
-
-    return () => {
-      cancelled = true;
-      bulbTween?.kill();
-      if (flickerRef.current) gsap.killTweensOf(flickerRef.current);
-    };
-  }, [revealed, isClient]);
 
   /* ---------- lock-screen's own song: only ever plays here, never near your content ---------- */
   useEffect(() => {
@@ -316,8 +253,6 @@ export default function ShowtimeCountdown({
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
-    gsap.killTweensOf(rootRef.current?.querySelectorAll('.bulb-dot') ?? []);
-    if (flickerRef.current) gsap.killTweensOf(flickerRef.current);
 
     const finish = () => {
       if (redirectTo) {
@@ -350,34 +285,50 @@ export default function ShowtimeCountdown({
       return;
     }
 
-    // Fade the lock-screen song out in step with the curtain, so it ends in
-    // silence rather than cutting off abruptly.
+    // Fade the lock-screen song out in step with the curtain
     if (audioRef.current && !audioRef.current.paused) {
-      gsap.to(audioRef.current, { volume: 0, duration: 1.1, ease: 'power1.in' });
+      gsap.to(audioRef.current, { volume: 0, duration: 1.2, ease: 'power1.in' });
     }
 
-    // Fully sequential — no overlapping/negative offsets. Overlap is what
-    // was causing multiple tweens to compete for frames at once. The two
-    // curtain halves and the chrome fade all start together at the "open"
-    // label so the parting reads as one clean motion, not layered stutters.
-    // Once the curtain has fully finished opening, the whole screen fades.
+    // Theatrical curtain opening from the reference:
+    // Left: translate(-100%) rotate(20deg) scale(0, 2) from top right
+    // Right: translate(100%) rotate(-20deg) scale(0, 2) from top left
+    // Filter: brightness(180%) -> brightness(100%)
     const tl = gsap.timeline({ onComplete: finish });
-    tl.to(lockContentRef.current, { opacity: 0, y: -10, duration: 0.35, ease: 'power2.inOut' })
-      .addLabel('open', '+=0.05')
-      .to(curtainL, { xPercent: -100, duration: 1.0, ease: 'power3.inOut', force3D: true }, 'open')
-      .to(curtainR, { xPercent: 100, duration: 1.0, ease: 'power3.inOut', force3D: true }, 'open')
-      .to(chromeRef.current, { opacity: 0, duration: 0.6, ease: 'power2.out' }, 'open');
+    tl.to(lockContentRef.current, { opacity: 0, y: -18, duration: 0.45, ease: 'power2.inOut' })
+      .addLabel('open', '+=0.04')
+      .fromTo(
+        curtainL,
+        { xPercent: 0, rotation: 0, scaleX: 1, scaleY: 1, transformOrigin: 'top right', filter: 'brightness(180%)' },
+        { xPercent: -100, rotation: 20, scaleX: 0, scaleY: 2, filter: 'brightness(100%)', duration: 2.2, ease: 'power2.inOut', force3D: true },
+        'open'
+      )
+      .fromTo(
+        curtainR,
+        { xPercent: 0, rotation: 0, scaleX: 1, scaleY: 1, transformOrigin: 'top left', filter: 'brightness(180%)' },
+        { xPercent: 100, rotation: -20, scaleX: 0, scaleY: 2, filter: 'brightness(100%)', duration: 2.2, ease: 'power2.inOut', force3D: true },
+        'open'
+      )
+      .to(chromeRef.current, { opacity: 0, duration: 0.8, ease: 'power2.out' }, 'open+=0.5');
   }, [redirectTo, router]);
+
+  /* ---------- Space and Enter key listener to trigger curtain opening ---------- */
+  useEffect(() => {
+    if (revealed || !isClient) return;
+    const detectKey = (event: KeyboardEvent) => {
+      if (event.keyCode === 13 || event.keyCode === 32 || event.key === 'Enter' || event.key === ' ') {
+        triggerUnlock();
+      }
+    };
+    document.addEventListener('keydown', detectKey);
+    return () => document.removeEventListener('keydown', detectKey);
+  }, [revealed, isClient, triggerUnlock]);
 
   /* ---------- countdown tick (stops entirely the moment unlock triggers) ---------- */
   useEffect(() => {
     if (revealed) return;
     async function paint() {
-      const r = await getRemaining();
-      paintUnit(daysRef.current, 'days', String(Math.min(r.days, 99)).padStart(2, '0'));
-      paintUnit(hoursRef.current, 'hours', String(r.hours).padStart(2, '0'));
-      paintUnit(minutesRef.current, 'minutes', String(r.minutes).padStart(2, '0'));
-      paintUnit(secondsRef.current, 'seconds', String(r.seconds).padStart(2, '0'));
+      const r = await getRemaining(effectiveTarget.getTime());
       if (r.total <= 0) triggerUnlock();
     }
     paint();
@@ -388,21 +339,18 @@ export default function ShowtimeCountdown({
         intervalRef.current = null;
       }
     };
-  }, [revealed, paintUnit, triggerUnlock]);
+  }, [revealed, effectiveTarget, triggerUnlock]);
 
   const overlay = (
     <div className="showtime-root " ref={rootRef}>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Caveat:wght@500;600&family=JetBrains+Mono:wght@500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Calistoga&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,700,100,1;1,9..144,500,100,1&family=Outfit:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
       />
 
       {songSrc && <audio ref={audioRef} src={songSrc} loop preload="auto" />}
 
       <div ref={chromeRef}>
-        <div className="rail left" />
-        <div className="rail right" />
-        <div className="flicker" ref={flickerRef} />
         <div className="vignette" />
         <div className="spotlight" />
         <div className="grain" />
@@ -418,52 +366,51 @@ export default function ShowtimeCountdown({
         </button>
       )}
 
-      <div className="lock">
-        <div className="curtain-l" ref={curtainLRef} />
-        <div className="curtain-r" ref={curtainRRef} />
+      <div className="lock" id="scene">
+        {/* Realistic Curtain Drapery - Layered directly behind the timer with gentle wind wave */}
+        <div id="curtain" aria-hidden="true">
+          <div className="left" ref={curtainLRef}>
+            <div className="curtain-wave curtain-wave-left">
+              <div className="curtain-texture" />
+              <div className="curtain-velvet-color" />
+              <div className="curtain-sheen" />
+              <div className="curtain-floor-shadow" />
+            </div>
+          </div>
+          <div className="right" ref={curtainRRef}>
+            <div className="curtain-wave curtain-wave-right">
+              <div className="curtain-texture" />
+              <div className="curtain-velvet-color" />
+              <div className="curtain-sheen" />
+              <div className="curtain-floor-shadow" />
+            </div>
+          </div>
+        </div>
 
         <div className="screen">
-          <span className="corner corner-tl" aria-hidden="true">✦</span>
-          <span className="corner corner-tr" aria-hidden="true">✦</span>
-          <span className="corner corner-bl" aria-hidden="true">✦</span>
-          <span className="corner corner-br" aria-hidden="true">✦</span>
           <div className="lock-content" ref={lockContentRef}>
-            <div className="bulb-rail top" ref={bulbTopRef} />
-            <div className="ticker">
-              <div className="ticker-track">
-                <span>{tickerText}</span>
-                <span>{tickerText}</span>
-                <span>{tickerText}</span>
-                <span>{tickerText}</span>
-              </div>
-            </div>
-            <div className="bulb-rail bottom" ref={bulbBottomRef} />
 
-            <h1 className="marquee-title">
-              <span className="marquee-title-star" aria-hidden="true">✦</span>
-              {marqueeTitle}
-              <span className="marquee-title-star" aria-hidden="true">✦</span>
-            </h1>
+            <div className="deco-crown" aria-hidden="true">
+              <span className="deco-bar" />
+              <span className="deco-gem">◆</span>
+              <span className="deco-bar" />
+            </div>
+            <h1 className="marquee-title">{marqueeTitle}</h1>
             <p className="marquee-sub">{marqueeSub}</p>
 
-            <div className="hero-days">
-              <div className="od-number" ref={daysRef} />
-              <div className="hero-caption">days to curtain</div>
-            </div>
-
-            <div className="rest-row">
-              <div className="bulb-tile">
-                <div className="od-number" ref={hoursRef} />
-                <span className="bulb-label">hrs</span>
+            <div className="flip-countdown-wrapper my-4 flex flex-col items-center w-full max-w-[100vw] overflow-visible">
+              <div className="transform scale-[0.66] xs:scale-[0.76] sm:scale-90 md:scale-100 origin-center transition-transform">
+                <FlipClock
+                  countdown={true}
+                  targetDate={effectiveTarget}
+                  size="lg"
+                  variant="theatre"
+                  showDays="always"
+                  showLabels={true}
+                  onComplete={triggerUnlock}
+                />
               </div>
-              <div className="bulb-tile">
-                <div className="od-number" ref={minutesRef} />
-                <span className="bulb-label">min</span>
-              </div>
-              <div className="bulb-tile">
-                <div className="od-number" ref={secondsRef} />
-                <span className="bulb-label">sec</span>
-              </div>
+              <div className="hero-caption mt-1 sm:mt-2">countdown to curtain call</div>
             </div>
 
             <div className="perforation" aria-hidden="true" />
@@ -473,6 +420,15 @@ export default function ShowtimeCountdown({
       </div>
 
       <style>{`
+        @font-face {
+          font-family: 'Maglite';
+          src: url('/fonts/maglite/Maglite.otf') format('opentype'),
+               url('/fonts/maglite/Maglite.ttf') format('truetype');
+          font-weight: 100 900;
+          font-style: normal;
+          font-display: swap;
+        }
+
         .showtime-root {
           --bg: #120d0a;
           --bg-2: #1b140d;
@@ -483,12 +439,10 @@ export default function ShowtimeCountdown({
           --maroon-2: #8c2a30;
           --muted: #a8957a;
           --film: #241a10;
-          --font-display: 'Bebas Neue', sans-serif;
-          --font-marquee: 'Anton', 'Bebas Neue', sans-serif;
-          --font-script: 'Caveat', cursive;
-          --font-mono: 'JetBrains Mono', monospace;
+          --font-title: 'Maglite', 'Fraunces', Georgia, serif;
+          --font-sub: 'Maglite', 'Fraunces', Georgia, serif;
+          --font-sans: 'Outfit', -apple-system, sans-serif;
           --gold: #d4af6a;
-          --rail: 26px;
 
           position: fixed;
           inset: 0;
@@ -498,41 +452,13 @@ export default function ShowtimeCountdown({
           z-index: 999;
           background: radial-gradient(120% 90% at 50% 40%, var(--bg-2) 0%, var(--bg) 70%);
           color: var(--cream);
-          font-family: var(--font-mono);
+          font-family: var(--font-sans);
           -webkit-font-smoothing: antialiased;
           overflow: hidden;
           isolation: isolate;
         }
         .showtime-root * {
           box-sizing: border-box;
-        }
-
-        .showtime-root .rail {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          width: var(--rail);
-          z-index: 3;
-          background-color: var(--film);
-          background-image: radial-gradient(circle, var(--bg) 5px, transparent 5.6px);
-          background-size: 100% 30px;
-          background-position: center;
-        }
-        .showtime-root .rail.left {
-          left: 0;
-        }
-        .showtime-root .rail.right {
-          right: 0;
-        }
-
-        .showtime-root .flicker {
-          position: absolute;
-          inset: 0;
-          z-index: 2;
-          background: #fff;
-          opacity: 0;
-          pointer-events: none;
-          mix-blend-mode: overlay;
         }
 
         /* Soft dark corners so the frame reads like it's lit by a single
@@ -616,7 +542,7 @@ export default function ShowtimeCountdown({
           align-items: center;
           justify-content: center;
           overflow: hidden;
-          padding: calc(var(--rail) + 10px);
+          padding: 0;
         }
 
         /* The actual "projector screen" — a real 16:9 box, centered, so the
@@ -625,174 +551,295 @@ export default function ShowtimeCountdown({
            screens and by width on narrow ones, whichever runs out first. */
 
       .showtime-root .screen {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  container-type: size;
-  box-shadow: inset 0 0 0 1px rgba(212, 175, 106, 0.16), inset 0 0 40px rgba(0, 0, 0, 0.4);
-}
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        container-type: size;
+      }
 
-        .showtime-root .corner {
+        /* ── REALISTIC THEATRE CURTAIN (LAYERED BEHIND TIMER) ─── */
+        .showtime-root #curtain {
           position: absolute;
-          z-index: 15;
-          font-size: clamp(10px, 1.8cqw, 14px);
-          color: var(--gold);
-          opacity: 0.55;
-          text-shadow: 0 0 6px var(--amber-glow);
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 2; /* Sits directly behind the timer screen (z-index: 10) */
           pointer-events: none;
+          overflow: hidden;
         }
-        .showtime-root .corner-tl { top: 10px; left: 12px; }
-        .showtime-root .corner-tr { top: 10px; right: 12px; }
-        .showtime-root .corner-bl { bottom: 10px; left: 12px; }
-        .showtime-root .corner-br { bottom: 10px; right: 12px; }
 
-        .showtime-root .curtain-l,
-        .showtime-root .curtain-r {
+        .showtime-root #curtain .left,
+        .showtime-root #curtain .right {
           position: absolute;
           top: 0;
-          bottom: 0;
-          width: 52%;
-          z-index: 1;
-          will-change: transform;
-          transform: translateZ(0);
-          backface-visibility: hidden;
-          /* Wide, soft-edged stripes instead of a tight hard-edged repeat —
-             tight repeating patterns shimmer/moiré under transform on most
-             displays, which is what read as a "glitch" during the curtain
-             animation. */
-          background-image:
-            radial-gradient(140% 55% at 50% -8%, rgba(255, 255, 255, 0.1), transparent 60%),
-            linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(0,0,0,0.3) 100%),
-            repeating-linear-gradient(
-            90deg,
-            var(--maroon) 0,
-            var(--maroon) 26px,
-            var(--maroon-2) 34px,
-            var(--maroon-2) 60px,
-            var(--maroon) 68px
-          );
-          box-shadow: 0 0 60px rgba(0, 0, 0, 0.6) inset;
+          width: 50.15%;
+          height: 100%;
+          filter: brightness(180%);
+          will-change: transform, filter;
+          overflow: hidden;
+          background-color: #1a060a;
         }
-        .showtime-root .curtain-l {
+
+        .showtime-root #curtain .left {
           left: 0;
-          transform-origin: left;
+          transform-origin: top right;
+          box-shadow: inset 24px 0 40px rgba(0, 0, 0, 0.5);
         }
-        .showtime-root .curtain-r {
+
+        .showtime-root #curtain .right {
+          left: 50%;
+          transform-origin: top left;
+          box-shadow: inset -24px 0 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ── THEATRICAL CURTAIN WIND & BREEZE ANIMATION ── */
+        .showtime-root .curtain-wave {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          transform-origin: top center;
+          will-change: transform;
+          pointer-events: none;
+        }
+
+        /* Extra bleed past the center seam prevents any gap from opening during wind sway */
+        .showtime-root .curtain-wave-left {
+          left: 0;
+          width: 108%;
+          animation: curtain-breeze-left 8s ease-in-out infinite;
+        }
+
+        .showtime-root .curtain-wave-right {
+          left: -8%;
+          width: 108%;
+          animation: curtain-breeze-right 9.5s ease-in-out infinite;
+          animation-delay: -3.8s;
+        }
+
+        @keyframes curtain-breeze-left {
+          0% {
+            transform: skewX(0deg) translateX(0) scaleY(1);
+          }
+          18% {
+            transform: skewX(-1.1deg) translateX(-0.3%) scaleY(1.005);
+          }
+          38% {
+            transform: skewX(0.6deg) translateX(0.2%) scaleY(0.998);
+          }
+          60% {
+            transform: skewX(-1.4deg) translateX(-0.4%) scaleY(1.008);
+          }
+          82% {
+            transform: skewX(0.4deg) translateX(0.1%) scaleY(1.002);
+          }
+          100% {
+            transform: skewX(0deg) translateX(0) scaleY(1);
+          }
+        }
+
+        @keyframes curtain-breeze-right {
+          0% {
+            transform: skewX(0deg) translateX(0) scaleY(1);
+          }
+          20% {
+            transform: skewX(1.1deg) translateX(0.3%) scaleY(1.005);
+          }
+          42% {
+            transform: skewX(-0.5deg) translateX(-0.2%) scaleY(0.998);
+          }
+          64% {
+            transform: skewX(1.5deg) translateX(0.4%) scaleY(1.008);
+          }
+          85% {
+            transform: skewX(-0.3deg) translateX(-0.1%) scaleY(1.002);
+          }
+          100% {
+            transform: skewX(0deg) translateX(0) scaleY(1);
+          }
+        }
+
+        .showtime-root #curtain .right .curtain-texture,
+        .showtime-root #curtain .right .curtain-velvet-color {
+          transform: scaleX(-1);
+        }
+
+        /* High-detail cloth fold SVG drape texture */
+        .showtime-root .curtain-texture {
+          position: absolute;
+          inset: 0;
+          background-image: url("/curtain.svg");
+          background-size: cover;
+          background-repeat: no-repeat;
+          mix-blend-mode: overlay;
+          opacity: 0.9;
+          pointer-events: none;
+        }
+
+        /* Deep Crimson Velvet Shading with subtle breathing swell */
+        .showtime-root .curtain-velvet-color {
+          position: absolute;
+          inset: 0;
+          background: 
+            radial-gradient(130% 65% at 50% 10%, rgba(255, 255, 255, 0.22) 0%, transparent 60%),
+            linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, transparent 15%, transparent 75%, rgba(0, 0, 0, 0.75) 100%),
+            repeating-linear-gradient(
+              90deg,
+              #3d070b 0px,
+              #6e141a 22px,
+              #9e1f26 48px,
+              #bd2c34 58px,
+              #6e141a 84px,
+              #3d070b 106px
+            );
+          mix-blend-mode: multiply;
+          pointer-events: none;
+          animation: curtain-velvet-swell 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes curtain-velvet-swell {
+          0% {
+            filter: brightness(100%);
+          }
+          50% {
+            filter: brightness(107%);
+          }
+          100% {
+            filter: brightness(100%);
+          }
+        }
+
+        /* Silky Velvet Sheen with shimmering light motion */
+        .showtime-root .curtain-sheen {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(ellipse at 50% 25%, rgba(255, 235, 205, 0.20) 0%, transparent 60%);
+          mix-blend-mode: screen;
+          pointer-events: none;
+          animation: curtain-sheen-wave 7s ease-in-out infinite alternate;
+        }
+
+        @keyframes curtain-sheen-wave {
+          0% {
+            opacity: 0.16;
+            transform: scale(1) translateY(0);
+          }
+          50% {
+            opacity: 0.27;
+            transform: scale(1.05) translateY(1.5%);
+          }
+          100% {
+            opacity: 0.16;
+            transform: scale(1) translateY(0);
+          }
+        }
+
+        /* Natural subtle floor shadow with gentle depth pulse */
+        .showtime-root .curtain-floor-shadow {
+          position: absolute;
+          bottom: 0;
+          left: 0;
           right: 0;
-          transform-origin: right;
+          height: 80px;
+          background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+          pointer-events: none;
+          animation: curtain-floor-sway 8.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes curtain-floor-sway {
+          0% {
+            opacity: 0.65;
+            transform: scaleY(1);
+          }
+          50% {
+            opacity: 0.85;
+            transform: scaleY(1.08);
+          }
+          100% {
+            opacity: 0.65;
+            transform: scaleY(1);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .showtime-root .curtain-wave,
+          .showtime-root .curtain-sheen,
+          .showtime-root .curtain-velvet-color,
+          .showtime-root .curtain-floor-shadow {
+            animation: none !important;
+          }
         }
 
     .showtime-root .lock-content {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  padding: 24px 0 3cqh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: center;
-}
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      padding: 3cqh 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
 
-        .showtime-root .bulb-rail {
+        .showtime-root .deco-crown {
           display: flex;
-          justify-content: space-between;
-          padding: 0 4px;
-          width: 100%;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          margin-bottom: 0.6cqh;
+          opacity: 0.85;
         }
-        .showtime-root .bulb-rail.top {
-          margin-bottom: 7px;
+        .showtime-root .deco-crown .deco-bar {
+          width: clamp(24px, 4cqw, 48px);
+          height: 1px;
+          background: linear-gradient(90deg, transparent, #dfb462);
         }
-        .showtime-root .bulb-rail.bottom {
-          margin-top: 7px;
-          margin-bottom: 24px;
+        .showtime-root .deco-crown .deco-bar:last-child {
+          background: linear-gradient(90deg, #dfb462, transparent);
         }
-        .showtime-root .bulb-rail .bulb-dot {
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
-          background: var(--amber);
-          opacity: 0.25;
-          box-shadow: 0 0 4px var(--amber-glow);
-        }
-
-        .showtime-root .ticker {
-          width: 100%;
-          overflow: hidden;
-          border-top: 1px solid var(--amber-glow);
-          border-bottom: 1px solid var(--amber-glow);
-          padding: 1.4cqh 0;
-          /* Fade the scrolling text at both edges instead of a hard cut. */
-          -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-          mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-        }
-        .showtime-root .ticker-track {
-          display: flex;
-          white-space: nowrap;
-          animation: showtime-scroll 16s linear infinite;
-        }
-        .showtime-root .ticker-track span {
-          font-family: var(--font-display);
-          font-size: clamp(11px, 2.4cqw, 15px);
-          letter-spacing: 0.22em;
-          color: var(--amber);
-          padding-right: 2.4em;
-        }
-        @keyframes showtime-scroll {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
+        .showtime-root .deco-crown .deco-gem {
+          font-size: 7px;
+          color: #f7dfa5;
         }
 
         .showtime-root .marquee-title {
-          font-family: var(--font-marquee);
+          font-family: var(--font-title);
           font-weight: 400;
-          font-size: clamp(1.6rem, 7.8cqw, 4.8rem);
-          letter-spacing: 0.01em;
-          color: var(--cream);
-          line-height: 0.95;
+          font-feature-settings: 'liga' 1, 'dlig' 1, 'calt' 1, 'swsh' 1;
+          font-size: clamp(2.6rem, 7.5cqw, 5.2rem);
+          letter-spacing: 0.015em;
+          line-height: 1.05;
+          text-transform: none;
+          color: #fff9f0;
           text-shadow:
-            0 1px 0 rgba(0, 0, 0, 0.5),
-            0 2px 0 rgba(0, 0, 0, 0.35),
-            0 0 22px var(--amber-glow),
-            0 0 60px rgba(240, 168, 60, 0.22);
-          margin-top: 2.2cqh;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: nowrap;
+            0 2px 4px rgba(0, 0, 0, 0.95),
+            0 0 20px rgba(240, 168, 60, 0.45),
+            0 0 50px rgba(240, 168, 60, 0.18);
+          margin: 0;
+          display: block;
+          text-align: center;
           max-width: 96%;
-          gap: 0.3em;
           animation: showtime-title-in 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
-        .showtime-root .marquee-title-star {
-          font-size: 0.32em;
-          color: var(--amber);
-          opacity: 0.8;
-          flex-shrink: 0;
-          animation: showtime-twinkle 2.4s ease-in-out infinite;
-        }
-        .showtime-root .marquee-title-star:last-child {
-          animation-delay: 1.1s;
-        }
         @keyframes showtime-title-in {
-          from { opacity: 0; transform: translateY(10px) scale(0.97); letter-spacing: 0.16em; }
-          to { opacity: 1; transform: translateY(0) scale(1); letter-spacing: 0.03em; }
-        }
-        @keyframes showtime-twinkle {
-          0%, 100% { opacity: 0.35; transform: scale(0.85); }
-          50% { opacity: 1; transform: scale(1.1); }
+          from { opacity: 0; transform: translateY(10px) scale(0.98); letter-spacing: 0.08em; }
+          to { opacity: 1; transform: translateY(0) scale(1); letter-spacing: 0.015em; }
         }
         .showtime-root .marquee-sub {
-          font-family: var(--font-script);
-          font-size: clamp(0.95rem, 2.8cqw, 1.4rem);
-          color: var(--gold);
-          margin: 0.8cqh 0 0;
-          text-shadow: 0 0 14px rgba(212, 175, 106, 0.3);
+          font-family: var(--font-sub);
+          font-style: normal;
+          font-weight: 400;
+          font-feature-settings: 'liga' 1, 'dlig' 1, 'calt' 1;
+          font-size: clamp(1.15rem, 2.5cqw, 1.55rem);
+          letter-spacing: 0.03em;
+          color: #eed8b0;
+          margin: 0.9cqh 0 0;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 16px rgba(238, 216, 176, 0.25);
           max-width: 90%;
         }
 
@@ -808,23 +855,25 @@ export default function ShowtimeCountdown({
           background: radial-gradient(50% 60% at 50% 45%, rgba(240, 168, 60, 0.16) 0%, transparent 75%);
           filter: blur(2px);
         }
-        .showtime-root .hero-days .od-col {
-          width: clamp(28px, 8cqw, 64px);
-          height: clamp(42px, 11cqw, 92px);
-        }
-        .showtime-root .hero-days .od-digit {
-          height: clamp(42px, 11cqw, 92px);
-          font-size: clamp(1.8rem, 6.8cqw, 4.4rem);
-        }
-        .showtime-root .hero-days .od-number {
-          display: inline-flex;
-          gap: 2px;
+        .showtime-root .flip-countdown-wrapper {
+          position: relative;
+          z-index: 15;
+          margin-top: 2.2cqh;
+          margin-bottom: 1cqh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
         .showtime-root .hero-caption {
-          font-family: var(--font-display);
-          font-size: clamp(9px, 1.8cqw, 13px);
-          letter-spacing: 0.26em;
-          color: var(--muted);
+          font-family: var(--font-sans);
+          font-size: clamp(10.5px, 1.4cqw, 12px);
+          font-weight: 600;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          color: #e5c378;
+          opacity: 0.95;
+          margin-top: 16px;
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
         }
 
         .showtime-root .rest-row {
@@ -908,20 +957,33 @@ export default function ShowtimeCountdown({
         }
 
         .showtime-root .perforation {
-          width: min(220px, 60%);
+          width: min(200px, 45%);
           height: 1px;
-          margin-top: 2cqh;
-          background-image: radial-gradient(circle, rgba(212, 175, 106, 0.5) 1.1px, transparent 1.2px);
-          background-size: 9px 1px;
-          background-repeat: repeat-x;
-          opacity: 0.7;
+          margin-top: 2.2cqh;
+          background: linear-gradient(90deg, transparent 0%, rgba(229, 195, 120, 0.75) 40%, rgba(229, 195, 120, 0.75) 60%, transparent 100%);
+          position: relative;
+          opacity: 0.9;
+        }
+        .showtime-root .perforation::after {
+          content: '◆';
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 7px;
+          color: #e5c378;
+          background: #120d0a;
+          padding: 0 6px;
         }
         .showtime-root .lock-foot {
-          margin-top: 1cqh;
-          font-size: clamp(8.5px, 1.5cqw, 10.5px);
-          letter-spacing: 0.14em;
-          color: var(--gold);
+          margin-top: 1.4cqh;
+          font-family: var(--font-sans);
+          font-size: clamp(9.5px, 1.3cqw, 11px);
+          font-weight: 600;
+          letter-spacing: 0.28em;
+          color: #c49f5c;
           text-transform: uppercase;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
         }
 
         @media (max-width: 640px) {

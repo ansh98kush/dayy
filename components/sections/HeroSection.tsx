@@ -6,20 +6,22 @@ import MarqueeAlongSvgPath from "../LineCmp";
 const path =
   "M1 209.434C58.5872 255.935 387.926 325.938 482.583 209.434C600.905 63.8051 525.516 -43.2211 427.332 19.9613C329.149 83.1436 352.902 242.723 515.041 267.302C644.752 286.966 943.56 181.94 995 156.5";
 
-// Local photos from /public/ref — resolve to /ref/*.jpg at runtime.
+// Client photos from /public/client
 const imgs = [
-  { src: "/ref/heart.jpg" },
-  { src: "/ref/girl.jpg" },
-  { src: "/ref/girl2.jpg" },
-  { src: "/ref/girl3.jpg" },
-  { src: "/ref/girl4.jpg" },
-  { src: "/ref/girl5.jpg" },
-  { src: "/ref/girl6.jpg" },
-  { src: "/ref/girl7.jpg" },
-  { src: "/ref/girl8.jpg" },
-  { src: "/ref/girl9.jpg" },
-  { src: "/ref/girl10.jpg" },
-  { src: "/ref/girl11.jpg" },
+  { src: "/client/photo-1.jpg" },
+  { src: "/client/photo-2.jpg" },
+  { src: "/client/photo-3.jpg" },
+  { src: "/client/photo-4.jpg" },
+  { src: "/client/photo-5.jpg" },
+  { src: "/client/photo-6.jpg" },
+  { src: "/client/photo-7.jpg" },
+  { src: "/client/photo-8.jpg" },
+  { src: "/client/photo-9.jpg" },
+  { src: "/client/photo-10.jpg" },
+  { src: "/client/photo-1.jpg" },
+  { src: "/client/photo-3.jpg" },
+  { src: "/client/photo-5.jpg" },
+  { src: "/client/photo-7.jpg" },
 ];
 
 // const imgs = [
@@ -59,22 +61,22 @@ export const HeroSection = () => {
       `}</style>
 
       {/* Top row: quiet date stamp */}
-      <div className="hero-mono flex items-center justify-between px-6 pt-5 text-[11px] uppercase tracking-[0.25em] text-[#8A8A80] sm:px-14 sm:pt-8 z-20">
-        <span>Aug 5</span>
+      <div className="hero-mono flex items-center justify-between px-6 pt-4 xs:pt-5 sm:px-14 sm:pt-8 text-[11px] uppercase tracking-[0.25em] text-[#8A8A80] z-20 shrink-0">
+        <span>Oct 23</span>
       </div>
 
       {/* Headline & content — film trail positioned between headline and text on mobile */}
-      <div className="px-6 pt-3 xs:pt-6 sm:px-14 sm:pt-16 z-20 relative flex flex-col flex-1 justify-between sm:justify-start pb-6 sm:pb-0">
-        <h1 className="hero-display text-[13.5vw] sm:text-7xl lg:text-8xl leading-[0.88] tracking-tight text-[#14140F]">
+      <div className="px-6 pt-2 xs:pt-4 sm:px-14 sm:pt-16 z-20 relative flex flex-col flex-1 justify-between sm:justify-start pb-2 xs:pb-4 sm:pb-0">
+        <h1 className="hero-display text-[11vw] xs:text-5xl sm:text-7xl lg:text-8xl leading-[0.92] sm:leading-[0.88] tracking-tight text-[#14140F] shrink-0">
           <span className="font-light">Happy</span>
           <br />
           <span className="font-bold">Birthday</span>
           <br/>
-          <span className="font-bold mt-1 mb-2 text-amber-500">Sweety</span>
+          <span className="font-bold mt-0.5 sm:mt-1 mb-1 sm:mb-2 text-amber-500">Aakriti</span>
         </h1>
 
-        {/* Mobile film trail — continuous film strip with zero space between pics and clear separation from headline */}
-        <div className="block sm:hidden mt-24 xs:mt-28 mb-3 w-[996px] left-1/2 -translate-x-1/2 relative overflow-visible h-[270px] pointer-events-auto -rotate-2">
+        {/* Mobile film trail — rotated 15 degrees clockwise */}
+        <div className="block sm:hidden my-auto w-full relative overflow-visible h-[220px] xs:h-[240px] pointer-events-auto scale-[1.22] origin-center rotate-[15deg]">
           <MarqueeAlongSvgPath
             path={path}
             viewBox="0 0 996 330"
@@ -83,7 +85,7 @@ export const HeroSection = () => {
             baseVelocity={5}
             slowdownOnHover={true}
             draggable={true}
-            repeat={2}
+            repeat={1}
             dragSensitivity={0.08}
             dragVelocityDecay={0.98}
             slowDownFactor={0.05}
@@ -95,7 +97,7 @@ export const HeroSection = () => {
             {imgs.map((img, i) => (
               <div
                 key={i}
-                className="h-[68px] w-[74px] overflow-hidden border border-[#14140F]/15 bg-[#14140F]/10 rounded-none transition-transform duration-300 ease-out hover:scale-105 shadow-sm"
+                className="h-[105px] w-[115px] overflow-hidden border border-[#14140F]/15 bg-[#14140F]/10 rounded-sm transition-transform duration-300 ease-out hover:scale-105 shadow-sm"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -145,16 +147,16 @@ export const HeroSection = () => {
           </MarqueeAlongSvgPath>
         </div>
 
-        <div className="mt-2 xs:mt-4 sm:mt-6">
-          <div className="h-px w-20 bg-[#9C7A3F]" />
-          <p className="hero-body mt-3 xs:mt-4 sm:mt-6 max-w-sm sm:max-w-sm text-base xs:text-lg sm:text-base leading-[1.65] text-[#2c2c26]">
+        <div className="mt-1 xs:mt-3 sm:mt-6 shrink-0">
+          <div className="h-px w-16 xs:w-20 bg-[#9C7A3F]" />
+          <p className="hero-body mt-2 xs:mt-3 sm:mt-6 max-w-sm sm:max-w-sm text-[13px] xs:text-[14px] sm:text-base leading-[1.55] sm:leading-[1.65] text-[#2c2c26]">
             wishing you a day filled with love, laughter, and all the happiness your heart can hold. May this year bring you endless joy and unforgettable memories. Happy Birthday!
           </p>
         </div>
       </div>
 
       {/* Footer hairline */}
-      <div className="mt-auto flex items-center justify-between px-6 pb-5 sm:px-14 sm:pb-8 z-20">
+      <div className="mt-auto flex items-center justify-between px-6 pb-4 xs:pb-5 sm:px-14 sm:pb-8 z-20 shrink-0">
         <div className="h-px flex-1 bg-[#14140F]/10" />
         <span className="hero-mono px-4 text-[10px] uppercase tracking-[0.25em] text-[#8A8A80]">
           Made for you

@@ -412,8 +412,8 @@
   id="bgMusic"
   loop
   playsinline
-  preload="auto"
-  volume="0.7"
+  preload="none"
+  muted
 >
   <source src="/sounds/pipi-song.mp3" type="audio/mpeg">
 </audio>
@@ -437,11 +437,11 @@
 <!-- ---------------- spotify-style mini player ---------------- -->
 <div class="player" id="musicPlayer">
   <div class="player-art">
-    <img id="artA" class="is-active" src="/ref/girl1.jpg" alt="">
-    <img id="artB" src="/ref/girl2.jpg" alt="">
+    <img id="artA" class="is-active" src="/client/photo-1.jpg" alt="Aakriti">
+    <img id="artB" src="/client/photo-2.jpg" alt="Aakriti">
   </div>
   <div class="player-info">
-    <div class="player-title">Sweety Song</div>
+    <div class="player-title">Aakriti's Song</div>
     <div class="player-artist">Birthday Playlist</div>
     <div class="player-progress">
       <span class="player-time" id="curTime">0:00</span>
@@ -511,8 +511,8 @@
   }
 
   const initial = computeParts();
-  const AGE = initial.years;
-  const DISPLAY_AGE = Math.max(0, AGE - 1);
+  const AGE = 18;
+  const DISPLAY_AGE = 17;
 
   document.getElementById('watermark').textContent = String(DISPLAY_AGE).padStart(2,'0');
 
@@ -584,7 +584,7 @@
   // eases in from a soft, zoomed, blurred state into a settled frame, capped
   // well under full opacity so the number and the photo both stay legible
   // together instead of one washing out the other
-  const BG_REVEAL_SRC = '/bg2.jpg';
+  const BG_REVEAL_SRC = '/client/cover.jpg';
   const BG_MAX_OPACITY = 0.85;
   function revealBackground(){
     bgRevealImg.src = BG_REVEAL_SRC;
@@ -927,13 +927,7 @@
 
 
 
-  //play music on button click
-  triggerBtn.addEventListener('click', () => {
-  if (bgMusic.paused) {
-    bgMusic.play().catch(() => {}); // catch autoplay-policy rejection silently
-    musicPlayer.classList.add('is-visible', 'is-playing');
-  }
-}, { once: true }); // only trigger the first press/burn
+  // Music is muted by default
 
   // ---------------- intro: odometer-style roll into the number, then zoom through ----------------
   const introNum = document.getElementById('introNum');
@@ -1062,9 +1056,10 @@
     seeking = false;
   });
 
-  // browsers block un-prompted audio autoplay - attempt it, and otherwise
-  // let the mini player's play button be the first user gesture that starts it
-  bgMusic.play().catch(() => {});
+  // Audio is muted
+  bgMusic.muted = true;
+  bgMusic.volume = 0;
+  bgMusic.pause();
 
   // ---------------- player art: crossfade through pipis/pipi1.jpg..pipi13.jpg ----------------
   const PIPI_COUNT = 10;
