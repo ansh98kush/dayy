@@ -406,7 +406,7 @@
 <body>
 
   <div class="bg-reveal" id="bgReveal">
-    <img id="bgRevealImg" src="/bg2.jpg" alt="Aria">
+    <img id="bgRevealImg" src="/bg2.jpg" alt="Sweety">
   </div>
 
   <audio
@@ -438,11 +438,11 @@
 <!-- ---------------- spotify-style mini player ---------------- -->
 <div class="player" id="musicPlayer">
   <div class="player-art">
-    <img id="artA" class="is-active" src="/aria/photos/aria_cover.jpg" alt="Aria">
-    <img id="artB" src="/aria/photos/aria_dance_1.jpg" alt="Aria">
+    <img id="artA" class="is-active" src="/ref/girl1.jpg" alt="Sweety">
+    <img id="artB" src="/ref/girl2.jpg" alt="Sweety">
   </div>
   <div class="player-info">
-    <div class="player-title">Aria's Song</div>
+    <div class="player-title">Sweety Song</div>
     <div class="player-artist">Birthday Playlist</div>
     <div class="player-progress">
       <span class="player-time" id="curTime">0:00</span>
@@ -510,9 +510,8 @@
   }
 
   const initial = computeParts();
-  // Aria is 14, turning 15 for Chapter 15!
-  const AGE = 15;
-  const DISPLAY_AGE = 14;
+  const AGE = initial.years;
+  const DISPLAY_AGE = Math.max(0, AGE - 1);
 
   document.getElementById('watermark').textContent = String(DISPLAY_AGE).padStart(2,'0');
 
@@ -521,9 +520,10 @@
   let revealed = false;
 
   function readout(p){
-    // before the burn reveal, the watermark shows 14 ("14 ki hai"),
-    // upon reveal it shows 15 ("15 ki ho gayi")!
-    const shownYears = revealed ? AGE : DISPLAY_AGE;
+    // before the burn reveal, the watermark intentionally shows one year
+    // less (DISPLAY_AGE) as part of the reveal effect - the ticker must
+    // match that number, or it looks like the clock is wrong
+    const shownYears = revealed ? p.years : DISPLAY_AGE;
     return `${shownYears}y · ${p.days}d · ${String(p.hours).padStart(2,'0')}:${String(p.minutes).padStart(2,'0')}:${String(p.seconds).padStart(2,'0')}`;
   }
   document.getElementById('liveReadout').textContent = readout(initial);
@@ -1065,21 +1065,9 @@
   // let the mini player's play button be the first user gesture that starts it
   bgMusic.play().catch(() => {});
 
-  // ---------------- player art: crossfade through aria photos ----------------
-  const ariaPhotos = [
-    "/aria/photos/aria_cover.jpg",
-    "/aria/photos/aria_dance_1.jpg",
-    "/aria/photos/aria_lehenga_1.jpg",
-    "/aria/photos/aria_selfie_1.jpg",
-    "/aria/photos/aria_dance_2.jpg",
-    "/aria/photos/aria_lehenga_2.jpg",
-    "/aria/photos/aria_selfie_2.jpg",
-    "/aria/photos/aria_dance_3.jpg",
-    "/aria/photos/aria_cover.jpg",
-    "/aria/photos/aria_dance_4.jpg"
-  ];
-  const PIPI_COUNT = ariaPhotos.length;
-  const pipiSrc = (n) => ariaPhotos[(n - 1) % ariaPhotos.length];
+  // ---------------- player art: crossfade through ref photos ----------------
+  const PIPI_COUNT = 11;
+  const pipiSrc = (n) => `/ref/girl${n}.jpg`;
   const artA = document.getElementById('artA');
   const artB = document.getElementById('artB');
   let pipiIndex = 1; // artA currently shows pipi1

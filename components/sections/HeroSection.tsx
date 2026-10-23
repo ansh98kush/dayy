@@ -8,18 +8,18 @@ const path =
 
 // Local photos from /public/ref — resolve to /ref/*.jpg at runtime.
 const imgs = [
-  { src: "/aria/curated/aria_face_square.jpg" },
-  { src: "/aria/curated/aria_dance_1.jpg" },
-  { src: "/aria/curated/aria_face_portrait.jpg" },
-  { src: "/aria/curated/aria_lehenga_full_1.jpg" },
-  { src: "/aria/curated/aria_bust_medium.jpg" },
-  { src: "/aria/curated/aria_dance_2.jpg" },
-  { src: "/aria/curated/aria_cinematic_wide.jpg" },
-  { src: "/aria/curated/aria_dance_3.jpg" },
-  { src: "/aria/curated/aria_orig_full.jpg" },
-  { src: "/aria/curated/aria_dance_4.jpg" },
-  { src: "/aria/curated/aria_face_square.jpg" },
-  { src: "/aria/curated/aria_dance_5.jpg" },
+  { src: "/ref/heart.jpg" },
+  { src: "/ref/girl.jpg" },
+  { src: "/ref/girl2.jpg" },
+  { src: "/ref/girl3.jpg" },
+  { src: "/ref/girl4.jpg" },
+  { src: "/ref/girl5.jpg" },
+  { src: "/ref/girl6.jpg" },
+  { src: "/ref/girl7.jpg" },
+  { src: "/ref/girl8.jpg" },
+  { src: "/ref/girl9.jpg" },
+  { src: "/ref/girl10.jpg" },
+  { src: "/ref/girl11.jpg" },
 ];
 
 export const HeroSection = () => {
@@ -41,7 +41,7 @@ export const HeroSection = () => {
 
       {/* Top row: quiet date stamp */}
       <div className="hero-mono flex items-center justify-between px-6 pt-4 xs:pt-5 sm:px-14 sm:pt-8 text-[11px] uppercase tracking-[0.25em] text-[#8A8A80] z-20 shrink-0">
-        <span>Oct 24 · Chapter 15</span>
+        <span>Happy Birthday · Sweety</span>
       </div>
 
       {/* Headline & content — film trail positioned between headline and text on mobile */}
@@ -51,7 +51,7 @@ export const HeroSection = () => {
           <br />
           <span className="font-bold">Birthday</span>
           <br/>
-          <span className="font-bold mt-0.5 sm:mt-1 mb-1 sm:mb-2 text-amber-500">Aria</span>
+          <span className="font-bold mt-0.5 sm:mt-1 mb-1 sm:mb-2 text-amber-500">Sweety</span>
         </h1>
 
         {/* Mobile film trail — rotated 15 degrees clockwise */}
@@ -129,7 +129,7 @@ export const HeroSection = () => {
         <div className="mt-1 xs:mt-3 sm:mt-6 shrink-0">
           <div className="h-px w-16 xs:w-20 bg-[#9C7A3F]" />
           <p className="hero-body mt-2 xs:mt-3 sm:mt-6 max-w-sm sm:max-w-sm text-[13px] xs:text-[14px] sm:text-base leading-[1.55] sm:leading-[1.65] text-[#2c2c26]">
-            Happy 15th Birthday to the prettiest girl and the love of my life. You bring so much sunshine, laughter, and pure magic into my world. May this year be as sweet and special as you are to me. Forever yours ❤️
+            wishing you a day filled with love, laughter, and all the happiness your heart can hold. May this year bring you endless joy and unforgettable memories. Happy Birthday!
           </p>
         </div>
       </div>
@@ -138,7 +138,7 @@ export const HeroSection = () => {
       <div className="mt-auto flex items-center justify-between px-6 pb-4 xs:pb-5 sm:px-14 sm:pb-8 z-20 shrink-0">
         <div className="h-px flex-1 bg-[#14140F]/10" />
         <span className="hero-mono px-4 text-[10px] uppercase tracking-[0.25em] text-[#8A8A80]">
-          Made with love by your boyfriend
+          Made for you
         </span>
       </div>
     </section>

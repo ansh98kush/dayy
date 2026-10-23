@@ -9,11 +9,11 @@ import MeltingMusicPlayerFrame from "./MeltingMusicPlayerFrame";
  * ========================================================================== */
 
 export const FLIPBOOK_CONFIG = {
-  name: "ARIA",
-  fullName: "ARIA",
-  age: "15",
-  date: "OCTOBER 24",
-  sender: "YOUR BOYFRIEND",
+  name: "SWEETY",
+  fullName: "SWEETY",
+  age: "BIRTHDAY",
+  date: "SPECIAL DAY",
+  sender: "YOUR FAVORITE PERSON",
   accentColor: "#6b5836", // Olive-gold foil color used in template
 };
 
@@ -134,36 +134,36 @@ export function PageEditorialCollage() {
       {/* Top Row: Photo 1 (wider) + Photo 2 (narrower portrait) */}
       <div className="flex gap-1.5 h-[30%]">
         <div className="relative w-[62%] h-full bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_cinematic_wide.jpg" alt="Aria Cinematic" fill priority className="object-cover object-center" sizes="220px" />
+          <Image src="/ref/girl1.jpg" alt="Sweety Memory 1" fill priority className="object-cover object-center" sizes="220px" />
         </div>
         <div className="relative w-[38%] h-full bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_dance_1.jpg" alt="Aria Dancing" fill priority className="object-cover object-top" sizes="150px" />
+          <Image src="/ref/girl2.jpg" alt="Sweety Memory 2" fill priority className="object-cover object-top" sizes="150px" />
         </div>
       </div>
 
       {/* Middle Row: Photo 3 + Photo 4 */}
       <div className="flex gap-1.5 h-[28%]">
         <div className="relative w-[48%] h-full bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_face_portrait.jpg" alt="Aria Portrait" fill priority className="object-cover object-top" sizes="180px" />
+          <Image src="/ref/girl3.jpg" alt="Sweety Memory 3" fill priority className="object-cover object-top" sizes="180px" />
         </div>
         <div className="relative w-[52%] h-full bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_lehenga_full_1.jpg" alt="Aria in Lehenga" fill priority className="object-cover object-center" sizes="180px" />
+          <Image src="/ref/girl4.jpg" alt="Sweety Memory 4" fill priority className="object-cover object-center" sizes="180px" />
         </div>
       </div>
 
       {/* Lower Row: Photo 5 + Photo 6 */}
       <div className="flex gap-1.5 h-[23%]">
         <div className="relative w-[50%] h-full bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_dance_2.jpg" alt="Aria Grace" fill priority className="object-cover object-top" sizes="180px" />
+          <Image src="/ref/girl5.jpg" alt="Sweety Memory 5" fill priority className="object-cover object-top" sizes="180px" />
         </div>
         <div className="relative w-[50%] h-full bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_bust_medium.jpg" alt="Aria Smile" fill priority className="object-cover object-top" sizes="180px" />
+          <Image src="/ref/girl6.jpg" alt="Sweety Memory 6" fill priority className="object-cover object-top" sizes="180px" />
         </div>
       </div>
 
       {/* Bottom Row: Full Width Panorama Photo */}
       <div className="relative w-full h-[19%] bg-[#e7e5e4] shadow-sm overflow-hidden">
-        <Image src="/aria/curated/aria_orig_full.jpg" alt="Aria Full Panorama" fill priority className="object-cover object-center" sizes="380px" />
+        <Image src="/ref/girl7.jpg" alt="Sweety Full Panorama" fill priority className="object-cover object-center" sizes="380px" />
       </div>
     </div>
   );
@@ -177,7 +177,7 @@ export function PageWhosThatGirl() {
     <div className="relative w-full h-full bg-[#faf8f4] text-[#1c1917] p-4 flex select-none overflow-hidden font-sans">
       {/* Left Column: Tall Vertical Portrait */}
       <div className="relative w-[44%] h-full bg-[#e7e5e4] shadow-md rounded-[1px] overflow-hidden border border-[#1c1917]/10">
-        <Image src="/aria/curated/aria_face_portrait.jpg" alt="Who's that girl" fill priority className="object-cover object-top" sizes="180px" />
+        <Image src="/ref/girl.jpg" alt="Who's that girl" fill priority className="object-cover object-top" sizes="180px" />
       </div>
 
       {/* Right Column: Editorial Profile & Biography */}
@@ -210,7 +210,7 @@ export function PageWhosThatGirl() {
               The girl with the sweetest smile, the most captivating eyes, and the gentlest soul in this whole world. She turns every simple second into pure magic, radiating warmth, innocence, and unmatched grace.
             </p>
             <p className="text-[9.5px] leading-[1.45] text-justify font-sans">
-              My favourite person, my happy place, and the girl who has my whole heart. 15 years ago today, an angel was born—and I am the luckiest guy alive to call you mine. Happy 15th Birthday, Aria!
+              My favourite person, my happy place, and the girl who has my whole heart. An angel was born—and I am the luckiest guy alive to call you mine. Happy Birthday, Sweety!
             </p>
           </div>
         </div>
@@ -358,32 +358,32 @@ function InstagramAvatar({
 export function PageInstagramGirl() {
   const posts = [
     {
-      img: "/aria/curated/aria_face_square.jpg",
+      img: "/ref/girl2.jpg",
       likes: 2410,
       comments: "520",
       time: "YESTERDAY",
-      caption: "chapter 15 begins tomorrow ✨ with my favourite boy ♡",
+      caption: "birthday celebrations begin ✨ with my favourite person ♡",
     },
     {
-      img: "/aria/curated/aria_dance_1.jpg",
+      img: "/ref/girl3.jpg",
       likes: 2890,
       comments: "642",
       time: "2 DAYS AGO",
-      caption: "forever his girl 💍 keeping each other smiling always 🤍",
+      caption: "keeping each other smiling always 🤍",
     },
     {
-      img: "/aria/curated/aria_bust_medium.jpg",
+      img: "/ref/girl4.jpg",
       likes: 3514,
       comments: "1,024",
       time: "3 DAYS AGO",
-      caption: "sweet 15 birthday eve vibes 💫 my heart is full #15",
+      caption: "birthday eve vibes 💫 my heart is full",
     },
     {
-      img: "/aria/curated/aria_dance_3.jpg",
+      img: "/ref/girl5.jpg",
       likes: 3120,
       comments: "815",
       time: "5 DAYS AGO",
-      caption: "pure smiles & traditional grace ♡ dancing through life",
+      caption: "pure smiles & grace ♡ celebrating life",
     },
   ];
 
@@ -882,7 +882,7 @@ export function PageThingsAbout() {
       <div className="flex gap-4 my-auto h-[68%]">
         {/* Left Hero Photo */}
         <div className="relative w-[52%] h-full bg-[#e7e5e4] shadow-md rounded-[1px] overflow-hidden">
-          <Image src="/aria/curated/aria_dance_2.jpg" alt="Aria Hero" fill priority className="object-cover object-top" sizes="200px" />
+          <Image src="/ref/girl8.jpg" alt="Sweety Hero" fill priority className="object-cover object-top" sizes="200px" />
         </div>
 
         {/* Right Side: Big Quote & Mini Taped Polaroid */}
@@ -908,7 +908,7 @@ export function PageThingsAbout() {
             {/* Washi tape strip */}
             <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-8 h-3 bg-[#d6d3d1]/80 shadow-xs rotate-[-2deg]" />
             <div className="relative aspect-square w-full bg-[#f5f5f4] overflow-hidden">
-              <Image src="/aria/curated/aria_face_square.jpg" alt="Aria Mini" fill priority className="object-cover object-top" sizes="120px" />
+              <Image src="/ref/girl.jpg" alt="Sweety Mini" fill priority className="object-cover object-top" sizes="120px" />
             </div>
           </div>
         </div>
@@ -973,15 +973,15 @@ export function PageFactsWithPhotos() {
       {/* Right Column: Vertical Stack of 6 Photos */}
       <div className="w-[36%] flex flex-col justify-between gap-1 py-1">
         {[
-          "/aria/curated/aria_face_square.jpg",
-          "/aria/curated/aria_dance_sq_1.jpg",
-          "/aria/curated/aria_bust_medium.jpg",
-          "/aria/curated/aria_dance_sq_2.jpg",
-          "/aria/curated/aria_lehenga_full_1.jpg",
-          "/aria/curated/aria_dance_sq_3.jpg",
+          "/ref/girl1.jpg",
+          "/ref/girl2.jpg",
+          "/ref/girl3.jpg",
+          "/ref/girl4.jpg",
+          "/ref/girl5.jpg",
+          "/ref/girl6.jpg",
         ].map((img, idx) => (
           <div key={idx} className="relative w-full aspect-[4/3] bg-[#e7e5e4] shadow-xs rounded-[1px] overflow-hidden">
-            <Image src={img} alt={`Aria Thumb ${idx}`} fill priority className="object-cover object-center" sizes="120px" />
+            <Image src={img} alt={`Sweety Thumb ${idx}`} fill priority className="object-cover object-center" sizes="120px" />
           </div>
         ))}
       </div>
@@ -998,31 +998,31 @@ export function PageThingsILoveAboutYou() {
       num: "01",
       title: "YOUR RADIANT SMILE",
       desc: "The way your face lights up whenever we talk, making my entire day brighter.",
-      img: "/aria/curated/aria_face_portrait.jpg",
+      img: "/ref/girl1.jpg",
     },
     {
       num: "02",
       title: "YOUR PURE HEART",
       desc: "The sweetest, most caring soul who understands me better than anyone ever could.",
-      img: "/aria/curated/aria_dance_1.jpg",
+      img: "/ref/girl2.jpg",
     },
     {
       num: "03",
       title: "YOUR UNMATCHED GRACE",
-      desc: "From your gorgeous traditional looks to your sweet selfies, you leave me in awe.",
-      img: "/aria/curated/aria_lehenga_full_1.jpg",
+      desc: "From your gorgeous looks to your sweet selfies, you leave me in awe.",
+      img: "/ref/girl3.jpg",
     },
     {
       num: "04",
       title: "OUR SWEET TALKS",
       desc: "Late night laughs, whispering dreams, and all the silly moments only we share.",
-      img: "/aria/curated/aria_bust_medium.jpg",
+      img: "/ref/girl4.jpg",
     },
     {
       num: "05",
-      title: "JUST BEING MY ARIA",
+      title: "JUST BEING MY SWEETY",
       desc: "No one in this world compares to you. You are my princess, my love, and my world.",
-      img: "/aria/curated/aria_face_square.jpg",
+      img: "/ref/girl5.jpg",
     },
   ];
 
@@ -1116,7 +1116,7 @@ export function PageMeetTheQueen() {
 
         {/* Photo */}
         <div className="relative aspect-[4/5] w-full bg-[#e7e5e4] overflow-hidden">
-          <Image src="/aria/curated/aria_face_portrait.jpg" alt="Meet the queen Aria" fill priority className="object-cover object-top" sizes="260px" />
+          <Image src="/ref/girl10.jpg" alt="Meet the queen Sweety" fill priority className="object-cover object-top" sizes="260px" />
         </div>
 
         {/* Handwritten Polaroid Caption */}
@@ -1179,10 +1179,10 @@ export function PageFavouriteMemory() {
       <div className="flex items-center justify-center my-auto py-1">
         <div className="w-[195px]">
           <MeltingMusicPlayerFrame
-            src="/aria/curated/aria_face_square.jpg"
+            src="/ref/girl.jpg"
             alt="Favourite Memory"
             title="iPhone"
-            artist="Our Love Story • Aria's 15th Birthday"
+            artist="Our Love Story • Sweety's Birthday"
           />
         </div>
       </div>
@@ -1191,7 +1191,7 @@ export function PageFavouriteMemory() {
       <div className="border-t border-[#1c1917]/15 pt-1.5">
         <p className="text-[8.5px] text-[#44403c] leading-[1.35] text-justify tracking-wide">
           From our late night talks to every sweet laugh we share, every single second with you is etched into my heart.
-          Being your boyfriend is the greatest blessing of my life. Happy 15th Birthday to the girl who holds my entire world!
+          Being with you is the greatest blessing of my life. Happy Birthday to the girl who holds my entire world!
         </p>
       </div>
     </div>
@@ -1214,14 +1214,14 @@ export function PageNumberedMemories() {
           <span className="text-[6.5px] text-[#78716c] leading-tight">When you first stole my heart</span>
         </div>
         <div className="w-[68%] relative bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_cinematic_wide.jpg" alt="Aria Memory 1" fill priority className="object-cover object-center" sizes="240px" />
+          <Image src="/ref/girl3.jpg" alt="Sweety Memory 1" fill priority className="object-cover object-center" sizes="240px" />
         </div>
       </div>
 
       {/* Row 2: Photo + Card 02 + Card 03 + Photo */}
       <div className="flex gap-2 h-[31%]">
         <div className="w-[28%] relative bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_dance_sq_1.jpg" alt="Aria Memory 2" fill priority className="object-cover object-top" sizes="120px" />
+          <Image src="/ref/girl4.jpg" alt="Sweety Memory 2" fill priority className="object-cover object-top" sizes="120px" />
         </div>
         <div className="w-[44%] bg-white p-2 shadow-xs border border-[#1c1917]/10 flex flex-col justify-between">
           <span className="font-mono text-[10px] font-bold text-[#6b5836]">02 &amp; 03</span>
@@ -1231,14 +1231,14 @@ export function PageNumberedMemories() {
           <span className="text-[6.5px] text-[#78716c] leading-tight">Laughing together for hours</span>
         </div>
         <div className="w-[28%] relative bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_face_square.jpg" alt="Aria Memory 3" fill priority className="object-cover object-top" sizes="120px" />
+          <Image src="/ref/girl5.jpg" alt="Sweety Memory 3" fill priority className="object-cover object-top" sizes="120px" />
         </div>
       </div>
 
       {/* Row 3: Wide Photo + Card 04, 05, 06 */}
       <div className="flex gap-2 h-[33%]">
         <div className="w-[60%] relative bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_orig_full.jpg" alt="Aria Memory 4" fill priority className="object-cover object-center" sizes="220px" />
+          <Image src="/ref/girl6.jpg" alt="Sweety Memory 4" fill priority className="object-cover object-center" sizes="220px" />
         </div>
         <div className="w-[40%] bg-white p-2 shadow-xs border border-[#1c1917]/10 flex flex-col justify-between">
           <span className="font-mono text-[10px] font-bold text-[#6b5836]">04 - 06</span>
@@ -1259,25 +1259,25 @@ export function PageNumberedMemories() {
 export function HeartMosaicCanvas() {
   const heartTiles = [
     // Row 1 (Top Lobes)
-    { id: 1, src: "/aria/curated/aria_dance_sq_1.jpg", style: { left: "275px", top: "92px", width: "146px", height: "90px" } },
-    { id: 2, src: "/aria/curated/aria_dance_sq_2.jpg", style: { left: "429px", top: "92px", width: "146px", height: "90px" } },
+    { id: 1, src: "/ref/girl1.jpg", style: { left: "275px", top: "92px", width: "146px", height: "90px" } },
+    { id: 2, src: "/ref/girl2.jpg", style: { left: "429px", top: "92px", width: "146px", height: "90px" } },
 
     // Row 2 (3 Main Tiles)
-    { id: 3, src: "/aria/curated/aria_lehenga_full_1.jpg", style: { left: "197px", top: "186px", width: "146px", height: "114px" } },
-    { id: 4, src: "/aria/curated/aria_face_square.jpg", style: { left: "347px", top: "186px", width: "156px", height: "114px" } },
-    { id: 5, src: "/aria/curated/aria_lehenga_full_2.jpg", style: { left: "507px", top: "186px", width: "146px", height: "114px" } },
+    { id: 3, src: "/ref/girl3.jpg", style: { left: "197px", top: "186px", width: "146px", height: "114px" } },
+    { id: 4, src: "/ref/girl.jpg", style: { left: "347px", top: "186px", width: "156px", height: "114px" } },
+    { id: 5, src: "/ref/girl4.jpg", style: { left: "507px", top: "186px", width: "146px", height: "114px" } },
 
     // Row 3 (3 Mid Tiles)
-    { id: 6, src: "/aria/curated/aria_dance_1.jpg", style: { left: "242px", top: "304px", width: "118px", height: "86px" } },
-    { id: 7, src: "/aria/curated/aria_bust_medium.jpg", style: { left: "364px", top: "304px", width: "122px", height: "86px" } },
-    { id: 8, src: "/aria/curated/aria_dance_2.jpg", style: { left: "490px", top: "304px", width: "118px", height: "86px" } },
+    { id: 6, src: "/ref/girl5.jpg", style: { left: "242px", top: "304px", width: "118px", height: "86px" } },
+    { id: 7, src: "/ref/girl6.jpg", style: { left: "364px", top: "304px", width: "122px", height: "86px" } },
+    { id: 8, src: "/ref/girl7.jpg", style: { left: "490px", top: "304px", width: "118px", height: "86px" } },
 
     // Row 4 (2 Lower Tiles)
-    { id: 9, src: "/aria/curated/aria_dance_3.jpg", style: { left: "311px", top: "394px", width: "110px", height: "72px" } },
-    { id: 10, src: "/aria/curated/aria_dance_4.jpg", style: { left: "429px", top: "394px", width: "110px", height: "72px" } },
+    { id: 9, src: "/ref/girl8.jpg", style: { left: "311px", top: "394px", width: "110px", height: "72px" } },
+    { id: 10, src: "/ref/girl9.jpg", style: { left: "429px", top: "394px", width: "110px", height: "72px" } },
 
     // Row 5 (Bottom Tip Tile)
-    { id: 11, src: "/aria/curated/aria_face_portrait.jpg", style: { left: "383px", top: "470px", width: "84px", height: "62px" } },
+    { id: 11, src: "/ref/girl10.jpg", style: { left: "383px", top: "470px", width: "84px", height: "62px" } },
   ];
 
   return (
@@ -1334,7 +1334,7 @@ export function HeartMosaicCanvas() {
         <p className="text-[12px] italic text-[#4a2e2e]/90 leading-[1.35]" style={{ fontFamily: "serif" }}>
           To the girl who holds my whole heart,
           <br />
-          Happy 15th Birthday Aria. Forever yours.
+          Happy Birthday Sweety. Forever yours.
         </p>
       </div>
 
@@ -1424,17 +1424,17 @@ export function PagePhotoDumpPart1() {
           </span>
         </div>
         <div className="w-[50%] relative bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_dance_1.jpg" alt="Dump 1" fill priority className="object-cover object-top" sizes="180px" />
+          <Image src="/ref/girl3.jpg" alt="Dump 1" fill priority className="object-cover object-top" sizes="180px" />
         </div>
       </div>
 
       {/* Middle Row: 2 Photos */}
       <div className="flex gap-2 h-[26%]">
         <div className="w-[50%] relative bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_bust_medium.jpg" alt="Dump 2" fill priority className="object-cover object-top" sizes="180px" />
+          <Image src="/ref/girl4.jpg" alt="Dump 2" fill priority className="object-cover object-top" sizes="180px" />
         </div>
         <div className="w-[50%] relative bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/aria/curated/aria_lehenga_full_1.jpg" alt="Dump 3" fill priority className="object-cover object-center" sizes="180px" />
+          <Image src="/ref/girl5.jpg" alt="Dump 3" fill priority className="object-cover object-center" sizes="180px" />
         </div>
       </div>
 
@@ -1443,18 +1443,18 @@ export function PagePhotoDumpPart1() {
         {/* Polaroid frame */}
         <div className="w-[38%] bg-white p-1 pb-3 shadow-md border border-black/10">
           <div className="relative aspect-square w-full bg-[#e7e5e4] overflow-hidden">
-            <Image src="/aria/curated/aria_face_square.jpg" alt="Dump Polar" fill priority className="object-cover object-top" sizes="120px" />
+            <Image src="/ref/girl6.jpg" alt="Dump Polar" fill priority className="object-cover object-top" sizes="120px" />
           </div>
         </div>
         {/* Horizontal Filmstrip */}
         <div className="w-[62%] h-full">
-          <FilmstripFrame src="/aria/curated/aria_dance_2.jpg" className="w-full h-full" orientation="horizontal" />
+          <FilmstripFrame src="/ref/girl7.jpg" className="w-full h-full" orientation="horizontal" />
         </div>
       </div>
 
       {/* Bottom Wide Photo */}
       <div className="relative w-full h-[18%] bg-[#e7e5e4] shadow-sm overflow-hidden">
-        <Image src="/aria/curated/aria_orig_full.jpg" alt="Dump Bottom" fill priority className="object-cover object-center" sizes="360px" />
+        <Image src="/ref/girl8.jpg" alt="Dump Bottom" fill priority className="object-cover object-center" sizes="360px" />
       </div>
     </div>
   );
@@ -1491,7 +1491,7 @@ export function PageScatteredPolaroids() {
         {/* Polaroid 1 (Top Left) */}
         <div className="absolute top-[1.5%] left-[3%] w-[46%] bg-white p-1.5 pb-5 shadow-lg rounded-[1px] rotate-[-5deg] border border-black/10 z-10">
           <div className="relative aspect-[4/3] w-full bg-[#e7e5e4] overflow-hidden">
-            <Image src="/aria/curated/aria_dance_sq_1.jpg" alt="Snap 1" fill priority className="object-cover object-top" sizes="160px" />
+            <Image src="/ref/girl1.jpg" alt="Snap 1" fill priority className="object-cover object-top" sizes="160px" />
           </div>
           <span className="text-[13.5px] font-normal text-[#1c1917] block text-center mt-1 leading-tight" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive" }}>
             candid laughs
@@ -1501,7 +1501,7 @@ export function PageScatteredPolaroids() {
         {/* Polaroid 2 (Top Right) */}
         <div className="absolute top-[1.5%] right-[3%] w-[46%] bg-white p-1.5 pb-5 shadow-lg rounded-[1px] rotate-[4deg] border border-black/10 z-10">
           <div className="relative aspect-[4/3] w-full bg-[#e7e5e4] overflow-hidden">
-            <Image src="/aria/curated/aria_dance_sq_2.jpg" alt="Snap 2" fill priority className="object-cover object-top" sizes="160px" />
+            <Image src="/ref/girl2.jpg" alt="Snap 2" fill priority className="object-cover object-top" sizes="160px" />
           </div>
           <span className="text-[13.5px] font-normal text-[#1c1917] block text-center mt-1 leading-tight" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive" }}>
             golden times
@@ -1513,17 +1513,17 @@ export function PageScatteredPolaroids() {
           {/* Washi tape strip */}
           <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-10 h-3 bg-[#e7e5e4]/90 shadow-xs rotate-[2deg]" />
           <div className="relative aspect-square w-full bg-[#e7e5e4] overflow-hidden">
-            <Image src="/aria/curated/aria_face_square.jpg" alt="Snap 3" fill priority className="object-cover object-top" sizes="180px" />
+            <Image src="/ref/girl3.jpg" alt="Snap 3" fill priority className="object-cover object-top" sizes="180px" />
           </div>
           <span className="text-[18px] font-normal text-[#1c1917] block text-center mt-1.5 leading-tight" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive", color: FLIPBOOK_CONFIG.accentColor }}>
-            unforgettable sweet 15
+            unforgettable moments
           </span>
         </div>
 
         {/* Polaroid 4 (Bottom Left) */}
         <div className="absolute bottom-[2%] left-[3%] w-[45%] bg-white p-1.5 pb-4.5 shadow-lg rounded-[1px] rotate-[3deg] border border-black/10 z-10">
           <div className="relative aspect-[4/3] w-full bg-[#e7e5e4] overflow-hidden">
-            <Image src="/aria/curated/aria_bust_medium.jpg" alt="Snap 4" fill priority className="object-cover object-center" sizes="160px" />
+            <Image src="/ref/girl4.jpg" alt="Snap 4" fill priority className="object-cover object-center" sizes="160px" />
           </div>
           <span className="text-[13.5px] font-normal text-[#1c1917] block text-center mt-1 leading-tight" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive" }}>
             best vibes only
@@ -1533,7 +1533,7 @@ export function PageScatteredPolaroids() {
         {/* Polaroid 5 (Bottom Right) */}
         <div className="absolute bottom-[3%] right-[3%] w-[47%] bg-white p-1.5 pb-4.5 shadow-lg rounded-[1px] rotate-[-4deg] border border-black/10 z-10">
           <div className="relative aspect-[4/3] w-full bg-[#e7e5e4] overflow-hidden">
-            <Image src="/aria/curated/aria_face_portrait.jpg" alt="Snap 5" fill priority className="object-cover object-top" sizes="160px" />
+            <Image src="/ref/girl5.jpg" alt="Snap 5" fill priority className="object-cover object-top" sizes="160px" />
           </div>
           <span className="text-[13.5px] font-normal text-[#1c1917] block text-center mt-1 leading-tight" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive" }}>
             forever &amp; always
@@ -1565,17 +1565,17 @@ export function PageHeartfeltMessage() {
           className="text-[14px] italic leading-none block mt-0.5"
           style={{ fontFamily: "'Bodoni Moda', Georgia, serif", color: FLIPBOOK_CONFIG.accentColor }}
         >
-          To my sweet Aria on her 15th birthday
+          To my sweet Sweety on her birthday
         </span>
       </div>
 
       {/* Letter Body */}
       <div className="my-auto space-y-3 px-2">
         <p className="text-[11px] leading-[1.5] text-[#292524] text-justify font-semibold" style={{ fontFamily: "serif" }}>
-          Dearest Aria,
+          Dearest Sweety,
         </p>
         <p className="text-[9.5px] leading-[1.55] text-[#44403c] text-justify">
-          Happy 15th Birthday to the prettiest, sweetest girl in the universe! Watching you step into Chapter 15 makes me realize just how lucky I am to have you by my side. You bring so much peace, pure joy, and warmth into my world.
+          Happy Birthday to the prettiest, sweetest girl in the universe! Watching you step into this new chapter makes me realize just how lucky I am to have you by my side. You bring so much peace, pure joy, and warmth into my world.
         </p>
         <p className="text-[9.5px] leading-[1.55] text-[#44403c] text-justify">
           Every time you smile, every time you laugh, and every time I look into your eyes, I fall in love with you all over again. I promise to always protect that beautiful smile, support your dreams, and cherish you through every single chapter ahead.
@@ -1594,7 +1594,7 @@ export function PageHeartfeltMessage() {
           </span>
         </div>
         <div className="relative w-16 aspect-square bg-[#e7e5e4] rounded-[1px] shadow-sm overflow-hidden border border-white">
-          <Image src="/aria/curated/aria_face_square.jpg" alt="Mini Sign" fill priority className="object-cover object-top" sizes="70px" />
+          <Image src="/ref/girl6.jpg" alt="Mini Sign" fill priority className="object-cover object-top" sizes="70px" />
         </div>
       </div>
     </div>
@@ -1632,7 +1632,7 @@ export function PageDiagonalFilmstrip() {
             ))}
           </div>
           <div className="grid grid-cols-3 gap-1 my-0.5">
-            {["/aria/curated/aria_dance_sq_1.jpg", "/aria/curated/aria_dance_sq_2.jpg", "/aria/curated/aria_dance_sq_3.jpg"].map((src, i) => (
+            {["/ref/girl7.jpg", "/ref/girl8.jpg", "/ref/girl9.jpg"].map((src, i) => (
               <div key={i} className="relative aspect-[16/10] bg-zinc-800 overflow-hidden">
                 <Image src={src} alt={`Film ${i}`} fill priority className="object-cover object-top" sizes="120px" />
               </div>
@@ -1655,7 +1655,7 @@ export function PageDiagonalFilmstrip() {
             ))}
           </div>
           <div className="grid grid-cols-3 gap-1 my-0.5">
-            {["/aria/curated/aria_dance_sq_4.jpg", "/aria/curated/aria_dance_sq_5.jpg", "/aria/curated/aria_dance_sq_6.jpg"].map((src, i) => (
+            {["/ref/girl2.jpg", "/ref/girl3.jpg", "/ref/girl4.jpg"].map((src, i) => (
               <div key={i} className="relative aspect-[16/10] bg-zinc-800 overflow-hidden">
                 <Image src={src} alt={`Film2 ${i}`} fill priority className="object-cover object-top" sizes="120px" />
               </div>
@@ -1671,7 +1671,7 @@ export function PageDiagonalFilmstrip() {
         {/* Center Floating Polaroid Accent */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[46%] bg-white p-1.5 pb-4 shadow-2xl rounded-[1px] rotate-[-2deg] border border-black/15 z-20">
           <div className="relative aspect-square w-full bg-[#e7e5e4] overflow-hidden">
-            <Image src="/aria/curated/aria_face_square.jpg" alt="Center Film" fill priority className="object-cover object-top" sizes="160px" />
+            <Image src="/ref/girl10.jpg" alt="Center Film" fill priority className="object-cover object-top" sizes="160px" />
           </div>
           <span className="text-[12px] text-[#1c1917] block text-center mt-1" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive", color: FLIPBOOK_CONFIG.accentColor }}>
             Golden reel
@@ -1711,7 +1711,7 @@ export function PageBackCoverFlipbook() {
             color: "#d4af6a", // gold foil
           }}
         >
-          BIRTHDAY ARIA
+          BIRTHDAY SWEETY
         </h3>
         <p className="text-[16px] text-white/80 mt-1" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive" }}>
           Cheers to forever with you
@@ -1720,7 +1720,7 @@ export function PageBackCoverFlipbook() {
 
       {/* Center Hero Portrait Photo with Soft Glow */}
       <div className="relative w-[78%] mx-auto aspect-[4/5] bg-zinc-900 rounded-[2px] shadow-2xl overflow-hidden border border-white/20 my-auto">
-        <Image src="/aria/curated/aria_face_portrait.jpg" alt="Back Hero" fill priority className="object-cover object-top" sizes="280px" />
+        <Image src="/ref/girl.jpg" alt="Back Hero" fill priority className="object-cover object-top" sizes="280px" />
       </div>
 
       {/* Bottom Message & Barcode */}
@@ -1763,7 +1763,7 @@ export function PageBackCoverFlipbook() {
             This is our story
           </span>
           <span className="text-[7px] tracking-[0.18em] text-white/60 uppercase block">
-            WRITTEN WITH LOVE, FOR ARIA
+            WRITTEN WITH LOVE, FOR SWEETY
           </span>
           <span className="text-[8px] font-bold text-white/90 tracking-wider block mt-0.5 uppercase">
             FOREVER &amp; ALWAYS YOURS

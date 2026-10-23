@@ -185,8 +185,8 @@ export default function DemoOne() {
 
       {/* Revealed Photo Layer */}
       <img
-        src="/aria/curated/aria_face_portrait.jpg"
-        alt="Birthday Girl Aria"
+        src="/ref/girl.jpg"
+        alt="Birthday Girl Sweety"
         className="absolute inset-0 w-full h-full object-cover object-[center_20%]"
       />
 

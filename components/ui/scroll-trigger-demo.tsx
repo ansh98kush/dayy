@@ -11,22 +11,22 @@ import {
 } from '@/components/ui/scroll-trigger-animations';
 
 const IMAGES_1 = [
-  '/aria/curated/aria_face_portrait.jpg',
-  '/aria/curated/aria_dance_1.jpg',
-  '/aria/curated/aria_lehenga_full_1.jpg',
-  '/aria/curated/aria_bust_medium.jpg',
+  '/ref/girl1.jpg',
+  '/ref/girl2.jpg',
+  '/ref/girl3.jpg',
+  '/ref/girl4.jpg',
 ];
 const IMAGES_2 = [
-  '/aria/curated/aria_face_portrait.jpg',
-  '/aria/curated/aria_bust_medium.jpg',
-  '/aria/curated/aria_face_square.jpg',
-  '/aria/curated/aria_orig_full.jpg',
+  '/ref/girl.jpg',
+  '/ref/girl5.jpg',
+  '/ref/girl6.jpg',
+  '/ref/girl7.jpg',
 ];
 const IMAGES_3 = [
-  '/aria/curated/aria_lehenga_full_2.jpg',
-  '/aria/curated/aria_dance_4.jpg',
-  '/aria/curated/aria_cinematic_wide.jpg',
-  '/aria/curated/aria_dance_5.jpg',
+  '/ref/girl8.jpg',
+  '/ref/girl9.jpg',
+  '/ref/girl10.jpg',
+  '/ref/girl11.jpg',
 ];
 
 function SmoothSideColumn({
@@ -91,7 +91,7 @@ export default function ScrollTriggerDemo() {
                   key={index}
                   className="aspect-[3/4] md:aspect-[4/2.5] inline-block align-middle h-auto max-h-full w-full object-cover rounded-md"
                   src={imageUrl}
-                  alt="Birthday Girl Aria"
+                  alt="Birthday Girl Sweety"
                 />
               ))}
             </SmoothSideColumn>
@@ -106,7 +106,7 @@ export default function ScrollTriggerDemo() {
                   key={index}
                   className="aspect-[3/4] md:aspect-[4/2.5] inline-block align-middle h-auto max-h-full w-full object-cover object-[center_20%] rounded-md"
                   src={imageUrl}
-                  alt="Birthday Girl Aria"
+                  alt="Birthday Girl Sweety"
                 />
               ))}
             </ContainerScrollTranslate>
@@ -118,7 +118,7 @@ export default function ScrollTriggerDemo() {
                   key={index}
                   className="aspect-[3/4] md:aspect-[4/2.5] inline-block align-middle h-auto max-h-full w-full object-cover rounded-md"
                   src={imageUrl}
-                  alt="Birthday Girl Aria"
+                  alt="Birthday Girl Sweety"
                 />
               ))}
             </SmoothSideColumn>

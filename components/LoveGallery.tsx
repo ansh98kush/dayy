@@ -24,16 +24,16 @@ const handwriting = Caveat({
 // ];
 
 const cards = [
-  { src: "/aria/aria-video-3.mp4", isVideo: true, caption: "My graceful dancer 💃❤️" },
-  { src: "/aria/photos/aria_cover.jpg", isVideo: false, caption: "My beautiful Aria 🌸" },
-  { src: "/aria/aria-video-1.mp4", isVideo: true, caption: "That lehenga glow ✨" },
-  { src: "/aria/photos/aria_dance_1.jpg", isVideo: false, caption: "Angel with jhumkas 🥹" },
-  { src: "/aria/aria-video-2.mp4", isVideo: true, caption: "Cutest girl alive 🤍" },
-  { src: "/aria/photos/aria_lehenga_1.jpg", isVideo: false, caption: "Sweet 15 looks so good on you 💫" },
-  { src: "/aria/photos/aria_selfie_1.jpg", isVideo: false, caption: "My heart & safe place 🫶" },
-  { src: "/aria/photos/aria_dance_3.jpg", isVideo: false, caption: "My birthday princess 👑" },
-  { src: "/aria/photos/aria_selfie_3.jpg", isVideo: false, caption: "That nose ring smile 🥺" },
-  { src: "/aria/photos/aria_lehenga_2.jpg", isVideo: false, caption: "Forever yours ❤️" },
+  { src: "/ref/girl2.jpg", isVideo: false, caption: "Cutie 🥹" },
+  { src: "/ref/girl3.jpg", isVideo: false, caption: "Baddie 😎" },
+  { src: "/ref/girl4.jpg", isVideo: false, caption: "Pretty ✨" },
+  { src: "/ref/girl5.jpg", isVideo: false, caption: "My Love 🤍" },
+  { src: "/ref/girl6.jpg", isVideo: false, caption: "Sunshine ☀️" },
+  { src: "/ref/girl7.jpg", isVideo: false, caption: "Angel 🪽" },
+  { src: "/ref/girl8.jpg", isVideo: false, caption: "Beautiful 🌸" },
+  { src: "/ref/girl9.jpg", isVideo: false, caption: "Dream Girl 💫" },
+  { src: "/ref/girl10.jpg", isVideo: false, caption: "Queen 👑" },
+  { src: "/ref/girl11.jpg", isVideo: false, caption: "Always You 🫶" },
 ];
 
 const positions = [

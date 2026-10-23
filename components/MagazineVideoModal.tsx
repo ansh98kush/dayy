@@ -78,7 +78,7 @@ function PostageStampDoodle({ className = "" }: { className?: string }) {
         letterSpacing="0.16em"
         opacity={0.85}
       >
-        ARIA
+        SWEETY
       </text>
     </svg>
   );
@@ -143,7 +143,7 @@ function InstagramThemeIcon({ className = "w-4 h-4" }: { className?: string }) {
 export default function MagazineVideoModal({
   isOpen,
   onClose,
-  name = "Aria",
+  name = "Sweety",
 }: MagazineVideoModalProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -301,7 +301,7 @@ export default function MagazineVideoModal({
 
   const handleCopyCaption = () => {
     navigator.clipboard.writeText(
-      `Happy 15th Birthday Aria! 👑✨ The prettiest girl and the love of my life 💖🎂 #BirthdayQueen #Aria15`
+      `Happy Birthday Sweety! 👑✨ The prettiest girl and the love of my life 💖🎂 #BirthdayQueen #Sweety`
     );
     setCopiedCaption(true);
     setTimeout(() => setCopiedCaption(false), 2400);
@@ -338,7 +338,7 @@ export default function MagazineVideoModal({
           <div className="flex flex-col">
             <div className="flex items-center gap-2 mb-0.5">
               <span className="text-[10px] font-mono tracking-[0.24em] text-[#9f773a] uppercase font-semibold">
-                ✦ SPECIAL BIRTHDAY ARCHIVE · ARIA&apos;S 15TH ✦
+                ✦ SPECIAL BIRTHDAY ARCHIVE · SWEETY ✦
               </span>
             </div>
             <h2 className="text-xl sm:text-2xl font-serif tracking-wide text-[#2b2118] font-semibold">
@@ -409,7 +409,7 @@ export default function MagazineVideoModal({
                 ) : (
                   <>
                     <Volume2 className="w-3.5 h-3.5 text-[#9f773a]" />
-                    <span className="font-semibold">Playing: Aria&apos;s Song</span>
+                    <span className="font-semibold">Playing: Sweety Song</span>
                   </>
                 )}
               </button>

@@ -29,26 +29,26 @@ import {
  * Change the cover image, text, or dimensions directly in code here:
  * ------------------------------------------------------------------ */
 export const COVER_CONFIG = {
-  // Birthday Girl Image from /aria/curated (High-quality camera portrait)
-  coverImage: "/aria/curated/aria_face_portrait.jpg",
-  imagePosition: "center 15%", // Perfectly frames Aria's face, bangs, and eyes
+  // Birthday Girl Image from /ref
+  coverImage: "/ref/girl.jpg",
+  imagePosition: "center 20%",
   // Crisp natural editorial grade
   imageFilter: "contrast(102%) brightness(102%) saturate(102%)",
 
   // Exact VOUGUE Magazine Typography & Text
   masthead: "VOUGUE",
-  issue: "ISSUE NO.241011",
-  headlineName: "ARIA",
+  issue: "ISSUE NO.2026",
+  headlineName: "SWEETY",
   headlineSub1: "TIMELESS AND",
   headlineSub2: "BEAUTIFUL,",
-  headlineSub3: "THE STORY OF ARIA",
-  age: "15",
-  editionLine1: "SWEET 15TH",
+  headlineSub3: "THE STORY OF SWEETY",
+  age: "BIRTHDAY",
+  editionLine1: "SPECIAL",
   editionLine2: "EDITION",
   featureTag: "FEATURING",
   featureRole: "THE GIRL WHO HAS MY WHOLE HEART",
-  modelName: "ARIA",
-  barcode: "ARIA24102011B",
+  modelName: "SWEETY",
+  barcode: "SWEETY2026B",
 
   // Magazine proportions (1:1.41 authentic Vogue / A4 portrait size)
   pageWidth: 425,

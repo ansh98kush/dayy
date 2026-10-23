@@ -118,10 +118,10 @@ type UnitKey = 'days' | 'hours' | 'minutes' | 'seconds';
 
 export default function ShowtimeCountdown({
   targetDate,
-  tickerText = 'HAPPY 15TH BIRTHDAY ARIA · OCT 24 ·',
-  marqueeTitle = "Aria's 15th Birthday",
-  marqueeSub = "forever yours, made with all my love for Aria ❤️",
-  doorsText = 'celebrating Aria · October 24',
+  tickerText = 'HAPPY BIRTHDAY SWEETY ·',
+  marqueeTitle = "Sweety's Birthday",
+  marqueeSub = "forever yours, made with all my love for Sweety ❤️",
+  doorsText = 'celebrating Sweety',
   songSrc,
   songVolume = 0.6,
   redirectTo,
