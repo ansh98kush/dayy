@@ -23,30 +23,17 @@ const handwriting = Caveat({
 //   "/pipis/pipi11.jpg",
 // ];
 
-const images = [
-  "/client/photo-1.jpg",
-  "/client/photo-2.jpg",
-  "/client/photo-3.jpg",
-  "/client/photo-4.jpg",
-  "/client/photo-5.jpg",
-  "/client/photo-6.jpg",
-  "/client/photo-7.jpg",
-  "/client/photo-8.jpg",
-  "/client/photo-9.jpg",
-  "/client/photo-10.jpg",
-];
-
-const captions = [
-  "Aakriti ✨",
-  "Iconic 😎",
-  "Pretty 🌸",
-  "Good Vibes ✌️",
-  "Sunshine ☀️",
-  "Goofy 🤪",
-  "Vibe Check 💯",
-  "Turning 18! 🥂",
-  "Queen 👑",
-  "Stay Blessed 🫶",
+const cards = [
+  { src: "/aria/aria-video-3.mp4", isVideo: true, caption: "My graceful dancer 💃❤️" },
+  { src: "/aria/photos/aria_cover.jpg", isVideo: false, caption: "My beautiful Aria 🌸" },
+  { src: "/aria/aria-video-1.mp4", isVideo: true, caption: "That lehenga glow ✨" },
+  { src: "/aria/photos/aria_dance_1.jpg", isVideo: false, caption: "Angel with jhumkas 🥹" },
+  { src: "/aria/aria-video-2.mp4", isVideo: true, caption: "Cutest girl alive 🤍" },
+  { src: "/aria/photos/aria_lehenga_1.jpg", isVideo: false, caption: "Sweet 15 looks so good on you 💫" },
+  { src: "/aria/photos/aria_selfie_1.jpg", isVideo: false, caption: "My heart & safe place 🫶" },
+  { src: "/aria/photos/aria_dance_3.jpg", isVideo: false, caption: "My birthday princess 👑" },
+  { src: "/aria/photos/aria_selfie_3.jpg", isVideo: false, caption: "That nose ring smile 🥺" },
+  { src: "/aria/photos/aria_lehenga_2.jpg", isVideo: false, caption: "Forever yours ❤️" },
 ];
 
 const positions = [
@@ -85,11 +72,9 @@ export default function LoveGallery() {
         after:bg-[radial-gradient(circle,transparent_30%,rgba(0,0,0,0.08))]
       "
     >
-
-
-      {images.map((img, index) => (
+      {cards.map((card, index) => (
         <DraggableCardBody
-          key={img}
+          key={card.src}
           className={`
             absolute
             ${positions[index % positions.length]}
@@ -112,24 +97,47 @@ export default function LoveGallery() {
           `}
         >
           <div className="relative overflow-visible">
-            <img
-              src={img}
-              alt={captions[index % captions.length]}
-              draggable={false}
-              className="
-                h-20
-                w-20
-                xs:h-24
-                xs:w-24
-                sm:h-56
-                sm:w-56
-                rounded-md
-                sm:rounded-lg
-                object-cover
-                pointer-events-none
-                select-none
-              "
-            />
+            {card.isVideo ? (
+              <video
+                src={card.src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="
+                  h-20
+                  w-20
+                  xs:h-24
+                  xs:w-24
+                  sm:h-56
+                  sm:w-56
+                  rounded-md
+                  sm:rounded-lg
+                  object-cover
+                  pointer-events-none
+                  select-none
+                "
+              />
+            ) : (
+              <img
+                src={card.src}
+                alt={card.caption}
+                draggable={false}
+                className="
+                  h-20
+                  w-20
+                  xs:h-24
+                  xs:w-24
+                  sm:h-56
+                  sm:w-56
+                  rounded-md
+                  sm:rounded-lg
+                  object-cover
+                  pointer-events-none
+                  select-none
+                "
+              />
+            )}
 
             <div
               className="
@@ -164,7 +172,7 @@ export default function LoveGallery() {
                 leading-tight
               `}
             >
-              {captions[index % captions.length]}
+              {card.caption}
             </p>
           </div>
         </DraggableCardBody>

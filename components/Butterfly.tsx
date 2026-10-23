@@ -45,31 +45,31 @@ const DEFAULT_NOTES: NoteData[] = [
   {
     id: "n1",
     title: "01",
-    text: "Happy 18th Birthday Aakriti! So glad to have a wonderful friend like you who brings so much good energy and laughs. 🥂✨",
+    text: "Every butterfly escapes... except me. I've been happily in love with you, Aria, since day one. 🤍",
     accent: "#D98E7E",
   },
   {
     id: "n2",
     title: "02",
-    text: "Tere jaisa funny friend dhoondne se bhi nahi milta! Thanks for always bringing good vibes whenever you're around. 🫶",
+    text: "Is butterfly ki tarah meri har khushi ka raasta bhi aakhir tum tak hi aakar rukta hai, Aria. 🫶",
     accent: "#C9A15E",
   },
   {
     id: "n3",
     title: "03",
-    text: "Officially 18 tomorrow! Adulting starts now, hope this year brings you tons of success and fun times! 🎉",
+    text: "Tumne butterfly ko touch kiya... aur meri heartbeat phir se skip kar gayi, my beautiful girl. 😭❤️",
     accent: "#7E9C68",
   },
   {
     id: "n4",
     title: "04",
-    text: "From laughing at silly jokes to having great conversations — wishing you an awesome 18th birthday! 💫",
+    text: "Looks like you're really good at catching butterflies... no wonder you caught my heart so effortlessly. ❤️",
     accent: "#B27A94",
   },
   {
     id: "n5",
     title: "05",
-    text: "Cheers to you entering chapter 18, Aakriti! May all your dreams and goals come true this year. 🦋🤍",
+    text: "Happy 15th Birthday to my favorite girl in the world! You own my whole heart forever, Aria. 🦋✨",
     accent: "#7C8FA6",
   },
 ];

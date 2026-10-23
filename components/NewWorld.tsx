@@ -79,18 +79,18 @@ function CardProvider({ children }: { children: React.ReactNode }) {
   const [selectedCard, setSelectedCard] = useState<Card | null>(null)
 
   const cards: Card[] = [
-    { id: "1", imageUrl: "/client/photo-1.jpg", alt: "Cutie", title: "Cutie" },
-    { id: "2", imageUrl: "/client/photo-2.jpg", alt: "Baddie", title: "Baddie" },
-    { id: "3", imageUrl: "/client/photo-3.jpg", alt: "Angel", title: "Angel" },
-    { id: "4", imageUrl: "/client/photo-4.jpg", alt: "Dreamgirl", title: "Dreamgirl" },
-    { id: "5", imageUrl: "/client/photo-5.jpg", alt: "Sweetheart", title: "Sweetheart" },
-    { id: "6", imageUrl: "/client/photo-6.jpg", alt: "Icon", title: "Icon" },
-    { id: "7", imageUrl: "/client/photo-7.jpg", alt: "Stunner", title: "Stunner" },
-    { id: "8", imageUrl: "/client/photo-8.jpg", alt: "Babe", title: "Babe" },
-    { id: "9", imageUrl: "/client/photo-9.jpg", alt: "Darling", title: "Darling" },
-    { id: "10", imageUrl: "/client/photo-10.jpg", alt: "Sunshine", title: "Sunshine" },
-    { id: "11", imageUrl: "/client/photo-1.jpg", alt: "Queen", title: "Queen" },
-    { id: "12", imageUrl: "/client/photo-2.jpg", alt: "Heartbreaker", title: "Heartbreaker" },
+    // { id: "1", imageUrl: "/ref/💜.jpg", alt: "Cutie", title: "Cutie" },
+    { id: "2", imageUrl: "/ref/girl.jpg", alt: "Baddie", title: "Baddie" },
+    { id: "3", imageUrl: "/ref/girl2.jpg", alt: "Angel", title: "Angel" },
+    { id: "4", imageUrl: "/ref/girl3.jpg", alt: "Dreamgirl", title: "Dreamgirl" },
+    { id: "5", imageUrl: "/ref/girl4.jpg", alt: "Sweetheart", title: "Sweetheart" },
+    { id: "6", imageUrl: "/ref/girl5.jpg", alt: "Icon", title: "Icon" },
+    { id: "7", imageUrl: "/ref/girl6.jpg", alt: "Stunner", title: "Stunner" },
+    { id: "8", imageUrl: "/ref/girl7.jpg", alt: "Babe", title: "Babe" },
+    { id: "9", imageUrl: "/ref/girl8.jpg", alt: "Darling", title: "Darling" },
+    { id: "10", imageUrl: "/ref/girl9.jpg", alt: "Sunshine", title: "Sunshine" },
+    { id: "11", imageUrl: "/ref/girl10.jpg", alt: "Queen", title: "Queen" },
+    { id: "12", imageUrl: "/ref/girl11.jpg", alt: "Heartbreaker", title: "Heartbreaker" },
   ]
 
   // const cards: Card[] = [

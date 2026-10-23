@@ -11,22 +11,22 @@ import {
 } from '@/components/ui/scroll-trigger-animations';
 
 const IMAGES_1 = [
-  '/client/photo-1.jpg',
-  '/client/photo-2.jpg',
-  '/client/photo-3.jpg',
-  '/client/photo-4.jpg',
+  '/aria/curated/aria_face_portrait.jpg',
+  '/aria/curated/aria_dance_1.jpg',
+  '/aria/curated/aria_lehenga_full_1.jpg',
+  '/aria/curated/aria_bust_medium.jpg',
 ];
 const IMAGES_2 = [
-  '/client/photo-8.jpg',
-  '/client/cover.jpg',
-  '/client/photo-10.jpg',
-  '/client/photo-7.jpg',
+  '/aria/curated/aria_face_portrait.jpg',
+  '/aria/curated/aria_bust_medium.jpg',
+  '/aria/curated/aria_face_square.jpg',
+  '/aria/curated/aria_orig_full.jpg',
 ];
 const IMAGES_3 = [
-  '/client/photo-5.jpg',
-  '/client/photo-6.jpg',
-  '/client/photo-9.jpg',
-  '/client/photo-4.jpg',
+  '/aria/curated/aria_lehenga_full_2.jpg',
+  '/aria/curated/aria_dance_4.jpg',
+  '/aria/curated/aria_cinematic_wide.jpg',
+  '/aria/curated/aria_dance_5.jpg',
 ];
 
 function SmoothSideColumn({
@@ -91,7 +91,7 @@ export default function ScrollTriggerDemo() {
                   key={index}
                   className="aspect-[3/4] md:aspect-[4/2.5] inline-block align-middle h-auto max-h-full w-full object-cover rounded-md"
                   src={imageUrl}
-                  alt="Birthday Girl Aakriti"
+                  alt="Birthday Girl Aria"
                 />
               ))}
             </SmoothSideColumn>
@@ -104,9 +104,9 @@ export default function ScrollTriggerDemo() {
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   key={index}
-                  className="aspect-[3/4] md:aspect-[4/2.5] inline-block align-middle h-auto max-h-full w-full object-cover rounded-md"
+                  className="aspect-[3/4] md:aspect-[4/2.5] inline-block align-middle h-auto max-h-full w-full object-cover object-[center_20%] rounded-md"
                   src={imageUrl}
-                  alt="Birthday Girl Aakriti"
+                  alt="Birthday Girl Aria"
                 />
               ))}
             </ContainerScrollTranslate>
@@ -118,7 +118,7 @@ export default function ScrollTriggerDemo() {
                   key={index}
                   className="aspect-[3/4] md:aspect-[4/2.5] inline-block align-middle h-auto max-h-full w-full object-cover rounded-md"
                   src={imageUrl}
-                  alt="Birthday Girl Aakriti"
+                  alt="Birthday Girl Aria"
                 />
               ))}
             </SmoothSideColumn>

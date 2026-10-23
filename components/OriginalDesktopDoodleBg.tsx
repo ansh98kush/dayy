@@ -155,14 +155,14 @@ function scatterNoOverlap(rng: () => number, count: number, opts: ScatterOpts): 
 /* ---------- photos ---------- */
 
 const PHOTO_SOURCES = [
-  "/client/photo-1.jpg",
-  "/client/photo-2.jpg",
-  "/client/photo-3.jpg",
-  "/client/photo-4.jpg",
-  "/client/photo-5.jpg",
-  "/client/photo-6.jpg",
-  "/client/photo-7.jpg",
-  "/client/photo-8.jpg",
+  "/ref/girl.jpg",
+  "/ref/girl2.jpg",
+  "/ref/girl4.jpg",
+  "/ref/girl5.jpg",
+  "/ref/girl7.jpg",
+  "/ref/girl8.jpg",
+  "/ref/girl10.jpg",
+  "/ref/girl9.jpg",
 ];
 
 type PhotoProps = { src: string; top: string; left: string; size: number; rotate: number; delay: number };

@@ -11,10 +11,9 @@ import ScrollTriggerDemo from "@/components/ui/scroll-trigger-demo";
 export default function Home() {
   return (
     <ShowtimeCountdown
-      showPreviewButton={false}
-      targetDate={new Date('2026-10-23T00:00:00+05:30')}
-      tickerText="HAPPY 18TH BIRTHDAY AAKRITI · OCT 23 ·"
-      marqueeSub="Aakriti turns 18 · The Celebration Begins"
+      targetDate={new Date('2026-10-24T00:00:00+05:30')}
+      tickerText="HAPPY 15TH BIRTHDAY ARIA · OCT 24 ·"
+      marqueeSub="forever yours, made with all my love for Aria ❤️"
     >
       <div id="main-scroll-container" className="w-full max-w-[100vw] overflow-x-clip bg-zinc-50 dark:bg-black select-none">
         {/* Section 1: Intro Counter & Watermark Reveal */}

@@ -25,7 +25,7 @@
     position:fixed;
     inset:0;
     z-index:0;
-    opacity:0;
+    opacity:1;
     pointer-events:none;
   }
   .bg-reveal img{
@@ -34,16 +34,17 @@
     width:100%;
     height:100%;
     object-fit:cover;
-    opacity:0; /* animated in by GSAP, capped well below 100% so the number stays readable over it */
-    transform:scale(1.18);
-    filter:saturate(0.9) brightness(0.4) blur(18px);
+    object-position:60% 38%;
+    opacity:0.48;
+    transform:scale(1.05);
+    filter:saturate(1.0) brightness(0.68);
     will-change:transform, filter, opacity;
   }
   .bg-reveal::after{
     content:'';
     position:absolute;
     inset:0;
-    background:radial-gradient(circle at 50% 50%, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 78%);
+    background:radial-gradient(circle at 50% 50%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 78%);
   }
 
   /* ---------------- intro counter ---------------- */
@@ -405,15 +406,15 @@
 <body>
 
   <div class="bg-reveal" id="bgReveal">
-    <img id="bgRevealImg" src="" alt="">
+    <img id="bgRevealImg" src="/bg2.jpg" alt="Aria">
   </div>
 
   <audio
   id="bgMusic"
   loop
   playsinline
-  preload="none"
-  muted
+  preload="auto"
+  volume="0.7"
 >
   <source src="/sounds/pipi-song.mp3" type="audio/mpeg">
 </audio>
@@ -437,11 +438,11 @@
 <!-- ---------------- spotify-style mini player ---------------- -->
 <div class="player" id="musicPlayer">
   <div class="player-art">
-    <img id="artA" class="is-active" src="/client/photo-1.jpg" alt="Aakriti">
-    <img id="artB" src="/client/photo-2.jpg" alt="Aakriti">
+    <img id="artA" class="is-active" src="/aria/photos/aria_cover.jpg" alt="Aria">
+    <img id="artB" src="/aria/photos/aria_dance_1.jpg" alt="Aria">
   </div>
   <div class="player-info">
-    <div class="player-title">Aakriti's Song</div>
+    <div class="player-title">Aria's Song</div>
     <div class="player-artist">Birthday Playlist</div>
     <div class="player-progress">
       <span class="player-time" id="curTime">0:00</span>
@@ -473,11 +474,9 @@
   initBalloons();
 </script>
 <script>
-  // ---- EDIT THIS: real birth date/time, given in IST (India Standard Time) ----
-  // 14:30 IST on Aug 2, 2003 == 09:00 UTC on Aug 2, 2003  (birth year set so the reveal lands on 23)
+  // ---- real birth date/time in IST: Oct 24, 2011 (Turning 15 in Chapter 15) ----
   const IST_OFFSET_MS = (5 * 60 + 30) * 60000;
-  // const BIRTH_UTC_MS = Date.UTC(2003, 7, 2, 9, 0, 0);
-  const BIRTH_UTC_MS = Date.UTC(2003, 7, 4, 18, 30, 0);
+  const BIRTH_UTC_MS = Date.UTC(2011, 9, 23, 18, 30, 0); // Oct 24 IST
   const shiftedBirth = new Date(BIRTH_UTC_MS + IST_OFFSET_MS); // read with getUTC* for IST wall-clock parts
 
   function computeParts(){
@@ -511,8 +510,9 @@
   }
 
   const initial = computeParts();
-  const AGE = 18;
-  const DISPLAY_AGE = 17;
+  // Aria is 14, turning 15 for Chapter 15!
+  const AGE = 15;
+  const DISPLAY_AGE = 14;
 
   document.getElementById('watermark').textContent = String(DISPLAY_AGE).padStart(2,'0');
 
@@ -521,10 +521,9 @@
   let revealed = false;
 
   function readout(p){
-    // before the burn reveal, the watermark intentionally shows one year
-    // less (DISPLAY_AGE) as part of the reveal effect - the ticker must
-    // match that number, or it looks like the clock is wrong
-    const shownYears = revealed ? p.years : DISPLAY_AGE;
+    // before the burn reveal, the watermark shows 14 ("14 ki hai"),
+    // upon reveal it shows 15 ("15 ki ho gayi")!
+    const shownYears = revealed ? AGE : DISPLAY_AGE;
     return `${shownYears}y · ${p.days}d · ${String(p.hours).padStart(2,'0')}:${String(p.minutes).padStart(2,'0')}:${String(p.seconds).padStart(2,'0')}`;
   }
   document.getElementById('liveReadout').textContent = readout(initial);
@@ -584,24 +583,24 @@
   // eases in from a soft, zoomed, blurred state into a settled frame, capped
   // well under full opacity so the number and the photo both stay legible
   // together instead of one washing out the other
-  const BG_REVEAL_SRC = '/client/cover.jpg';
+  const BG_REVEAL_SRC = '/bg2.jpg';
   const BG_MAX_OPACITY = 0.85;
   function revealBackground(){
     bgRevealImg.src = BG_REVEAL_SRC;
     gsap.killTweensOf([bgReveal, bgRevealImg]);
     gsap.set(bgReveal, {opacity:1});
     gsap.fromTo(bgRevealImg,
-      { opacity:0, scale:1.18, filter:'saturate(0.9) brightness(0.4) blur(18px)' },
+      { opacity:0.48, scale:1.05, filter:'saturate(1.0) brightness(0.68)' },
       {
-        opacity:BG_MAX_OPACITY,
+        opacity:0.92,
         scale:1,
-        filter:'saturate(0.9) brightness(0.55) blur(0px)',
-        duration:2.6,
+        filter:'saturate(1.05) brightness(0.92) blur(0px)',
+        duration:2.4,
         ease:'power3.out',
         onComplete: () => {
           // slow ambient drift once it's settled in, like a living photo
           gsap.to(bgRevealImg, {
-            scale:1.08,
+            scale:1.06,
             duration:22,
             ease:'sine.inOut',
             yoyo:true,
@@ -927,7 +926,13 @@
 
 
 
-  // Music is muted by default
+  //play music on button click
+  triggerBtn.addEventListener('click', () => {
+  if (bgMusic.paused) {
+    bgMusic.play().catch(() => {}); // catch autoplay-policy rejection silently
+    musicPlayer.classList.add('is-visible', 'is-playing');
+  }
+}, { once: true }); // only trigger the first press/burn
 
   // ---------------- intro: odometer-style roll into the number, then zoom through ----------------
   const introNum = document.getElementById('introNum');
@@ -1056,14 +1061,25 @@
     seeking = false;
   });
 
-  // Audio is muted
-  bgMusic.muted = true;
-  bgMusic.volume = 0;
-  bgMusic.pause();
+  // browsers block un-prompted audio autoplay - attempt it, and otherwise
+  // let the mini player's play button be the first user gesture that starts it
+  bgMusic.play().catch(() => {});
 
-  // ---------------- player art: crossfade through pipis/pipi1.jpg..pipi13.jpg ----------------
-  const PIPI_COUNT = 10;
-  const pipiSrc = (n) => `/ref/girl${n}.jpg`;
+  // ---------------- player art: crossfade through aria photos ----------------
+  const ariaPhotos = [
+    "/aria/photos/aria_cover.jpg",
+    "/aria/photos/aria_dance_1.jpg",
+    "/aria/photos/aria_lehenga_1.jpg",
+    "/aria/photos/aria_selfie_1.jpg",
+    "/aria/photos/aria_dance_2.jpg",
+    "/aria/photos/aria_lehenga_2.jpg",
+    "/aria/photos/aria_selfie_2.jpg",
+    "/aria/photos/aria_dance_3.jpg",
+    "/aria/photos/aria_cover.jpg",
+    "/aria/photos/aria_dance_4.jpg"
+  ];
+  const PIPI_COUNT = ariaPhotos.length;
+  const pipiSrc = (n) => ariaPhotos[(n - 1) % ariaPhotos.length];
   const artA = document.getElementById('artA');
   const artB = document.getElementById('artB');
   let pipiIndex = 1; // artA currently shows pipi1

@@ -6,42 +6,21 @@ import MarqueeAlongSvgPath from "../LineCmp";
 const path =
   "M1 209.434C58.5872 255.935 387.926 325.938 482.583 209.434C600.905 63.8051 525.516 -43.2211 427.332 19.9613C329.149 83.1436 352.902 242.723 515.041 267.302C644.752 286.966 943.56 181.94 995 156.5";
 
-// Client photos from /public/client
+// Local photos from /public/ref — resolve to /ref/*.jpg at runtime.
 const imgs = [
-  { src: "/client/photo-1.jpg" },
-  { src: "/client/photo-2.jpg" },
-  { src: "/client/photo-3.jpg" },
-  { src: "/client/photo-4.jpg" },
-  { src: "/client/photo-5.jpg" },
-  { src: "/client/photo-6.jpg" },
-  { src: "/client/photo-7.jpg" },
-  { src: "/client/photo-8.jpg" },
-  { src: "/client/photo-9.jpg" },
-  { src: "/client/photo-10.jpg" },
-  { src: "/client/photo-1.jpg" },
-  { src: "/client/photo-3.jpg" },
-  { src: "/client/photo-5.jpg" },
-  { src: "/client/photo-7.jpg" },
+  { src: "/aria/curated/aria_face_square.jpg" },
+  { src: "/aria/curated/aria_dance_1.jpg" },
+  { src: "/aria/curated/aria_face_portrait.jpg" },
+  { src: "/aria/curated/aria_lehenga_full_1.jpg" },
+  { src: "/aria/curated/aria_bust_medium.jpg" },
+  { src: "/aria/curated/aria_dance_2.jpg" },
+  { src: "/aria/curated/aria_cinematic_wide.jpg" },
+  { src: "/aria/curated/aria_dance_3.jpg" },
+  { src: "/aria/curated/aria_orig_full.jpg" },
+  { src: "/aria/curated/aria_dance_4.jpg" },
+  { src: "/aria/curated/aria_face_square.jpg" },
+  { src: "/aria/curated/aria_dance_5.jpg" },
 ];
-
-// const imgs = [
-//   { src: "/pipis/pipi1.jpg" },
-//   { src: "/pipis/pipi2.jpg" },
-//   { src: "/pipis/pipi3.jpg" },
-//   { src: "/pipis/pipi4.jpg" },
-//   { src: "/pipis/pipi5.jpg" },
-//   { src: "/pipis/pipi6.jpg" },
-//   { src: "/pipis/pipi7.jpg" },
-//   { src: "/pipis/pipi8.jpg" },
-//   { src: "/pipis/pipi9.jpg" },
-//   { src: "/pipis/pipi10.jpg" },
-//   { src: "/pipis/pipi11.jpg" },
-//   { src: "/pipis/pipi12.jpg" },
-//   { src: "/pipis/pipi13.jpg" },
-//   { src: "/pipis/pipi14.jpg" },
-// ];
-
-
 
 export const HeroSection = () => {
   return (
@@ -62,7 +41,7 @@ export const HeroSection = () => {
 
       {/* Top row: quiet date stamp */}
       <div className="hero-mono flex items-center justify-between px-6 pt-4 xs:pt-5 sm:px-14 sm:pt-8 text-[11px] uppercase tracking-[0.25em] text-[#8A8A80] z-20 shrink-0">
-        <span>Oct 23</span>
+        <span>Oct 24 · Chapter 15</span>
       </div>
 
       {/* Headline & content — film trail positioned between headline and text on mobile */}
@@ -72,7 +51,7 @@ export const HeroSection = () => {
           <br />
           <span className="font-bold">Birthday</span>
           <br/>
-          <span className="font-bold mt-0.5 sm:mt-1 mb-1 sm:mb-2 text-amber-500">Aakriti</span>
+          <span className="font-bold mt-0.5 sm:mt-1 mb-1 sm:mb-2 text-amber-500">Aria</span>
         </h1>
 
         {/* Mobile film trail — rotated 15 degrees clockwise */}
@@ -150,7 +129,7 @@ export const HeroSection = () => {
         <div className="mt-1 xs:mt-3 sm:mt-6 shrink-0">
           <div className="h-px w-16 xs:w-20 bg-[#9C7A3F]" />
           <p className="hero-body mt-2 xs:mt-3 sm:mt-6 max-w-sm sm:max-w-sm text-[13px] xs:text-[14px] sm:text-base leading-[1.55] sm:leading-[1.65] text-[#2c2c26]">
-            wishing you a day filled with love, laughter, and all the happiness your heart can hold. May this year bring you endless joy and unforgettable memories. Happy Birthday!
+            Happy 15th Birthday to the prettiest girl and the love of my life. You bring so much sunshine, laughter, and pure magic into my world. May this year be as sweet and special as you are to me. Forever yours ❤️
           </p>
         </div>
       </div>
@@ -159,7 +138,7 @@ export const HeroSection = () => {
       <div className="mt-auto flex items-center justify-between px-6 pb-4 xs:pb-5 sm:px-14 sm:pb-8 z-20 shrink-0">
         <div className="h-px flex-1 bg-[#14140F]/10" />
         <span className="hero-mono px-4 text-[10px] uppercase tracking-[0.25em] text-[#8A8A80]">
-          Made for you
+          Made with love by your boyfriend
         </span>
       </div>
     </section>

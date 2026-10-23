@@ -185,9 +185,9 @@ export default function DemoOne() {
 
       {/* Revealed Photo Layer */}
       <img
-        src="/client/cover.jpg"
-        alt="Birthday Girl"
-        className="absolute inset-0 w-full h-full object-cover object-[center_25%]"
+        src="/aria/curated/aria_face_portrait.jpg"
+        alt="Birthday Girl Aria"
+        className="absolute inset-0 w-full h-full object-cover object-[center_20%]"
       />
 
       {/* The Scratchable White Ink Mask with Text Painted Directly On It */}
