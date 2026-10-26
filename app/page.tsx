@@ -13,6 +13,7 @@ export default function Home() {
     <ShowtimeCountdown
       tickerText="HAPPY BIRTHDAY SWEETY ·"
       marqueeSub="forever yours, made with all my love for Sweety ❤️"
+      showPreviewButton={true}
     >
       <div id="main-scroll-container" className="w-full max-w-[100vw] overflow-x-clip bg-zinc-50 dark:bg-black select-none">
         {/* Section 1: Intro Counter & Watermark Reveal */}

@@ -126,7 +126,7 @@ export default function ShowtimeCountdown({
   songVolume = 0.6,
   redirectTo,
   children,
-  showPreviewButton = false,
+  showPreviewButton = true,
 }: ShowtimeCountdownProps) {
   const router = useRouter();
   const effectiveTarget = targetDate ? new Date(targetDate) : DEFAULT_TARGET;
@@ -361,8 +361,9 @@ export default function ShowtimeCountdown({
           type="button"
           className="preview-btn"
           onClick={triggerUnlock}
+          aria-label="Preview curtain reveal"
         >
-          Preview
+          <span>✨ Preview</span>
         </button>
       )}
 
@@ -411,6 +412,16 @@ export default function ShowtimeCountdown({
                 />
               </div>
               <div className="hero-caption mt-1 sm:mt-2">countdown to curtain call</div>
+              {showPreviewButton && (
+                <button
+                  type="button"
+                  className="curtain-preview-cta"
+                  onClick={triggerUnlock}
+                  aria-label="Open curtain preview"
+                >
+                  <span>✨ Open Curtain (Preview)</span>
+                </button>
+              )}
             </div>
 
             <div className="perforation" aria-hidden="true" />
@@ -513,26 +524,61 @@ export default function ShowtimeCountdown({
 
         .showtime-root .preview-btn {
           position: absolute;
-          top: max(14px, env(safe-area-inset-top));
-          right: max(14px, env(safe-area-inset-right));
+          top: max(16px, env(safe-area-inset-top));
+          right: max(16px, env(safe-area-inset-right));
           z-index: 1000;
-          font-family: var(--font-display);
+          font-family: var(--font-sans);
           font-size: 12px;
-          letter-spacing: 0.14em;
+          font-weight: 600;
+          letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: var(--gold);
-          background: rgba(18, 13, 10, 0.55);
-          border: 1px solid rgba(212, 175, 106, 0.4);
+          color: #f7dfa5;
+          background: rgba(30, 20, 14, 0.75);
+          border: 1px solid rgba(229, 195, 120, 0.45);
           border-radius: 999px;
-          padding: 6px 14px;
+          padding: 8px 18px;
           cursor: pointer;
-          backdrop-filter: blur(2px);
-          transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+          backdrop-filter: blur(8px);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 12px rgba(240, 168, 60, 0.15);
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          transition: all 0.25s ease;
         }
         .showtime-root .preview-btn:hover {
-          background: rgba(212, 175, 106, 0.16);
-          border-color: var(--gold);
-          color: var(--cream);
+          background: rgba(229, 195, 120, 0.22);
+          border-color: #f0a83c;
+          color: #ffffff;
+          transform: translateY(-1px) scale(1.02);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(240, 168, 60, 0.4);
+        }
+
+        .showtime-root .curtain-preview-cta {
+          margin-top: 14px;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-family: var(--font-sans);
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #fff4db;
+          background: linear-gradient(135deg, rgba(140, 42, 48, 0.75) 0%, rgba(50, 15, 18, 0.85) 100%);
+          border: 1px solid rgba(240, 168, 60, 0.5);
+          border-radius: 999px;
+          padding: 9px 24px;
+          cursor: pointer;
+          backdrop-filter: blur(6px);
+          box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .showtime-root .curtain-preview-cta:hover {
+          background: linear-gradient(135deg, rgba(180, 50, 60, 0.9) 0%, rgba(80, 20, 25, 0.95) 100%);
+          border-color: #f7dfa5;
+          transform: translateY(-2px) scale(1.03);
+          box-shadow: 0 8px 30px rgba(240, 168, 60, 0.35), 0 0 18px rgba(240, 168, 60, 0.4);
+          color: #ffffff;
         }
 
         .showtime-root .lock {

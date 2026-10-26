@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   Download,
   Share2,
@@ -158,8 +159,29 @@ export default function MagazineVideoModal({
   const [showInstaTip, setShowInstaTip] = useState(false);
   const [controlsVisible, setControlsVisible] = useState(true);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock body scroll and listen for Escape key when modal is open
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isOpen, onClose]);
 
   // Auto-play when opened
   useEffect(() => {
@@ -194,7 +216,7 @@ export default function MagazineVideoModal({
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -247,9 +269,36 @@ export default function MagazineVideoModal({
     return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
-  const handleDownloadClick = () => {
+  const handleDownloadClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (isDownloading) return;
     setIsDownloading(true);
-    setTimeout(() => setIsDownloading(false), 2500);
+
+    try {
+      const res = await fetch("/videos/magazine-flip.mp4");
+      if (!res.ok) throw new Error("Fetch failed");
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${name.toLowerCase()}-birthday-magazine.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      }, 100);
+    } catch {
+      // Fallback direct download
+      const a = document.createElement("a");
+      a.href = "/api/download-video";
+      a.download = `${name.toLowerCase()}-birthday-magazine.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } finally {
+      setTimeout(() => setIsDownloading(false), 1200);
+    }
   };
 
   const handleShareNative = async () => {
@@ -309,17 +358,17 @@ export default function MagazineVideoModal({
 
   const progressPct = duration > 0 ? (currentTime / duration) * 100 : 0;
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Birthday Magazine Film"
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#241a12]/55 backdrop-blur-md p-3 sm:p-6 animate-fade-in select-none"
+      className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/75 backdrop-blur-md p-3 sm:p-6 select-none overflow-y-auto"
       onClick={onClose}
     >
       {/* ── THEME FOLIO: WARM NATURAL PARCHMENT & ANTIQUE GOLD KEEPSAKE CARD ── */}
       <div
-        className="relative w-full max-w-4xl bg-[#FAF7F2] border-2 border-[#c59a45]/55 ring-1 ring-[#9f773a]/25 rounded-2xl sm:rounded-3xl shadow-[0_25px_80px_rgba(70,45,20,0.32)] overflow-hidden flex flex-col max-h-[96vh]"
+        className="relative w-full max-w-4xl bg-[#FAF7F2] border-2 border-[#c59a45]/55 ring-1 ring-[#9f773a]/25 rounded-2xl sm:rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.65)] overflow-hidden flex flex-col my-auto max-h-[92vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Scrapbook Doodle Ornaments */}
@@ -650,6 +699,7 @@ export default function MagazineVideoModal({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
