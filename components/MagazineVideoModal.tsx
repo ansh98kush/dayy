@@ -24,7 +24,7 @@ interface MagazineVideoModalProps {
   name?: string;
 }
 
-/* ── HANDCRAFTED SCRAPBOOK & GOLD FOIL DOODLES (Theme: #9f773a) ── */
+/* â”€â”€ HANDCRAFTED SCRAPBOOK & GOLD FOIL DOODLES (Theme: #9f773a) â”€â”€ */
 
 function SweetBowDoodle({ className = "" }: { className?: string }) {
   return (
@@ -79,7 +79,7 @@ function PostageStampDoodle({ className = "" }: { className?: string }) {
         letterSpacing="0.16em"
         opacity={0.85}
       >
-        SWEETY
+        HIMANI
       </text>
     </svg>
   );
@@ -144,7 +144,7 @@ function InstagramThemeIcon({ className = "w-4 h-4" }: { className?: string }) {
 export default function MagazineVideoModal({
   isOpen,
   onClose,
-  name = "Sweety",
+  name = "HIMANI",
 }: MagazineVideoModalProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -304,7 +304,7 @@ export default function MagazineVideoModal({
   const handleShareNative = async () => {
     const shareData = {
       title: `${name}'s Birthday Magazine`,
-      text: `Happy Birthday ${name}! 📖💖 Watch her special Birthday Magazine film! ✨`,
+      text: `Happy Birthday ${name}! ðŸ“–ðŸ’– Watch her special Birthday Magazine film! âœ¨`,
       url: window.location.href,
     };
 
@@ -337,7 +337,7 @@ export default function MagazineVideoModal({
 
   const handleShareWhatsApp = () => {
     const text = encodeURIComponent(
-      `🎉 Watch ${name}'s Special Birthday Magazine flip open! 📖💖✨\n${window.location.origin}`
+      `ðŸŽ‰ Watch ${name}'s Special Birthday Magazine flip open! ðŸ“–ðŸ’–âœ¨\n${window.location.origin}`
     );
     window.open(`https://api.whatsapp.com/send?text=${text}`, "_blank");
   };
@@ -350,7 +350,7 @@ export default function MagazineVideoModal({
 
   const handleCopyCaption = () => {
     navigator.clipboard.writeText(
-      `Happy Birthday Sweety! 👑✨ The prettiest girl and the love of my life 💖🎂 #BirthdayQueen #Sweety`
+      `Happy 21st Birthday HIMANI! 👑✨ The certified drama queen and best friend ever! 🥳💙 #BirthdayQueen #Himani #21stBirthday`
     );
     setCopiedCaption(true);
     setTimeout(() => setCopiedCaption(false), 2400);
@@ -366,7 +366,7 @@ export default function MagazineVideoModal({
       className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/75 backdrop-blur-md p-3 sm:p-6 select-none overflow-y-auto"
       onClick={onClose}
     >
-      {/* ── THEME FOLIO: WARM NATURAL PARCHMENT & ANTIQUE GOLD KEEPSAKE CARD ── */}
+      {/* â”€â”€ THEME FOLIO: WARM NATURAL PARCHMENT & ANTIQUE GOLD KEEPSAKE CARD â”€â”€ */}
       <div
         className="relative w-full max-w-4xl bg-[#FAF7F2] border-2 border-[#c59a45]/55 ring-1 ring-[#9f773a]/25 rounded-2xl sm:rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.65)] overflow-hidden flex flex-col my-auto max-h-[92vh]"
         onClick={(e) => e.stopPropagation()}
@@ -382,19 +382,19 @@ export default function MagazineVideoModal({
           <PostageStampDoodle className="w-12 h-12 text-[#9f773a]" />
         </div>
 
-        {/* ── Antique Scrapbook Folio Header ── */}
+        {/* â”€â”€ Antique Scrapbook Folio Header â”€â”€ */}
         <div className="relative flex items-center justify-between px-6 py-4 border-b border-[#e5d8c3] bg-gradient-to-r from-[#FAF7F2] via-[#F4EFE6] to-[#FAF7F2]">
           <div className="flex flex-col">
             <div className="flex items-center gap-2 mb-0.5">
               <span className="text-[10px] font-mono tracking-[0.24em] text-[#9f773a] uppercase font-semibold">
-                ✦ SPECIAL BIRTHDAY ARCHIVE · SWEETY ✦
+                âœ¦ SPECIAL BIRTHDAY ARCHIVE Â· HIMANI âœ¦
               </span>
             </div>
             <h2 className="text-xl sm:text-2xl font-serif tracking-wide text-[#2b2118] font-semibold">
               The Birthday Magazine Film
             </h2>
             <p className="font-['Caveat',cursive] text-base sm:text-lg text-[#8a6839] leading-none mt-0.5">
-              Every photograph, flipbook page, and your song — saved as a living keepsake
+              Every photograph, flipbook page, and your song â€” saved as a living keepsake
             </p>
           </div>
 
@@ -408,7 +408,7 @@ export default function MagazineVideoModal({
           </button>
         </div>
 
-        {/* ── Framed Keepsake Mat Board Stage ── */}
+        {/* â”€â”€ Framed Keepsake Mat Board Stage â”€â”€ */}
         <div className="p-2 sm:p-4 bg-[#F2ECE1] border-b border-[#e5d8c3]">
           <div
             ref={containerRef}
@@ -458,7 +458,7 @@ export default function MagazineVideoModal({
                 ) : (
                   <>
                     <Volume2 className="w-3.5 h-3.5 text-[#9f773a]" />
-                    <span className="font-semibold">Playing: Sweety Song</span>
+                    <span className="font-semibold">Playing: HIMANI Song</span>
                   </>
                 )}
               </button>
@@ -552,7 +552,7 @@ export default function MagazineVideoModal({
           </div>
         </div>
 
-        {/* ── Theme Keepsake Actions: Antique Gold & Warm Stationery ── */}
+        {/* â”€â”€ Theme Keepsake Actions: Antique Gold & Warm Stationery â”€â”€ */}
         <div className="p-4 sm:p-5 bg-gradient-to-b from-[#FAF7F2] to-[#F7F2E7] flex flex-col gap-3.5">
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             {/* Primary Antique Gold Leaf Download Button */}
@@ -578,7 +578,7 @@ export default function MagazineVideoModal({
               )}
             </a>
 
-            {/* Social Share Group — Warm Scrapbook Stationery Pills */}
+            {/* Social Share Group â€” Warm Scrapbook Stationery Pills */}
             <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap justify-center">
               {/* WhatsApp Button */}
               <button
@@ -635,7 +635,7 @@ export default function MagazineVideoModal({
             </div>
           </div>
 
-          {/* ── Theme Instagram Note Card (Styled like an antique stationery letter) ── */}
+          {/* â”€â”€ Theme Instagram Note Card (Styled like an antique stationery letter) â”€â”€ */}
           {showInstaTip && (
             <div className="p-3.5 rounded-2xl bg-[#FFFDF9] border border-[#d8c3a5] text-xs text-[#4a3a28] flex flex-col gap-2.5 animate-fade-in shadow-md">
               <div className="flex items-center justify-between border-b border-[#e8dcce] pb-1.5">
@@ -647,7 +647,7 @@ export default function MagazineVideoModal({
                   onClick={() => setShowInstaTip(false)}
                   className="text-[#9f773a] hover:text-[#2b2118] text-xs px-1"
                 >
-                  ✕
+                  âœ•
                 </button>
               </div>
 
@@ -669,7 +669,7 @@ export default function MagazineVideoModal({
                     <span className="font-serif font-bold text-[#9f773a] block mb-0.5">
                       3. Tag & Wish
                     </span>
-                    Tag <strong className="text-[#2b2118]">@{name.toLowerCase()}</strong> to share the birthday love!
+                    Tag <strong className="text-[#2b2118]">@{name.toLowerCase()}</strong> to celebrate her 21st birthday!
                   </div>
                   <button
                     type="button"
@@ -681,20 +681,20 @@ export default function MagazineVideoModal({
                     ) : (
                       <Copy className="w-2.5 h-2.5 text-[#9f773a]" />
                     )}
-                    <span>{copiedCaption ? "Caption Copied!" : "Copy Caption 💖"}</span>
+                    <span>{copiedCaption ? "Caption Copied!" : "Copy Caption ðŸ’–"}</span>
                   </button>
                 </div>
               </div>
             </div>
           )}
 
-          {/* ── Theme Keepsake Footer Signoff ── */}
+          {/* â”€â”€ Theme Keepsake Footer Signoff â”€â”€ */}
           <div className="flex items-center justify-between pt-1 border-t border-[#e8dcce] text-[11px]">
             <span className="font-['Caveat',cursive] text-lg text-[#9f773a]">
-              &ldquo;From the first page to the last, made with love for {name} ✨&rdquo;
+              &ldquo;From the first page to the last, celebrating {name} âœ¨&rdquo;
             </span>
             <span className="font-serif italic text-[#8a6839] opacity-80 hidden sm:inline">
-              Vogue Birthday Edition · Issue 000456
+              Vogue Birthday Edition Â· Issue 000456
             </span>
           </div>
         </div>

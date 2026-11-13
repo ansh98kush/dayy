@@ -4,7 +4,7 @@ import React from "react";
 import MobileBook from "./MobileBook";
 
 /* ------------------------------------------------------------------
- * SECTION 4: SCRAPBOOK DESK — RICH BESPOKE DOODLE WALLPAPER
+ * SECTION 4: SCRAPBOOK DESK â€” RICH BESPOKE DOODLE WALLPAPER
  * ------------------------------------------------------------------
  * Warm natural parchment canvas adorned with 25+ handcrafted antique
  * gold (#9f773a) celebration & scrapbook doodles spread thoughtfully
@@ -12,7 +12,7 @@ import MobileBook from "./MobileBook";
  * whether the 3D album is closed or fully opened.
  * ------------------------------------------------------------------ */
 
-// ── HANDCRAFTED CELEBRATION & SCRAPBOOK DOODLES (#9f773a) ──
+// â”€â”€ HANDCRAFTED CELEBRATION & SCRAPBOOK DOODLES (#9f773a) â”€â”€
 
 function ScrapbookCamera({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
   return (
@@ -74,7 +74,7 @@ function PostageStamp({ className = "", style }: { className?: string; style?: R
         opacity={0.65}
       />
       <text x={40} y={57} textAnchor="middle" fontSize={6} fontFamily="sans-serif" fill="currentColor" letterSpacing="0.12em" opacity={0.8}>
-        SWEETY
+        HIMANI
       </text>
     </svg>
   );
@@ -403,7 +403,7 @@ function VintageVipTicket({ className = "", style }: { className?: string; style
         letterSpacing="0.2em"
         opacity={0.8}
       >
-        ADMIT ONE • 2026
+        ADMIT ONE â€¢ 2026
       </text>
     </svg>
   );
@@ -578,7 +578,7 @@ export default function MobileDoodleDesk() {
       <div className="stage__ground" />
       <div className="stage__vignette" />
 
-      {/* ── BESPOKE NON-OVERLAPPING DOODLE WALLPAPER (Warm Antique Gold #9f773a) ── */}
+      {/* â”€â”€ BESPOKE NON-OVERLAPPING DOODLE WALLPAPER (Warm Antique Gold #9f773a) â”€â”€ */}
       <div className="stage__doodles">
 
         {/* ================================================================= */}
@@ -718,7 +718,7 @@ export default function MobileDoodleDesk() {
         <SparkleStar className="absolute bottom-[16%] right-[10%] w-3 h-3 text-[#9f773a]/30" />
       </div>
 
-      {/* ── THE HERO CENTERPIECE: 3D SPIRAL SKETCHBOOK ── */}
+      {/* â”€â”€ THE HERO CENTERPIECE: 3D SPIRAL SKETCHBOOK â”€â”€ */}
       <div className="stage__book-wrapper">
         <div className="stage__book-shadow" />
         <MobileBook />

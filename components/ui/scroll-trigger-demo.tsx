@@ -91,7 +91,7 @@ export default function ScrollTriggerDemo() {
                   key={index}
                   className="aspect-[3/4] md:aspect-[4/2.5] inline-block align-middle h-auto max-h-full w-full object-cover rounded-md"
                   src={imageUrl}
-                  alt="Birthday Girl Sweety"
+                  alt="Birthday Girl HIMANI"
                 />
               ))}
             </SmoothSideColumn>
@@ -106,7 +106,7 @@ export default function ScrollTriggerDemo() {
                   key={index}
                   className="aspect-[3/4] md:aspect-[4/2.5] inline-block align-middle h-auto max-h-full w-full object-cover object-[center_20%] rounded-md"
                   src={imageUrl}
-                  alt="Birthday Girl Sweety"
+                  alt="Birthday Girl HIMANI"
                 />
               ))}
             </ContainerScrollTranslate>
@@ -118,7 +118,7 @@ export default function ScrollTriggerDemo() {
                   key={index}
                   className="aspect-[3/4] md:aspect-[4/2.5] inline-block align-middle h-auto max-h-full w-full object-cover rounded-md"
                   src={imageUrl}
-                  alt="Birthday Girl Sweety"
+                  alt="Birthday Girl HIMANI"
                 />
               ))}
             </SmoothSideColumn>

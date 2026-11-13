@@ -131,7 +131,7 @@ export default function DemoOne() {
       if ("letterSpacing" in ctx) {
         (ctx as any).letterSpacing = "0px";
       }
-      ctx.fillText("♦", cx, heartY);
+      ctx.fillText("â™¦", cx, heartY);
 
       // 4. Poetic Dedication Message in Elegante Classica luxury modern serif font
       ctx.font = `normal 400 ${quoteSize}px 'Elegante Classica', 'Elegante', Georgia, serif`;
@@ -186,7 +186,7 @@ export default function DemoOne() {
       {/* Revealed Photo Layer */}
       <img
         src="/ref/girl.jpg"
-        alt="Birthday Girl Sweety"
+        alt="Birthday Girl HIMANI"
         className="absolute inset-0 w-full h-full object-cover object-[center_20%]"
       />
 

@@ -5,12 +5,12 @@ import Image from "next/image";
 import MeltingMusicPlayerFrame from "./MeltingMusicPlayerFrame";
 
 /* ==========================================================================
- * 📖 EDITORIAL FLIPBOOK PAGES (FLIPBOOK + EDITORIAL TEMPLATE HYBRID)
+ * ðŸ“– EDITORIAL FLIPBOOK PAGES (FLIPBOOK + EDITORIAL TEMPLATE HYBRID)
  * ========================================================================== */
 
 export const FLIPBOOK_CONFIG = {
-  name: "SWEETY",
-  fullName: "SWEETY",
+  name: "HIMANI",
+  fullName: "HIMANI",
   age: "BIRTHDAY",
   date: "SPECIAL DAY",
   sender: "YOUR FAVORITE PERSON",
@@ -70,16 +70,16 @@ export function FilmstripFrame({
  * ========================================================================== */
 export function PageTableContents() {
   const items = [
-    { num: "02", title: "EDITORIAL GALLERY", sub: "exclusive moments and fashion snapshots" },
-    { num: "04", title: "WHO'S THAT GIRL?", sub: "an iconic profile of the birthday queen" },
+    { num: "02", title: "EDITORIAL GALLERY", sub: "iconic snapshots and candid moods" },
+    { num: "04", title: "WHO'S THAT GIRL?", sub: "an honest profile of the drama queen" },
     { num: "06", title: "THE INSTAGRAM QUEEN", sub: "curated aesthetic feed & golden hour glow" },
-    { num: "08", title: `THINGS ABOUT ${FLIPBOOK_CONFIG.name}`, sub: "fun facts, personality and little traits" },
-    { num: "10", title: "12 THINGS I ADORE ABOUT YOU", sub: "the traits that make you my favourite person" },
-    { num: "12", title: "5 REASONS YOU OWN MY HEART", sub: "why you are the love of my life" },
-    { num: "14", title: "MY ONLY LOVE · HEART SPREAD", sub: "11-photo heart mosaic celebrating you" },
-    { num: "16", title: "FAVOURITE MEMORY OF US", sub: "every moment with you is unforgettable" },
+    { num: "08", title: `THINGS ABOUT ${FLIPBOOK_CONFIG.name}`, sub: "fun quirks, bakbak and little traits" },
+    { num: "10", title: "12 THINGS ABOUT HIMANI", sub: "the traits that make you an amazing friend" },
+    { num: "12", title: "5 REASONS YOU'RE AN INCREDIBLE FRIEND", sub: "why you're one of my favourite people" },
+    { num: "14", title: "MAIN APNI FAVOURITE HOON", sub: "11-photo sunshine mosaic celebrating you" },
+    { num: "16", title: "MEMORABLE CHAOS CHRONICLES", sub: "every adventure with you is unforgettable" },
     { num: "18", title: "PHOTO DUMP & POLAROIDS", sub: "spontaneous laughs, smiles, and film rolls" },
-    { num: "20", title: "MY MESSAGE TO YOU", sub: "a love letter celebrating your 15th chapter" },
+    { num: "20", title: "BEST FRIEND'S TRIBUTE", sub: "a genuine birthday letter for your 21st chapter" },
   ];
 
   return (
@@ -134,36 +134,36 @@ export function PageEditorialCollage() {
       {/* Top Row: Photo 1 (wider) + Photo 2 (narrower portrait) */}
       <div className="flex gap-1.5 h-[30%]">
         <div className="relative w-[62%] h-full bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/ref/girl1.jpg" alt="Sweety Memory 1" fill priority className="object-cover object-center" sizes="220px" />
+          <Image src="/ref/girl1.jpg" alt="HIMANI Memory 1" fill priority className="object-cover object-center" sizes="220px" />
         </div>
         <div className="relative w-[38%] h-full bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/ref/girl2.jpg" alt="Sweety Memory 2" fill priority className="object-cover object-top" sizes="150px" />
+          <Image src="/ref/girl2.jpg" alt="HIMANI Memory 2" fill priority className="object-cover object-top" sizes="150px" />
         </div>
       </div>
 
       {/* Middle Row: Photo 3 + Photo 4 */}
       <div className="flex gap-1.5 h-[28%]">
         <div className="relative w-[48%] h-full bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/ref/girl3.jpg" alt="Sweety Memory 3" fill priority className="object-cover object-top" sizes="180px" />
+          <Image src="/ref/girl3.jpg" alt="HIMANI Memory 3" fill priority className="object-cover object-top" sizes="180px" />
         </div>
         <div className="relative w-[52%] h-full bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/ref/girl4.jpg" alt="Sweety Memory 4" fill priority className="object-cover object-center" sizes="180px" />
+          <Image src="/ref/girl4.jpg" alt="HIMANI Memory 4" fill priority className="object-cover object-center" sizes="180px" />
         </div>
       </div>
 
       {/* Lower Row: Photo 5 + Photo 6 */}
       <div className="flex gap-1.5 h-[23%]">
         <div className="relative w-[50%] h-full bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/ref/girl5.jpg" alt="Sweety Memory 5" fill priority className="object-cover object-top" sizes="180px" />
+          <Image src="/ref/girl5.jpg" alt="HIMANI Memory 5" fill priority className="object-cover object-top" sizes="180px" />
         </div>
         <div className="relative w-[50%] h-full bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/ref/girl6.jpg" alt="Sweety Memory 6" fill priority className="object-cover object-top" sizes="180px" />
+          <Image src="/ref/girl6.jpg" alt="HIMANI Memory 6" fill priority className="object-cover object-top" sizes="180px" />
         </div>
       </div>
 
       {/* Bottom Row: Full Width Panorama Photo */}
       <div className="relative w-full h-[19%] bg-[#e7e5e4] shadow-sm overflow-hidden">
-        <Image src="/ref/girl7.jpg" alt="Sweety Full Panorama" fill priority className="object-cover object-center" sizes="380px" />
+        <Image src="/ref/girl7.jpg" alt="HIMANI Full Panorama" fill priority className="object-cover object-center" sizes="380px" />
       </div>
     </div>
   );
@@ -192,7 +192,7 @@ export function PageWhosThatGirl() {
               className="text-[32px] font-medium tracking-tight uppercase leading-[0.88] text-[#1c1917]"
               style={{ fontFamily: "'Bodoni Moda', serif" }}
             >
-              Who’s
+              Whoâ€™s
             </h2>
             <span
               className="text-[28px] font-normal leading-none block -mt-0.5"
@@ -207,10 +207,10 @@ export function PageWhosThatGirl() {
           {/* Profile Text */}
           <div className="space-y-2 text-[#44403c]">
             <p className="text-[9.5px] leading-[1.45] text-justify font-sans">
-              The girl with the sweetest smile, the most captivating eyes, and the gentlest soul in this whole world. She turns every simple second into pure magic, radiating warmth, innocence, and unmatched grace.
+              The girl with an infectious laugh, boundless energy, and an unmatchable Geet-level drama quotient! She turns every ordinary conversation into an entertaining story, radiating pure sunshine, spontaneity, and fun wherever she goes.
             </p>
             <p className="text-[9.5px] leading-[1.45] text-justify font-sans">
-              My favourite person, my happy place, and the girl who has my whole heart. An angel was born—and I am the luckiest guy alive to call you mine. Happy Birthday, Sweety!
+              One of my absolute favourite people, an incredible friend, and someone who always brings a genuine smile to everyone around her. Today we celebrate your 21st chapter—stay weird, stay crazy, and keep shining bright, Himani!
             </p>
           </div>
         </div>
@@ -218,10 +218,10 @@ export function PageWhosThatGirl() {
         {/* Bottom Tag */}
         <div className="border-t border-[#1c1917]/15 pt-2 flex items-center justify-between">
           <span className="text-[7px] font-mono tracking-wider uppercase text-[#78716c]">
-            EDITION NO. {FLIPBOOK_CONFIG.age}
+            EDITION NO. 21
           </span>
           <span className="text-[8px] font-bold tracking-widest uppercase text-[#6b5836]" style={{ fontFamily: "'Bodoni Moda', serif" }}>
-            THE QUEEN OF MY HEART
+            THE CERTIFIED DRAMA QUEEN
           </span>
         </div>
       </div>
@@ -362,28 +362,28 @@ export function PageInstagramGirl() {
       likes: 2410,
       comments: "520",
       time: "YESTERDAY",
-      caption: "birthday celebrations begin ✨ with my favourite person ♡",
+      caption: "birthday celebrations begin âœ¨ with my favourite person â™¡",
     },
     {
       img: "/ref/girl3.jpg",
       likes: 2890,
       comments: "642",
       time: "2 DAYS AGO",
-      caption: "keeping each other smiling always 🤍",
+      caption: "keeping each other smiling always ðŸ¤",
     },
     {
       img: "/ref/girl4.jpg",
       likes: 3514,
       comments: "1,024",
       time: "3 DAYS AGO",
-      caption: "birthday eve vibes 💫 my heart is full",
+      caption: "turning 21! ready for all new adventures ✨",
     },
     {
       img: "/ref/girl5.jpg",
       likes: 3120,
       comments: "815",
       time: "5 DAYS AGO",
-      caption: "pure smiles & grace ♡ celebrating life",
+      caption: "pure smiles & grace â™¡ celebrating life",
     },
   ];
 
@@ -432,7 +432,7 @@ export function PageInstagramGirl() {
             Instagram girl
           </h2>
           <span className="text-[6.5px] font-mono tracking-widest text-[#78716c] uppercase block mt-0.5">
-            @{username.toLowerCase()}_angel • 24.10K FOLLOWERS
+            @{username.toLowerCase()}_vibes â€¢ 24.10K FOLLOWERS
           </span>
         </div>
 
@@ -454,7 +454,7 @@ export function PageInstagramGirl() {
             }`}
             title="Grid feed view"
           >
-            ⊞ Grid
+            âŠž Grid
           </button>
           <button
             type="button"
@@ -472,7 +472,7 @@ export function PageInstagramGirl() {
             }`}
             title="Single frame spotlight"
           >
-            ▢ Insta
+            â–¢ Insta
           </button>
           <button
             type="button"
@@ -490,14 +490,14 @@ export function PageInstagramGirl() {
             }`}
             title="Melting music player frame"
           >
-            ♫ Player
+            â™« Player
           </button>
         </div>
       </div>
 
       {/* Main Content Area */}
       {viewMode === "grid" ? (
-        /* ── 2x2 GRID OF AUTHENTIC INSTAGRAM POST FRAMES ── */
+        /* â”€â”€ 2x2 GRID OF AUTHENTIC INSTAGRAM POST FRAMES â”€â”€ */
         <div className="grid grid-cols-2 gap-1.5 my-auto flex-1 items-center py-1">
           {posts.map((post, idx) => {
             const isLiked = likedState[idx] !== false;
@@ -641,7 +641,7 @@ export function PageInstagramGirl() {
           })}
         </div>
       ) : viewMode === "featured" ? (
-        /* ── SINGLE FEATURED INSTAGRAM FRAME (EXACT SCALE OF TEMPLATE) ── */
+        /* â”€â”€ SINGLE FEATURED INSTAGRAM FRAME (EXACT SCALE OF TEMPLATE) â”€â”€ */
         <div className="flex-1 flex flex-col justify-center items-center my-auto w-full px-1">
           <div className="w-full max-w-[325px] bg-white rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.06)] border border-neutral-200/90 p-3 flex flex-col justify-between">
             {/* Header: Circular Avatar + Username + More */}
@@ -688,7 +688,7 @@ export function PageInstagramGirl() {
                   className="absolute left-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white/85 hover:bg-white text-black shadow-md flex items-center justify-center text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                   aria-label="Previous photo"
                 >
-                  ‹
+                  â€¹
                 </button>
               )}
 
@@ -706,7 +706,7 @@ export function PageInstagramGirl() {
                   className="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white/85 hover:bg-white text-black shadow-md flex items-center justify-center text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                   aria-label="Next photo"
                 >
-                  ›
+                  â€º
                 </button>
               )}
             </div>
@@ -801,7 +801,7 @@ export function PageInstagramGirl() {
           </div>
         </div>
       ) : (
-        /* ── MELTING MUSIC PLAYER FRAME SPOTLIGHT ── */
+        /* â”€â”€ MELTING MUSIC PLAYER FRAME SPOTLIGHT â”€â”€ */
         <div className="flex-1 flex flex-col justify-center items-center my-auto w-full px-2 py-1">
           <div className="w-[235px]">
             <MeltingMusicPlayerFrame
@@ -833,7 +833,7 @@ export function PageInstagramGirl() {
             }}
             className="text-[7.5px] font-semibold text-[#6b5836] hover:underline cursor-pointer"
           >
-            ← Back to 4-Post Feed
+            â† Back to 4-Post Feed
           </button>
         )}
       </div>
@@ -872,7 +872,7 @@ export function PageThingsAbout() {
         <div className="flex items-center justify-center gap-2 mt-2">
           <div className="h-[0.5px] w-8 bg-[#1c1917]/20" />
           <span className="text-[7px] tracking-[0.2em] font-medium text-[#78716c] uppercase">
-            GET TO KNOW MY SWEETEST GIRL &amp; THE LOVE OF MY LIFE
+            GET TO KNOW THE ONE &amp; ONLY DRAMA QUEEN
           </span>
           <div className="h-[0.5px] w-8 bg-[#1c1917]/20" />
         </div>
@@ -882,7 +882,7 @@ export function PageThingsAbout() {
       <div className="flex gap-4 my-auto h-[68%]">
         {/* Left Hero Photo */}
         <div className="relative w-[52%] h-full bg-[#e7e5e4] shadow-md rounded-[1px] overflow-hidden">
-          <Image src="/ref/girl8.jpg" alt="Sweety Hero" fill priority className="object-cover object-top" sizes="200px" />
+          <Image src="/ref/girl8.jpg" alt="HIMANI Hero" fill priority className="object-cover object-top" sizes="200px" />
         </div>
 
         {/* Right Side: Big Quote & Mini Taped Polaroid */}
@@ -893,13 +893,13 @@ export function PageThingsAbout() {
               className="text-[44px] leading-none block -mb-3 opacity-60"
               style={{ fontFamily: "'Bodoni Moda', serif", color: FLIPBOOK_CONFIG.accentColor }}
             >
-              “
+              â€œ
             </span>
             <p
               className="text-[12px] italic leading-[1.35] text-[#292524] font-medium"
               style={{ fontFamily: "'Bodoni Moda', Georgia, serif" }}
             >
-              Being with you makes every ordinary day feel like the sweetest dream come true.
+              Zindagi mein thoda drama, thodi masti aur bohot saara pagalpan hona zaroori hai!
             </p>
           </div>
 
@@ -908,7 +908,7 @@ export function PageThingsAbout() {
             {/* Washi tape strip */}
             <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-8 h-3 bg-[#d6d3d1]/80 shadow-xs rotate-[-2deg]" />
             <div className="relative aspect-square w-full bg-[#f5f5f4] overflow-hidden">
-              <Image src="/ref/girl.jpg" alt="Sweety Mini" fill priority className="object-cover object-top" sizes="120px" />
+              <Image src="/ref/girl.jpg" alt="HIMANI Mini" fill priority className="object-cover object-top" sizes="120px" />
             </div>
           </div>
         </div>
@@ -922,21 +922,21 @@ export function PageThingsAbout() {
  * ========================================================================== */
 export function PageFactsWithPhotos() {
   const factsCol1 = [
-    { num: "01", t: "MESMERIZING EYES", d: "I could get lost in them forever" },
-    { num: "02", t: "SWEETEST SMILE", d: "Melts away all my stress in a second" },
-    { num: "03", t: "GRACEFUL DANCER", d: "Dancing to Maula Mere so beautifully" },
-    { num: "04", t: "TRADITIONAL CHARM", d: "Looks like an angel in saree & lehenga" },
-    { num: "05", t: "HER SILVER JHUMKAS", d: "The cute chime every time she turns" },
-    { num: "06", t: "NOSE RING GLOW", d: "That tiny sparkle made just for her" },
+    { num: "01", t: "UNSTOPPABLE BAKBAK", d: "Can talk for hours without needing a breath" },
+    { num: "02", t: "INFECTIOUS LAUGHTER", d: "Turns any dull moment into pure comedy" },
+    { num: "03", t: "GEET VIBES ONLY", d: "Certified main apni favourite hoon energy" },
+    { num: "04", t: "GOLDEN HEART", d: "Fiercely caring, loyal and genuine friend" },
+    { num: "05", t: "EXPRESSIVE DRAMA", d: "Has a different dramatic face for every mood" },
+    { num: "06", t: "CHIC STYLING", d: "Nails every ethnic and casual look effortlessly" },
   ];
 
   const factsCol2 = [
-    { num: "07", t: "CUTE GIGGLES", d: "Her infectious laugh that makes my day" },
-    { num: "08", t: "PUREST SOUL", d: "Caring, genuine, and so full of love" },
-    { num: "09", t: "MY SAFE PLACE", d: "Her voice brings me instant peace" },
-    { num: "10", t: "MY FOREVER CRUSH", d: "Falling more in love every single day" },
-    { num: "11", t: "SWEET 15 MAGIC", d: "Growing more gorgeous year after year" },
-    { num: "12", t: "FOREVER MINE", d: "Held in my heart today and always" },
+    { num: "07", t: "CHAOTIC GENIUS", d: "Spontaneous plans that always turn memorable" },
+    { num: "08", t: "FOODIE ADVENTURES", d: "Always ready for good food and treats" },
+    { num: "09", t: "STRONG & RESILIENT", d: "Takes on every challenge with head held high" },
+    { num: "10", t: "GOAL GETTER", d: "Big dreams and the drive to conquer them all" },
+    { num: "11", t: "21 YEARS OF ICONIC", d: "Stepping into her prime with total flair" },
+    { num: "12", t: "BEST FRIEND FOREVER", d: "Always in your corner, cheering you on" },
   ];
 
   return (
@@ -981,7 +981,7 @@ export function PageFactsWithPhotos() {
           "/ref/girl6.jpg",
         ].map((img, idx) => (
           <div key={idx} className="relative w-full aspect-[4/3] bg-[#e7e5e4] shadow-xs rounded-[1px] overflow-hidden">
-            <Image src={img} alt={`Sweety Thumb ${idx}`} fill priority className="object-cover object-center" sizes="120px" />
+            <Image src={img} alt={`HIMANI Thumb ${idx}`} fill priority className="object-cover object-center" sizes="120px" />
           </div>
         ))}
       </div>
@@ -997,31 +997,31 @@ export function PageThingsILoveAboutYou() {
     {
       num: "01",
       title: "YOUR RADIANT SMILE",
-      desc: "The way your face lights up whenever we talk, making my entire day brighter.",
+      desc: "The way you laugh at the silliest things and light up the whole room instantly.",
       img: "/ref/girl1.jpg",
     },
     {
       num: "02",
-      title: "YOUR PURE HEART",
-      desc: "The sweetest, most caring soul who understands me better than anyone ever could.",
+      title: "YOUR GOLDEN HEART",
+      desc: "A truly caring and genuine soul who always shows up for the people you care about.",
       img: "/ref/girl2.jpg",
     },
     {
       num: "03",
-      title: "YOUR UNMATCHED GRACE",
-      desc: "From your gorgeous looks to your sweet selfies, you leave me in awe.",
+      title: "YOUR UNMATCHED ENERGY",
+      desc: "From random spontaneous plans to dramatic stories, there is never a boring second.",
       img: "/ref/girl3.jpg",
     },
     {
       num: "04",
-      title: "OUR SWEET TALKS",
-      desc: "Late night laughs, whispering dreams, and all the silly moments only we share.",
+      title: "OUR RANDOM BAKBAK",
+      desc: "Hours of unfiltered gossip, hilarious rants, and inside jokes only we understand.",
       img: "/ref/girl4.jpg",
     },
     {
       num: "05",
-      title: "JUST BEING MY SWEETY",
-      desc: "No one in this world compares to you. You are my princess, my love, and my world.",
+      title: "SIMPLY BEING HIMANI",
+      desc: "Stay weird, stay crazy, and stay unapologetically you. Never change for anyone!",
       img: "/ref/girl5.jpg",
     },
   ];
@@ -1034,13 +1034,13 @@ export function PageThingsILoveAboutYou() {
           className="text-[26px] font-medium tracking-tight text-[#1c1917] leading-none"
           style={{ fontFamily: "'Bodoni Moda', serif" }}
         >
-          5 reasons you own my heart..
+          5 reasons you're an incredible friend..
         </h2>
         <span
           className="text-[15px] font-normal block mt-0.5"
           style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive", color: FLIPBOOK_CONFIG.accentColor }}
         >
-          5 reasons why you are the love of my life
+          why you're one of my favourite people in the world
         </span>
       </div>
 
@@ -1072,7 +1072,7 @@ export function PageThingsILoveAboutYou() {
       {/* Bottom Footer */}
       <div className="text-right border-t border-[#1c1917]/15 pt-1">
         <span className="text-[8px] font-mono tracking-widest text-[#78716c] uppercase">
-          FOREVER YOURS · ALL MY LOVE ♡
+          ALWAYS CHEERING FOR YOU · YOUR BEST FRIEND
         </span>
       </div>
     </div>
@@ -1116,7 +1116,7 @@ export function PageMeetTheQueen() {
 
         {/* Photo */}
         <div className="relative aspect-[4/5] w-full bg-[#e7e5e4] overflow-hidden">
-          <Image src="/ref/girl10.jpg" alt="Meet the queen Sweety" fill priority className="object-cover object-top" sizes="260px" />
+          <Image src="/ref/girl10.jpg" alt="Meet the queen HIMANI" fill priority className="object-cover object-top" sizes="260px" />
         </div>
 
         {/* Handwritten Polaroid Caption */}
@@ -1125,10 +1125,10 @@ export function PageMeetTheQueen() {
             className="text-[20px] font-normal text-[#1c1917] leading-none"
             style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive", color: FLIPBOOK_CONFIG.accentColor }}
           >
-            Meet my birthday princess
+            Meet the Birthday Queen
           </p>
           <span className="text-[7px] text-zinc-500 tracking-wider font-mono block mt-1 uppercase">
-            15 NEVER LOOKED SO BEAUTIFUL
+            21 NEVER LOOKED SO FUN
           </span>
         </div>
       </div>
@@ -1136,7 +1136,7 @@ export function PageMeetTheQueen() {
       {/* Bottom Tag */}
       <div className="relative z-10 text-center">
         <span className="text-[7.5px] italic text-[#78716c] font-serif">
-          {FLIPBOOK_CONFIG.date} • SWEET 15 SPECIAL EDITION
+          {FLIPBOOK_CONFIG.date} â€¢ CHAPTER 21 SPECIAL EDITION
         </span>
       </div>
     </div>
@@ -1165,12 +1165,12 @@ export function PageFavouriteMemory() {
             className="text-[22px] italic leading-none block -mt-0.5"
             style={{ fontFamily: "'Bodoni Moda', Georgia, serif", color: FLIPBOOK_CONFIG.accentColor }}
           >
-            Memory Of Us
+            Chaos Chronicles
           </span>
         </div>
         <div className="border-t border-b border-[#1c1917]/15 py-0.5 mt-1 text-center">
           <span className="text-[6.5px] tracking-[0.16em] uppercase text-[#78716c] font-medium block">
-            EVERY MOMENT WITH YOU BECOMES MY GREATEST TREASURE
+            EVERY RANDOM ADVENTURE WITH YOU TURNS INTO A COMEDY
           </span>
         </div>
       </div>
@@ -1182,7 +1182,7 @@ export function PageFavouriteMemory() {
             src="/ref/girl.jpg"
             alt="Favourite Memory"
             title="iPhone"
-            artist="Our Love Story • Sweety's Birthday"
+            artist="Friendship Chronicles • Himani's 21st"
           />
         </div>
       </div>
@@ -1190,8 +1190,7 @@ export function PageFavouriteMemory() {
       {/* Bottom Editorial Caption */}
       <div className="border-t border-[#1c1917]/15 pt-1.5">
         <p className="text-[8.5px] text-[#44403c] leading-[1.35] text-justify tracking-wide">
-          From our late night talks to every sweet laugh we share, every single second with you is etched into my heart.
-          Being with you is the greatest blessing of my life. Happy Birthday to the girl who holds my entire world!
+          From random tea runs to hours of endless bakbak, every single memory with you is pure entertainment. Life is so much brighter with a friend like you. Happy 21st Birthday to the one and only Himani!
         </p>
       </div>
     </div>
@@ -1209,43 +1208,43 @@ export function PageNumberedMemories() {
         <div className="w-[32%] bg-white p-2 shadow-xs border border-[#1c1917]/10 flex flex-col justify-between">
           <span className="font-mono text-[10px] font-bold text-[#6b5836]">01</span>
           <span className="text-[8px] font-bold uppercase tracking-wider text-[#1c1917] leading-tight">
-            THE DAY WE BEGAN
+            HOW IT ALL STARTED
           </span>
-          <span className="text-[6.5px] text-[#78716c] leading-tight">When you first stole my heart</span>
+          <span className="text-[6.5px] text-[#78716c] leading-tight">First day of our friendship</span>
         </div>
         <div className="w-[68%] relative bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/ref/girl3.jpg" alt="Sweety Memory 1" fill priority className="object-cover object-center" sizes="240px" />
+          <Image src="/ref/girl3.jpg" alt="HIMANI Memory 1" fill priority className="object-cover object-center" sizes="240px" />
         </div>
       </div>
 
       {/* Row 2: Photo + Card 02 + Card 03 + Photo */}
       <div className="flex gap-2 h-[31%]">
         <div className="w-[28%] relative bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/ref/girl4.jpg" alt="Sweety Memory 2" fill priority className="object-cover object-top" sizes="120px" />
+          <Image src="/ref/girl4.jpg" alt="HIMANI Memory 2" fill priority className="object-cover object-top" sizes="120px" />
         </div>
         <div className="w-[44%] bg-white p-2 shadow-xs border border-[#1c1917]/10 flex flex-col justify-between">
           <span className="font-mono text-[10px] font-bold text-[#6b5836]">02 &amp; 03</span>
           <span className="text-[8px] font-bold uppercase tracking-wider text-[#1c1917] leading-tight">
-            SWEET TALKS &amp; SMILES
+            RANDOM GOSSIP &amp; BAKBAK
           </span>
-          <span className="text-[6.5px] text-[#78716c] leading-tight">Laughing together for hours</span>
+          <span className="text-[6.5px] text-[#78716c] leading-tight">Laughing until our stomachs hurt</span>
         </div>
         <div className="w-[28%] relative bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/ref/girl5.jpg" alt="Sweety Memory 3" fill priority className="object-cover object-top" sizes="120px" />
+          <Image src="/ref/girl5.jpg" alt="HIMANI Memory 3" fill priority className="object-cover object-top" sizes="120px" />
         </div>
       </div>
 
       {/* Row 3: Wide Photo + Card 04, 05, 06 */}
       <div className="flex gap-2 h-[33%]">
         <div className="w-[60%] relative bg-[#e7e5e4] shadow-sm overflow-hidden">
-          <Image src="/ref/girl6.jpg" alt="Sweety Memory 4" fill priority className="object-cover object-center" sizes="220px" />
+          <Image src="/ref/girl6.jpg" alt="HIMANI Memory 4" fill priority className="object-cover object-center" sizes="220px" />
         </div>
         <div className="w-[40%] bg-white p-2 shadow-xs border border-[#1c1917]/10 flex flex-col justify-between">
           <span className="font-mono text-[10px] font-bold text-[#6b5836]">04 - 06</span>
           <span className="text-[8px] font-bold uppercase tracking-wider text-[#1c1917] leading-tight">
-            FOREVER &amp; ALWAYS
+            BEST FRIENDS FOREVER
           </span>
-          <span className="text-[6.5px] text-[#78716c] leading-tight">Holding your hand into our future</span>
+          <span className="text-[6.5px] text-[#78716c] leading-tight">Always got your back through thick and thin</span>
         </div>
       </div>
     </div>
@@ -1253,7 +1252,7 @@ export function PageNumberedMemories() {
 }
 
 /* ==========================================================================
- * 💖 SPREAD 6: "MY ONLY LOVE" 11-PHOTO HEART MOSAIC SPREAD (850px x 600px)
+ * ðŸ’– SPREAD 6: "MY ONLY LOVE" 11-PHOTO HEART MOSAIC SPREAD (850px x 600px)
  * ========================================================================== */
 
 export function HeartMosaicCanvas() {
@@ -1287,14 +1286,14 @@ export function HeartMosaicCanvas() {
         background: "radial-gradient(ellipse at 50% 50%, #ffffff 25%, #fff2f5 65%, #fde6ec 100%)",
       }}
     >
-      {/* 1. Top Header: "My only love" */}
+      {/* 1. Top Header: "Main apni favourite hoon" */}
       <div className="absolute top-[26px] left-0 w-[850px] flex items-center justify-center z-30 select-none">
         <div
           className="flex items-center text-[28px] font-normal tracking-[0.02em] text-[#4a2e2e] leading-none"
           style={{ fontFamily: "'Playfair Display', 'Bodoni Moda', Georgia, serif" }}
         >
-          <span className="w-[425px] text-right pr-3.5">My only</span>
-          <span className="w-[425px] text-left pl-3.5">love</span>
+          <span className="w-[425px] text-right pr-3.5">Main apni</span>
+          <span className="w-[425px] text-left pl-3.5">favourite hoon</span>
         </div>
       </div>
 
@@ -1332,19 +1331,19 @@ export function HeartMosaicCanvas() {
       {/* 5. Bottom-Left Heartfelt Quote */}
       <div className="absolute bottom-[32px] left-[175px] max-w-[215px] z-20 select-none">
         <p className="text-[12px] italic text-[#4a2e2e]/90 leading-[1.35]" style={{ fontFamily: "serif" }}>
-          To the girl who holds my whole heart,
+          To the girl who brings so much energy and sunshine,
           <br />
-          Happy Birthday Sweety. Forever yours.
+          Happy 21st Birthday Himani! Keep shining always.
         </p>
       </div>
 
       {/* 6. Bottom-Right Sparkle Ribbon Flourish */}
       <div className="absolute bottom-[34px] right-[175px] z-20 select-none">
         <div className="flex items-center gap-1.5 text-[#ea7a94] opacity-80 text-[13px] tracking-widest font-mono">
-          <span>✦</span>
-          <span>˚ ༘</span>
-          <span className="text-[16px]">♡</span>
-          <span>⋆｡˚</span>
+          <span>âœ¦</span>
+          <span>Ëš à¼˜</span>
+          <span className="text-[16px]">â™¡</span>
+          <span>â‹†ï½¡Ëš</span>
         </div>
       </div>
 
@@ -1373,7 +1372,7 @@ export function HeartMosaicCanvas() {
   );
 }
 
-/** Left half of the "My only love" 2-page heart spread */
+/** Left half of the "Main apni favourite hoon" 2-page sunshine spread */
 export function PageHeartSpreadLeft() {
   return (
     <div className="relative w-[425px] h-[600px] overflow-hidden select-none">
@@ -1384,7 +1383,7 @@ export function PageHeartSpreadLeft() {
   );
 }
 
-/** Right half of the "My only love" 2-page heart spread */
+/** Right half of the "Main apni favourite hoon" 2-page sunshine spread */
 export function PageHeartSpreadRight() {
   return (
     <div className="relative w-[425px] h-[600px] overflow-hidden select-none">
@@ -1494,7 +1493,7 @@ export function PageScatteredPolaroids() {
             <Image src="/ref/girl1.jpg" alt="Snap 1" fill priority className="object-cover object-top" sizes="160px" />
           </div>
           <span className="text-[13.5px] font-normal text-[#1c1917] block text-center mt-1 leading-tight" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive" }}>
-            candid laughs
+            drama queen
           </span>
         </div>
 
@@ -1504,7 +1503,7 @@ export function PageScatteredPolaroids() {
             <Image src="/ref/girl2.jpg" alt="Snap 2" fill priority className="object-cover object-top" sizes="160px" />
           </div>
           <span className="text-[13.5px] font-normal text-[#1c1917] block text-center mt-1 leading-tight" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive" }}>
-            golden times
+            non-stop bakbak
           </span>
         </div>
 
@@ -1516,7 +1515,7 @@ export function PageScatteredPolaroids() {
             <Image src="/ref/girl3.jpg" alt="Snap 3" fill priority className="object-cover object-top" sizes="180px" />
           </div>
           <span className="text-[18px] font-normal text-[#1c1917] block text-center mt-1.5 leading-tight" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive", color: FLIPBOOK_CONFIG.accentColor }}>
-            unforgettable moments
+            chaos chronicles
           </span>
         </div>
 
@@ -1526,7 +1525,7 @@ export function PageScatteredPolaroids() {
             <Image src="/ref/girl4.jpg" alt="Snap 4" fill priority className="object-cover object-center" sizes="160px" />
           </div>
           <span className="text-[13.5px] font-normal text-[#1c1917] block text-center mt-1 leading-tight" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive" }}>
-            best vibes only
+            pure geet vibes
           </span>
         </div>
 
@@ -1536,7 +1535,7 @@ export function PageScatteredPolaroids() {
             <Image src="/ref/girl5.jpg" alt="Snap 5" fill priority className="object-cover object-top" sizes="160px" />
           </div>
           <span className="text-[13.5px] font-normal text-[#1c1917] block text-center mt-1 leading-tight" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive" }}>
-            forever &amp; always
+            besties 4eva
           </span>
         </div>
       </div>
@@ -1559,38 +1558,38 @@ export function PageHeartfeltMessage() {
           className="text-[28px] font-normal tracking-tight uppercase leading-none mt-1"
           style={{ fontFamily: "'Bodoni Moda', serif" }}
         >
-          A LOVE LETTER TO YOU
+          A TRIBUTE TO MY BEST FRIEND
         </h2>
         <span
           className="text-[14px] italic leading-none block mt-0.5"
           style={{ fontFamily: "'Bodoni Moda', Georgia, serif", color: FLIPBOOK_CONFIG.accentColor }}
         >
-          To my sweet Sweety on her birthday
+          Celebrating Himani on her 21st milestone
         </span>
       </div>
 
       {/* Letter Body */}
       <div className="my-auto space-y-3 px-2">
         <p className="text-[11px] leading-[1.5] text-[#292524] text-justify font-semibold" style={{ fontFamily: "serif" }}>
-          Dearest Sweety,
+          Dearest HIMANI,
         </p>
         <p className="text-[9.5px] leading-[1.55] text-[#44403c] text-justify">
-          Happy Birthday to the prettiest, sweetest girl in the universe! Watching you step into this new chapter makes me realize just how lucky I am to have you by my side. You bring so much peace, pure joy, and warmth into my world.
+          Happy 21st Birthday to the most energetic, funny, and dramatic person I know! Stepping into adulthood is a huge milestone, and I am so grateful to have you as one of my closest friends. You bring so much laughter, spontaneity, and warmth into everyone's life.
         </p>
         <p className="text-[9.5px] leading-[1.55] text-[#44403c] text-justify">
-          Every time you smile, every time you laugh, and every time I look into your eyes, I fall in love with you all over again. I promise to always protect that beautiful smile, support your dreams, and cherish you through every single chapter ahead.
+          Never lose that crazy Geet-style spark, that unstoppable bakbak, and that golden heart of yours. I hope all your career aspirations, big dreams, and personal goals come true this year. No matter where life takes us, I'll always be in your corner cheering for you!
         </p>
       </div>
 
       {/* Signature & Mini Photo */}
       <div className="flex justify-between items-end border-t border-[#1c1917]/15 pt-2">
         <div>
-          <span className="text-[8px] tracking-wider uppercase text-[#78716c] block">WITH ALL MY LOVE &amp; HEART,</span>
+          <span className="text-[8px] tracking-wider uppercase text-[#78716c] block">PROUD TO BE YOUR FRIEND,</span>
           <span
             className="text-[22px] font-normal text-[#1c1917] leading-tight block mt-0.5"
             style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive" }}
           >
-            Your Boyfriend ♡
+            Your Best Friend 💙
           </span>
         </div>
         <div className="relative w-16 aspect-square bg-[#e7e5e4] rounded-[1px] shadow-sm overflow-hidden border border-white">
@@ -1682,7 +1681,7 @@ export function PageDiagonalFilmstrip() {
       {/* Footer */}
       <div className="text-center pt-1 border-t border-[#1c1917]/10">
         <span className="text-[7px] italic text-[#78716c] font-serif">
-          Frame by frame, the best story ever told
+          Frame by frame, 21 years of pure entertainment
         </span>
       </div>
     </div>
@@ -1711,10 +1710,10 @@ export function PageBackCoverFlipbook() {
             color: "#d4af6a", // gold foil
           }}
         >
-          BIRTHDAY SWEETY
+          BIRTHDAY HIMANI
         </h3>
         <p className="text-[16px] text-white/80 mt-1" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive" }}>
-          Cheers to forever with you
+          Cheers to 21 years of awesomeness
         </p>
       </div>
 
@@ -1760,13 +1759,13 @@ export function PageBackCoverFlipbook() {
         {/* Right: Closing Note */}
         <div className="text-right">
           <span className="text-[18px] text-[#d4af6a] block leading-tight" style={{ fontFamily: "'Aesthetic Script', 'Playfair Display', cursive" }}>
-            This is our story
+            Stay Iconic Always
           </span>
           <span className="text-[7px] tracking-[0.18em] text-white/60 uppercase block">
-            WRITTEN WITH LOVE, FOR SWEETY
+            FOR HIMANI · BEST FRIEND EDITION
           </span>
           <span className="text-[8px] font-bold text-white/90 tracking-wider block mt-0.5 uppercase">
-            FOREVER &amp; ALWAYS YOURS
+            ALWAYS CHEERING FOR YOU
           </span>
         </div>
       </div>

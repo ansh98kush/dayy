@@ -406,7 +406,7 @@
 <body>
 
   <div class="bg-reveal" id="bgReveal">
-    <img id="bgRevealImg" src="/bg2.jpg" alt="Sweety">
+    <img id="bgRevealImg" src="/bg2.jpg" alt="Himani">
   </div>
 
   <audio
@@ -438,11 +438,11 @@
 <!-- ---------------- spotify-style mini player ---------------- -->
 <div class="player" id="musicPlayer">
   <div class="player-art">
-    <img id="artA" class="is-active" src="/ref/girl1.jpg" alt="Sweety">
-    <img id="artB" src="/ref/girl2.jpg" alt="Sweety">
+    <img id="artA" class="is-active" src="/ref/girl1.jpg" alt="Himani">
+    <img id="artB" src="/ref/girl2.jpg" alt="Himani">
   </div>
   <div class="player-info">
-    <div class="player-title">Sweety Song</div>
+    <div class="player-title">Himani's Song</div>
     <div class="player-artist">Birthday Playlist</div>
     <div class="player-progress">
       <span class="player-time" id="curTime">0:00</span>
@@ -474,9 +474,9 @@
   initBalloons();
 </script>
 <script>
-  // ---- real birth date/time in IST: Oct 24, 2011 (Turning 15 in Chapter 15) ----
+  // ---- real birth date/time in IST: Nov 13, 2005 (Turning 21) ----
   const IST_OFFSET_MS = (5 * 60 + 30) * 60000;
-  const BIRTH_UTC_MS = Date.UTC(2011, 9, 23, 18, 30, 0); // Oct 24 IST
+  const BIRTH_UTC_MS = Date.UTC(2005, 10, 12, 18, 30, 0); // Nov 13 IST
   const shiftedBirth = new Date(BIRTH_UTC_MS + IST_OFFSET_MS); // read with getUTC* for IST wall-clock parts
 
   function computeParts(){
@@ -566,13 +566,13 @@
         textBalloons([
           { text: "Happy", fontSize: mobileFontSize, color: "#ffffff" },
           { text: "Birthday", fontSize: mobileFontSize, color: "#ffffff" },
-          { text: "🎉🎂🎈", fontSize: Math.round(mobileFontSize * 1.1), color: "#ffffff" },
+          { text: "Himani 🎉🎂", fontSize: Math.round(mobileFontSize * 1.1), color: "#ffffff" },
         ]);
       } else {
         // Desktop / wide screens: keep on single line with responsive font size
         const desktopFontSize = Math.min(100, Math.max(56, Math.floor(w * 0.06)));
         textBalloons([
-          { text: "Happy Birthday", fontSize: desktopFontSize, color: "#ffffff" },
+          { text: "Happy Birthday Himani", fontSize: desktopFontSize, color: "#ffffff" },
           { text: "🎉🎂🎈", fontSize: Math.round(desktopFontSize * 0.9), color: "#ffffff" },
         ]);
       }

@@ -24,7 +24,7 @@ import {
 } from "./MagazinePages";
 
 /* ------------------------------------------------------------------
- * 📖 MAGAZINE COVER CONFIGURATION
+ * ðŸ“– MAGAZINE COVER CONFIGURATION
  * ------------------------------------------------------------------
  * Change the cover image, text, or dimensions directly in code here:
  * ------------------------------------------------------------------ */
@@ -38,17 +38,17 @@ export const COVER_CONFIG = {
   // Exact VOUGUE Magazine Typography & Text
   masthead: "VOUGUE",
   issue: "ISSUE NO.2026",
-  headlineName: "SWEETY",
+  headlineName: "HIMANI",
   headlineSub1: "TIMELESS AND",
   headlineSub2: "BEAUTIFUL,",
-  headlineSub3: "THE STORY OF SWEETY",
+  headlineSub3: "THE STORY OF HIMANI",
   age: "BIRTHDAY",
   editionLine1: "SPECIAL",
   editionLine2: "EDITION",
   featureTag: "FEATURING",
   featureRole: "THE GIRL WHO HAS MY WHOLE HEART",
-  modelName: "SWEETY",
-  barcode: "SWEETY2026B",
+  modelName: "HIMANI",
+  barcode: "HIMANI2026B",
 
   // Magazine proportions (1:1.41 authentic Vogue / A4 portrait size)
   pageWidth: 425,
@@ -245,7 +245,7 @@ export default function MobileBook() {
 
   return (
     <div className={`flex flex-col items-center justify-center ${isDesktop ? "" : "w-full select-none"}`}>
-      {/* ── ON DESKTOP: Exact original layout without outer scale. ON MOBILE: auto-scale to fit phone width ── */}
+      {/* â”€â”€ ON DESKTOP: Exact original layout without outer scale. ON MOBILE: auto-scale to fit phone width â”€â”€ */}
       <div
         className={isDesktop ? "" : "relative flex items-center justify-center"}
         style={
@@ -282,7 +282,7 @@ export default function MobileBook() {
                     : "translateX(0px)",
             }}
           >
-            {/* ── FRONT COVER: EXACT VOUGUE MAGAZINE COVER WITH GIRL IMAGE ── */}
+            {/* â”€â”€ FRONT COVER: EXACT VOUGUE MAGAZINE COVER WITH GIRL IMAGE â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#c8b8a3] text-white shadow-2xl rounded-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight, isolation: "isolate" }}
@@ -335,7 +335,7 @@ export default function MobileBook() {
               {/* 3. Pixel-Perfect Editorial Typography Layer (Exact Bodoni Moda Magazine Typeface) */}
               {!isOriginalRefImage && (
                 <div className="absolute inset-0 z-20 pointer-events-none select-none">
-                  {/* ─ Masthead: VOUGUE (Didone high-contrast serif, tight tracking, edge-to-edge) ─ */}
+                  {/* â”€ Masthead: VOUGUE (Didone high-contrast serif, tight tracking, edge-to-edge) â”€ */}
                   <div className="absolute top-[2.2%] left-0 right-0 px-[14px] text-center select-none">
                     <h1
                       className="font-medium uppercase text-white select-none m-0"
@@ -354,7 +354,7 @@ export default function MobileBook() {
                     </h1>
                   </div>
 
-                  {/* ─ Issue Line: ISSUE NO.000456 ─ */}
+                  {/* â”€ Issue Line: ISSUE NO.000456 â”€ */}
                   <div className="absolute top-[16%] right-[5.8%] text-right">
                     <span
                       className="font-normal text-[9px] tracking-[0.18em] text-white/95 uppercase"
@@ -367,7 +367,7 @@ export default function MobileBook() {
                     </span>
                   </div>
 
-                  {/* ─ Left Upper Headline Block ─ */}
+                  {/* â”€ Left Upper Headline Block â”€ */}
                   <div className="absolute top-[27%] left-[6%] max-w-[50%] flex flex-col items-start text-left">
                     <span
                       className="text-[23px] font-medium tracking-[-0.045em] text-white leading-[0.88] uppercase"
@@ -392,7 +392,7 @@ export default function MobileBook() {
                     </span>
                   </div>
 
-                  {/* ─ Right Middle: 20 BIRTHDAY EDITION ─ */}
+                  {/* â”€ Right Middle: 20 BIRTHDAY EDITION â”€ */}
                   <div className="absolute top-[42%] right-[6%] flex flex-col items-end text-right">
                     <span
                       className="font-medium text-[68px] leading-[0.82] tracking-[-0.03em] text-white"
@@ -417,7 +417,7 @@ export default function MobileBook() {
                     </span>
                   </div>
 
-                  {/* ─ Bottom Left: FEATURING SUPER MODEL ISABELLA MASON ─ */}
+                  {/* â”€ Bottom Left: FEATURING SUPER MODEL ISABELLA MASON â”€ */}
                   <div className="absolute bottom-[5.2%] left-[6%] max-w-[56%] flex flex-col items-start text-left">
                     <span
                       className="text-[11px] tracking-[0.1em] text-white/90 leading-tight uppercase font-normal"
@@ -441,7 +441,7 @@ export default function MobileBook() {
                     </span>
                   </div>
 
-                  {/* ─ Bottom Right: Realistic Barcode Card ─ */}
+                  {/* â”€ Bottom Right: Realistic Barcode Card â”€ */}
                   <div className="absolute bottom-[4.2%] right-[6%]">
                     <div className="bg-white px-2 py-1 rounded-sm shadow-md flex flex-col items-center justify-center">
                       <svg viewBox="0 0 100 24" className="w-[82px] h-[16px]">
@@ -487,7 +487,7 @@ export default function MobileBook() {
               />
             </div>
 
-            {/* ── SPREAD 1 (LEFT): TABLE OF CONTENTS ── */}
+            {/* â”€â”€ SPREAD 1 (LEFT): TABLE OF CONTENTS â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -495,7 +495,7 @@ export default function MobileBook() {
               <PageTableContents />
             </div>
 
-            {/* ── SPREAD 1 (RIGHT): 7-PHOTO EDITORIAL COLLAGE ── */}
+            {/* â”€â”€ SPREAD 1 (RIGHT): 7-PHOTO EDITORIAL COLLAGE â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#faf8f4] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -503,7 +503,7 @@ export default function MobileBook() {
               <PageEditorialCollage />
             </div>
 
-            {/* ── SPREAD 2 (LEFT): "WHO'S THAT GIRL?" EDITORIAL SPOTLIGHT ── */}
+            {/* â”€â”€ SPREAD 2 (LEFT): "WHO'S THAT GIRL?" EDITORIAL SPOTLIGHT â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -511,7 +511,7 @@ export default function MobileBook() {
               <PageWhosThatGirl />
             </div>
 
-            {/* ── SPREAD 2 (RIGHT): "INSTAGRAM GIRL" 4-POST FEED ── */}
+            {/* â”€â”€ SPREAD 2 (RIGHT): "INSTAGRAM GIRL" 4-POST FEED â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -519,7 +519,7 @@ export default function MobileBook() {
               <PageInstagramGirl />
             </div>
 
-            {/* ── SPREAD 3 (LEFT): CHAPTER 01 - THINGS ABOUT HER ── */}
+            {/* â”€â”€ SPREAD 3 (LEFT): CHAPTER 01 - THINGS ABOUT HER â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -527,7 +527,7 @@ export default function MobileBook() {
               <PageThingsAbout />
             </div>
 
-            {/* ── SPREAD 3 (RIGHT): 12 FACTS & PHOTO STRIP ── */}
+            {/* â”€â”€ SPREAD 3 (RIGHT): 12 FACTS & PHOTO STRIP â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -535,7 +535,7 @@ export default function MobileBook() {
               <PageFactsWithPhotos />
             </div>
 
-            {/* ── SPREAD 4 (LEFT): THINGS I LOVE ABOUT YOU (5 REASONS) ── */}
+            {/* â”€â”€ SPREAD 4 (LEFT): THINGS I LOVE ABOUT YOU (5 REASONS) â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -543,7 +543,7 @@ export default function MobileBook() {
               <PageThingsILoveAboutYou />
             </div>
 
-            {/* ── SPREAD 4 (RIGHT): MEET THE BIRTHDAY QUEEN (PORTRAIT SPOTLIGHT) ── */}
+            {/* â”€â”€ SPREAD 4 (RIGHT): MEET THE BIRTHDAY QUEEN (PORTRAIT SPOTLIGHT) â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#f6f2ea] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -551,7 +551,7 @@ export default function MobileBook() {
               <PageMeetTheQueen />
             </div>
 
-            {/* ── SPREAD 5 (LEFT): CHAPTER 02 - FAVOURITE MEMORY OF US ── */}
+            {/* â”€â”€ SPREAD 5 (LEFT): CHAPTER 02 - FAVOURITE MEMORY OF US â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -559,7 +559,7 @@ export default function MobileBook() {
               <PageFavouriteMemory />
             </div>
 
-            {/* ── SPREAD 5 (RIGHT): NUMBERED MEMORIES COLLAGE (01-06) ── */}
+            {/* â”€â”€ SPREAD 5 (RIGHT): NUMBERED MEMORIES COLLAGE (01-06) â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -567,7 +567,7 @@ export default function MobileBook() {
               <PageNumberedMemories />
             </div>
 
-            {/* ── SPREAD 6 (LEFT): "MY ONLY LOVE" 11-PHOTO HEART (LEFT HALF) ── */}
+            {/* â”€â”€ SPREAD 6 (LEFT): "MY ONLY LOVE" 11-PHOTO HEART (LEFT HALF) â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#fff2f5] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -575,7 +575,7 @@ export default function MobileBook() {
               <PageHeartSpreadLeft />
             </div>
 
-            {/* ── SPREAD 6 (RIGHT): "MY ONLY LOVE" 11-PHOTO HEART (RIGHT HALF) ── */}
+            {/* â”€â”€ SPREAD 6 (RIGHT): "MY ONLY LOVE" 11-PHOTO HEART (RIGHT HALF) â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#fff2f5] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -583,7 +583,7 @@ export default function MobileBook() {
               <PageHeartSpreadRight />
             </div>
 
-            {/* ── SPREAD 7 (LEFT): CHAPTER 03 - PHOTO DUMP (PART 1) ── */}
+            {/* â”€â”€ SPREAD 7 (LEFT): CHAPTER 03 - PHOTO DUMP (PART 1) â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -591,7 +591,7 @@ export default function MobileBook() {
               <PagePhotoDumpPart1 />
             </div>
 
-            {/* ── SPREAD 7 (RIGHT): SCATTERED POLAROIDS ARCHIVE ── */}
+            {/* â”€â”€ SPREAD 7 (RIGHT): SCATTERED POLAROIDS ARCHIVE â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#f7f4ed] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -599,7 +599,7 @@ export default function MobileBook() {
               <PageScatteredPolaroids />
             </div>
 
-            {/* ── SPREAD 8 (LEFT): CHAPTER 04 - HEARTFELT MESSAGE ── */}
+            {/* â”€â”€ SPREAD 8 (LEFT): CHAPTER 04 - HEARTFELT MESSAGE â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -607,7 +607,7 @@ export default function MobileBook() {
               <PageHeartfeltMessage />
             </div>
 
-            {/* ── SPREAD 8 (RIGHT): DIAGONAL 35MM FILMSTRIP MEMORIES ── */}
+            {/* â”€â”€ SPREAD 8 (RIGHT): DIAGONAL 35MM FILMSTRIP MEMORIES â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#faf8f4] text-[#1c1917] shadow-md select-none"
               style={{ width: COVER_CONFIG.pageWidth, height: COVER_CONFIG.pageHeight }}
@@ -615,7 +615,7 @@ export default function MobileBook() {
               <PageDiagonalFilmstrip />
             </div>
 
-            {/* ── BACK COVER: HAPPY BIRTHDAY "THIS IS YOUR STORY" ── */}
+            {/* â”€â”€ BACK COVER: HAPPY BIRTHDAY "THIS IS YOUR STORY" â”€â”€ */}
             <div
               className="book-page relative overflow-hidden bg-[#141210] text-white shadow-2xl rounded-md select-none"
               data-density="hard"
@@ -627,7 +627,7 @@ export default function MobileBook() {
         </div>
       </div>
 
-      {/* ── DESKTOP CONTROLS (Exact Original) vs MOBILE CONTROLS ── */}
+      {/* â”€â”€ DESKTOP CONTROLS (Exact Original) vs MOBILE CONTROLS â”€â”€ */}
       {isDesktop ? (
         <div className="flex items-center justify-center gap-3 mt-4 z-30 select-none">
           <button
@@ -636,7 +636,7 @@ export default function MobileBook() {
             onClick={() => pageFlipRef.current?.flipPrev()}
             className="px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase rounded-full bg-[#9f773a]/15 hover:bg-[#9f773a]/25 active:scale-95 text-[#5c4935] border border-[#9f773a]/30 backdrop-blur-md transition-all cursor-pointer shadow-sm"
           >
-            ‹ Prev
+            â€¹ Prev
           </button>
 
           <span className="text-[11px] font-mono text-[#7a5c32] font-semibold tracking-widest px-2">
@@ -649,7 +649,7 @@ export default function MobileBook() {
             onClick={() => pageFlipRef.current?.flipNext()}
             className="px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase rounded-full bg-[#9f773a]/15 hover:bg-[#9f773a]/25 active:scale-95 text-[#5c4935] border border-[#9f773a]/30 backdrop-blur-md transition-all cursor-pointer shadow-sm"
           >
-            Next ›
+            Next â€º
           </button>
         </div>
       ) : (
@@ -661,7 +661,7 @@ export default function MobileBook() {
             disabled={currentPage === 0}
             className={`px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-[#9f773a]/25 hover:bg-[#9f773a]/40 active:scale-95 text-[#f5e7d5] border border-[#9f773a]/40 transition-all cursor-pointer shadow-sm touch-manipulation ${currentPage === 0 ? "opacity-40 cursor-not-allowed" : ""}`}
           >
-            ‹ Prev
+            â€¹ Prev
           </button>
 
           <span className="text-[11px] font-mono text-[#e8d5be] font-semibold tracking-widest px-2">
@@ -675,7 +675,7 @@ export default function MobileBook() {
             disabled={currentPage >= (totalPages || 18) - 1}
             className={`px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-[#9f773a]/25 hover:bg-[#9f773a]/40 active:scale-95 text-[#f5e7d5] border border-[#9f773a]/40 transition-all cursor-pointer shadow-sm touch-manipulation ${currentPage >= (totalPages || 18) - 1 ? "opacity-40 cursor-not-allowed" : ""}`}
           >
-            Next ›
+            Next â€º
           </button>
         </div>
       )}

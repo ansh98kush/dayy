@@ -457,7 +457,7 @@ function BespokeBirthdayDateSeal({ className = "", style }: { className?: string
         fontWeight={700}
         letterSpacing="0.12em"
       >
-        OCT 23
+        NOV 13
       </text>
       <text
         x={0}
@@ -754,7 +754,7 @@ function PostageStamp({ className = "", style }: { className?: string; style?: R
         opacity={0.65}
       />
       <text x={40} y={57} textAnchor="middle" fontSize={6} fontFamily="sans-serif" fill="currentColor" letterSpacing="0.12em" opacity={0.8}>
-        SWEETY
+        HIMANI
       </text>
     </svg>
   );
