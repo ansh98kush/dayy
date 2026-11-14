@@ -1293,7 +1293,7 @@ export function ScrapbookBackCover() {
           </span>
         </div>
         <span className="text-[10px] text-white/70 font-medium tracking-wider mt-2" style={{ fontFamily: "'Caveat', cursive" }}>
-          Made with all my love ❤️
+          Celebrating 21 years of Himani 💙
         </span>
       </div>
     </div>

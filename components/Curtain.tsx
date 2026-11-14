@@ -120,7 +120,7 @@ export default function ShowtimeCountdown({
   targetDate,
   tickerText = 'HAPPY BIRTHDAY HIMANI ·',
   marqueeTitle = "Himani's 21st Birthday",
-  marqueeSub = "forever yours, made with all my love for Himani ❤️",
+  marqueeSub = "celebrating 21 years of Himani, happy birthday to my best friend 💙",
   doorsText = "celebrating Himani's 21st",
   songSrc,
   songVolume = 0.6,

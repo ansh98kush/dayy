@@ -27,7 +27,7 @@ const cards = [
   { src: "/ref/girl2.jpg", isVideo: false, caption: "Cutie 🥹" },
   { src: "/ref/girl3.jpg", isVideo: false, caption: "Baddie 😎" },
   { src: "/ref/girl4.jpg", isVideo: false, caption: "Pretty ✨" },
-  { src: "/ref/girl5.jpg", isVideo: false, caption: "My Love 🤍" },
+  { src: "/ref/girl5.jpg", isVideo: false, caption: "Angel 🤍" },
   { src: "/ref/girl6.jpg", isVideo: false, caption: "Sunshine ☀️" },
   { src: "/ref/girl7.jpg", isVideo: false, caption: "Angel 🪽" },
   { src: "/ref/girl8.jpg", isVideo: false, caption: "Beautiful 🌸" },

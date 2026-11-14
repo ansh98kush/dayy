@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <ShowtimeCountdown
       tickerText="HAPPY BIRTHDAY HIMANI ·"
-      marqueeSub="forever yours, made with all my love for Himani ❤️"
+      marqueeSub="celebrating 21 years of Himani, happy birthday to my best friend 💙"
       showPreviewButton={true}
     >
       <div id="main-scroll-container" className="w-full max-w-[100vw] overflow-x-clip bg-zinc-50 dark:bg-black select-none">
